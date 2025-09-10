@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:vaccine_home/features/about/presentation/pages/about_page.dart';
+import 'package:vaccine_home/features/home/presentation/pages/home_page.dart';
+
+List<Widget> bottomNavScreens = [
+  const HomePage(),
+  const AboutPage(),
+  const Placeholder(),
+];
+
+const List<BottomNavigationBarItem> bottomNavItems = [
+  BottomNavigationBarItem(
+    icon: Icon(HugeIcons.strokeRoundedHome01),
+    label: 'Home',
+  ),
+  BottomNavigationBarItem(
+    icon: Icon(HugeIcons.strokeRoundedFavourite),
+    label: 'About',
+  ),
+  BottomNavigationBarItem(
+    icon: Icon(HugeIcons.strokeRoundedUser),
+    label: 'Profile',
+  ),
+];

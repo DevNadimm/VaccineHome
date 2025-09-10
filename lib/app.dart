@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/themes/theme.dart';
+import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
+import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => NavigationCubit()),
+      ],
+      child: MaterialApp(
+        title: 'Vaccine Home',
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        home: const NavigationPage(),
+      ),
+    );
+  }
+}
