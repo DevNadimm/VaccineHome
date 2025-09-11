@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/asset_paths.dart';
+import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/helper_functions/greeting_helper.dart';
 import 'package:vaccine_home/features/home/data/models/service.dart';
 import 'package:vaccine_home/features/home/data/repositories/service_repository.dart';
+import 'package:vaccine_home/features/home/presentation/pages/notification_page.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/service_card.dart';
 
@@ -19,7 +21,9 @@ class HomePage extends StatelessWidget {
         greetingText: getGreetingMessage(),
         userName: 'Nadim Chowdhury',
         userAvatar: AssetPaths.nadimCorporate,
-        onNotificationTap: () {},
+        onNotificationTap: () {
+          Navigator.push(context, NotificationPage.route());
+        },
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -38,7 +42,7 @@ class HomePage extends StatelessWidget {
                   textStyle: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: AppColors.primaryFontColor,
                   ),
                 ),
               ),

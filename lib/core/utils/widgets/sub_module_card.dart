@@ -17,7 +17,7 @@ class SubModuleCard extends StatelessWidget {
       onTap: subModule.onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
           color: AppColors.cardColor,
           borderRadius: BorderRadius.circular(16),
@@ -35,9 +35,9 @@ class SubModuleCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: AppColors.primaryColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(100),
               ),
-              child: Icon(subModule.icon, size: 28, color: AppColors.primaryColor),
+              child: Icon(subModule.icon, size: 24, color: AppColors.primaryColor),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -59,8 +59,9 @@ class SubModuleCard extends StatelessWidget {
                     subModule.subtitle,
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         color: AppColors.secondaryFontColor,
+                        height: 1.4,
                       ),
                     ),
                   ),
