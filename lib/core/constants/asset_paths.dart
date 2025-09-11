@@ -15,7 +15,7 @@ class AssetPaths {
 
   /// Local
   static const String banner = '$_localPath/banner.jpg';
-  static const String nadimCorporate = '$_localPath/nadim-corporate.png';
+  static const String nadimCorporate = '$_localPath/nadim_corporate.png';
 
   /// Logos
   // static const String appLogo = '$_logoPath/app_logo.png';
