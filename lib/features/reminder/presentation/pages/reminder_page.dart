@@ -3,7 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
-import 'package:vaccine_home/features/reminder/presentation/pages/add_medication_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/medication_reminder_page.dart';
 
 class ReminderPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const ReminderPage());
@@ -18,7 +18,7 @@ class ReminderPage extends StatelessWidget {
         title: "Medicine Reminder",
         subtitle: "Never miss your medicines on time.",
         onTap: () {
-          Navigator.push(context, AddMedicationPage.route());
+          Navigator.push(context, MedicationReminderPage.route());
         },
       ),
       SubModule(
