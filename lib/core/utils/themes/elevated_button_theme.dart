@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 
 ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
@@ -6,6 +7,12 @@ ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
     backgroundColor: AppColors.primaryColor,
     foregroundColor: AppColors.buttonFontColor,
     padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-    textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+    textStyle: GoogleFonts.poppins(
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.w700,
+        fontSize: 16,
+        height: 1.2,
+      ),
+    ),
   ),
 );

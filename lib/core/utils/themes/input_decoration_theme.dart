@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 
 InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
@@ -9,8 +10,8 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   filled: true,
   contentPadding: const EdgeInsets.all(16),
   labelStyle: const TextStyle().copyWith(fontSize: 16, color: AppColors.secondaryFontColor),
-  hintStyle: const TextStyle().copyWith(fontSize: 16, color: AppColors.secondaryFontColor, fontWeight: FontWeight.w500),
-  errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
+  hintStyle: GoogleFonts.poppins(textStyle: const TextStyle().copyWith(fontSize: 16, color: AppColors.secondaryFontColor, fontWeight: FontWeight.w500)),
+  errorStyle: GoogleFonts.poppins(textStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal)),
   floatingLabelStyle: const TextStyle().copyWith(
     color: Colors.black.withOpacity(0.8),
   ),

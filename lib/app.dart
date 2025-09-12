@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vaccine_home/core/utils/themes/theme.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => NavigationCubit()),
+        BlocProvider(create: (_) => IntakeToggleCubit()),
       ],
       child: MaterialApp(
         title: 'Vaccine Home',
