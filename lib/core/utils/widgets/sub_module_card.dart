@@ -39,7 +39,7 @@ class SubModuleCard extends StatelessWidget {
               ),
               child: Icon(subModule.icon, size: 24, color: AppColors.primaryColor),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
