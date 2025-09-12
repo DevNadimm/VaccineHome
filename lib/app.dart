@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/utils/themes/theme.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => NavigationCubit()),
         BlocProvider(create: (_) => IntakeToggleCubit()),
+        BlocProvider(create: (_) => TimeListCubit()),
       ],
       child: MaterialApp(
         title: 'Vaccine Home',

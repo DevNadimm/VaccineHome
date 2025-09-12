@@ -7,6 +7,8 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
+import 'package:vaccine_home/features/reminder/presentation/widgets/time_picker_list_widget.dart';
 
 class AddMedicationPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const AddMedicationPage());
@@ -23,7 +25,6 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
   final TextEditingController medicationType = TextEditingController();
   final TextEditingController startDate = TextEditingController();
   final TextEditingController endDate = TextEditingController();
-  final TextEditingController pickTime = TextEditingController();
 
   Future<void> _selectOnlyDate(TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -44,8 +45,9 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
         title: const Text('Add Medication'),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
             context.read<IntakeToggleCubit>().reset();
+            context.read<TimeListCubit>().clearControllers();
+            Navigator.pop(context);
           },
           icon: const Icon(
             HugeIcons.strokeRoundedArrowLeft01,
@@ -114,23 +116,30 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                 ],
               ),
               const SizedBox(height: 16),
-              CustomTextField(
-                label: 'Time',
-                hintText: 'Select time',
-                controller: pickTime,
-                isRequired: true,
-                readOnly: true,
-                validationLabel: 'Time',
-                onTap: () async {
-                  final TimeOfDay? time = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.now(),
-                  );
-                  if (time != null) {
-                    pickTime.text = time.format(context);
-                  }
-                },
+              Row(
+                children: [
+                  Text(
+                    'Time',
+                    style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primaryFontColor,
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    ' *',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
+              const SizedBox(height: 10),
+              const TimePickerListWidget(),
               const SizedBox(height: 16),
               Text(
                 'When to take?',
@@ -173,7 +182,9 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
         final bool isSelected = intakeTiming == label;
         return Expanded(
           child: GestureDetector(
-            onTap: isSelected ? null : () => context.read<IntakeToggleCubit>().toggle(),
+            onTap: isSelected
+                ? null
+                : () => context.read<IntakeToggleCubit>().toggle(),
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(
@@ -204,26 +215,26 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
   }
 
   void _saveMedication() async {
-    // if (globalKey.currentState?.validate() ?? false) {
-    //   try {
-    //     final medication = MedicationModel(
-    //       name: medicationName.text.toString(),
-    //       type: medicationType.text.toString(),
-    //       startDate: startDate.text.toString(),
-    //       endDate: endDate.text.toString(),
-    //       time: pickTime.text.toString(),
-    //       whenToTake: intakeTiming,
-    //     );
-    //
-    //     int id = await DBHelper.createMedication(medication);
-    //     medication.id = id; // Update id for notification controller (notification id)
-    //     NotificationController.scheduleMedicationNotifications(medication);
-    //     clearFields();
-    //     ToastMessage.medAddSuccess();
-    //   } catch (e) {
-    //     ToastMessage.medAddFailed();
-    //   }
-    // }
+    if (globalKey.currentState?.validate() ?? false) {
+      // try {
+      //   final medication = MedicationModel(
+      //     name: medicationName.text.toString(),
+      //     type: medicationType.text.toString(),
+      //     startDate: startDate.text.toString(),
+      //     endDate: endDate.text.toString(),
+      //     time: pickTime.text.toString(),
+      //     whenToTake: intakeTiming,
+      //   );
+      //
+      //   int id = await DBHelper.createMedication(medication);
+      //   medication.id = id; // Update id for notification controller (notification id)
+      //   NotificationController.scheduleMedicationNotifications(medication);
+      //   clearFields();
+      //   ToastMessage.medAddSuccess();
+      // } catch (e) {
+      //   ToastMessage.medAddFailed();
+      // }
+    }
   }
 
   Future<void> showCustomBottomSheet({
@@ -256,7 +267,6 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
     medicationType.dispose();
     startDate.dispose();
     endDate.dispose();
-    pickTime.dispose();
     super.dispose();
   }
 
@@ -265,6 +275,6 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
     medicationType.clear();
     startDate.clear();
     endDate.clear();
-    pickTime.clear();
+    context.read<TimeListCubit>().clearControllers();
   }
 }
