@@ -13,64 +13,76 @@ class SubModuleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: subModule.onTap,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        decoration: BoxDecoration(
-          color: AppColors.cardColor,
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 16,
+            offset: const Offset(0, 0),
+          ),
+        ],
+      ),
+      child: Material(
+        color: AppColors.cardColor,
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          onTap: subModule.onTap,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 16,
-              offset: const Offset(0, 0),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Icon(subModule.icon, size: 24, color: AppColors.primaryColor),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    subModule.title,
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primaryFontColor,
-                      ),
-                    ),
+          splashColor: AppColors.primaryColor.withOpacity(0.15),
+          highlightColor: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(100),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subModule.subtitle,
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        fontSize: 13,
-                        color: AppColors.secondaryFontColor,
-                        height: 1.4,
-                      ),
-                    ),
+                  child: Icon(
+                    subModule.icon,
+                    size: 24,
+                    color: AppColors.primaryColor,
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        subModule.title,
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primaryFontColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        subModule.subtitle,
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.secondaryFontColor,
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 4),
+                const Icon(Icons.arrow_forward_ios, size: 18, color: AppColors.grey),
+              ],
             ),
-            const SizedBox(width: 4),
-            const Icon(Icons.arrow_forward_ios, size: 18, color: AppColors.grey),
-          ],
+          ),
         ),
       ),
     );

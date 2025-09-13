@@ -30,25 +30,25 @@ class ProfileSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Container(
-          decoration: BoxDecoration(
-            color: AppColors.cardColor,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 16,
-                offset: const Offset(0, 0),
-              ),
-            ],
-          ),
+        Material(
+          color: AppColors.cardColor,
+          borderRadius: BorderRadius.circular(16),
+          elevation: 3,
+          shadowColor: Colors.black.withOpacity(0.1),
           child: Column(
             children: List.generate(items.length, (index) {
               final item = items[index];
               return Column(
                 children: [
-                  Material(
-                    color: Colors.transparent,
+                  InkWell(
+                    onTap: item.onTap,
+                    borderRadius: BorderRadius.only(
+                      topLeft: index == 0 ? const Radius.circular(16) : Radius.zero,
+                      topRight: index == 0 ? const Radius.circular(16) : Radius.zero,
+                      bottomLeft: index == items.length - 1 ? const Radius.circular(16) : Radius.zero,
+                      bottomRight: index == items.length - 1 ? const Radius.circular(16) : Radius.zero,
+                    ),
+                    splashColor: AppColors.primaryColor.withOpacity(0.15),
                     child: ListTile(
                       leading: Icon(item.icon, color: AppColors.primaryColor),
                       title: Text(
@@ -61,8 +61,7 @@ class ProfileSection extends StatelessWidget {
                           ),
                         ),
                       ),
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey,),
-                      onTap: item.onTap,
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
                     ),
                   ),
                   if (index != items.length - 1)

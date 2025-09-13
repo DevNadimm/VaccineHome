@@ -3,7 +3,9 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/dr_consultancy_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/medication_reminder_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/pathology_reminder_page.dart';
 
 class ReminderPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const ReminderPage());
@@ -25,19 +27,25 @@ class ReminderPage extends StatelessWidget {
         icon: HugeIcons.strokeRoundedHealth,
         title: "Diet Reminder",
         subtitle: "Stay healthy with proper meals.",
-        onTap: () {},
+        onTap: () {
+          // Navigator.push(context, DrConsultancyReminderPage.route());
+        },
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedStethoscope,
         title: "Dr Consultancy Reminder",
         subtitle: "Get notified for your appointments.",
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, DrConsultancyReminderPage.route());
+        },
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedTestTube,
         title: "Pathology Reminder",
         subtitle: "Lab tests and reports made easy.",
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, PathologyReminderPage.route());
+        },
       ),
     ];
 

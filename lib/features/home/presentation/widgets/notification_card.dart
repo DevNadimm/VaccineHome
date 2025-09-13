@@ -7,15 +7,16 @@ import 'package:vaccine_home/features/home/data/models/notification.dart';
 class NotificationCard extends StatelessWidget {
   final NotificationModel notification;
 
-  const NotificationCard({super.key, required this.notification});
+  const NotificationCard({
+    super.key,
+    required this.notification,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       decoration: BoxDecoration(
-        color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -25,81 +26,92 @@ class NotificationCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: Stack(
+      child: Material(
+        color: AppColors.cardColor,
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          onTap: () {},
+          borderRadius: BorderRadius.circular(16),
+          splashColor: AppColors.primaryColor.withOpacity(0.15),
+          highlightColor: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            child: Row(
               children: [
-                const Icon(
-                  HugeIcons.strokeRoundedNotification03,
-                  size: 24,
-                  color: AppColors.primaryColor,
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      const Icon(
+                        HugeIcons.strokeRoundedNotification03,
+                        size: 24,
+                        color: AppColors.primaryColor,
+                      ),
+                      if (!notification.isRead)
+                        const Positioned(
+                          top: 0,
+                          right: 0,
+                          child: CircleAvatar(
+                            radius: 5,
+                            backgroundColor: AppColors.error,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-                notification.isRead
-                    ? const SizedBox.shrink()
-                    : const Positioned(
-                        top: 0,
-                        right: 0,
-                        child: CircleAvatar(
-                          radius: 5,
-                          backgroundColor: AppColors.error,
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        notification.title,
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primaryFontColor,
+                          ),
                         ),
                       ),
+                      const SizedBox(height: 4),
+                      Text(
+                        notification.message,
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.secondaryFontColor,
+                            height: 1.4,
+                          ),
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        notification.timeAgo,
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 12,
+                            color: AppColors.secondaryFontColor,
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 4),
+                const Icon(Icons.arrow_forward_ios, size: 18, color: AppColors.grey),
               ],
             ),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  notification.title,
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.primaryFontColor,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  notification.message,
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 13,
-                      color: AppColors.secondaryFontColor,
-                      height: 1.4,
-                    ),
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  notification.timeAgo,
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.secondaryFontColor,
-                      height: 1.4,
-                    ),
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 4),
-          const Icon(Icons.arrow_forward_ios, size: 18, color: AppColors.grey),
-        ],
+        ),
       ),
     );
   }
