@@ -13,24 +13,24 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final notifications = [
-      NotificationModel(
-        title: "Vaccine Reminder",
-        message: "Your next vaccine is scheduled for tomorrow at 10:00 AM.",
-        createdAt: DateTime.now().subtract(const Duration(hours: 2)),
-        isRead: false,
-      ),
-      NotificationModel(
-        title: "Health Checkup",
-        message: "Your annual health checkup is due next week.",
-        createdAt: DateTime.now().subtract(const Duration(days: 1)),
-        isRead: true,
-      ),
-      NotificationModel(
-        title: "Diet Reminder",
-        message: "Don't forget to take your evening meal on time.",
-        createdAt: DateTime.now().subtract(const Duration(days: 10)),
-        isRead: true,
-      ),
+      // NotificationModel(
+      //   title: "Vaccine Reminder",
+      //   message: "Your next vaccine is scheduled for tomorrow at 10:00 AM.",
+      //   createdAt: DateTime.now().subtract(const Duration(hours: 2)),
+      //   isRead: false,
+      // ),
+      // NotificationModel(
+      //   title: "Health Checkup",
+      //   message: "Your annual health checkup is due next week.",
+      //   createdAt: DateTime.now().subtract(const Duration(days: 1)),
+      //   isRead: true,
+      // ),
+      // NotificationModel(
+      //   title: "Diet Reminder",
+      //   message: "Don't forget to take your evening meal on time.",
+      //   createdAt: DateTime.now().subtract(const Duration(days: 10)),
+      //   isRead: true,
+      // ),
     ];
 
     return Scaffold(

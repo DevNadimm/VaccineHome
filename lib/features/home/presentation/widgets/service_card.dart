@@ -10,39 +10,47 @@ class ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: service.onTap,
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: AppColors.cardColor,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 16,
+            offset: const Offset(0, 0),
+          ),
+        ],
+      ),
+      child: Material(
+        color: AppColors.cardColor,
+        borderRadius: BorderRadius.circular(32),
+        child: InkWell(
+          onTap: service.onTap,
           borderRadius: BorderRadius.circular(32),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 16,
-              offset: const Offset(0, 0),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(service.iconPath, scale: 6),
-            const SizedBox(height: 6),
-            Text(
-              service.name,
-              style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primaryFontColor,
-                  height: 1.4,
+          splashColor: AppColors.primaryColor.withOpacity(0.15),
+          highlightColor: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(service.iconPath, scale: 6),
+                const SizedBox(height: 6),
+                Text(
+                  service.name,
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primaryFontColor,
+                      height: 1.4,
+                    ),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              textAlign: TextAlign.center,
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
