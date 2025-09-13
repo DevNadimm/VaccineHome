@@ -15,7 +15,7 @@ class ReminderPage extends StatelessWidget {
     final reminderServices = [
       SubModule(
         icon: HugeIcons.strokeRoundedAddToList,
-        title: "Medicine Reminder",
+        title: "Medication Reminder",
         subtitle: "Never miss your medicines on time.",
         onTap: () {
           Navigator.push(context, MedicationReminderPage.route());
@@ -29,7 +29,7 @@ class ReminderPage extends StatelessWidget {
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedStethoscope,
-        title: "Doctor Consultancy",
+        title: "Dr Consultancy Reminder",
         subtitle: "Get notified for your appointments.",
         onTap: () {},
       ),
