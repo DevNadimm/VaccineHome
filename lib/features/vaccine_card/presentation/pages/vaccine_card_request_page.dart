@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
-import 'package:vaccine_home/core/utils/widgets/custom_bottom_sheet.dart';
+import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 
 class VaccineCardRequestPage extends StatefulWidget {
@@ -127,6 +127,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                   readOnly: true,
                   onTap: () {
                     showCustomBottomSheet(
+                      context: context,
                       items: ['Male', 'Female', 'Others'],
                       controller: gender,
                       title: 'Select Gender',
@@ -225,30 +226,6 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
         const SnackBar(content: Text('Vaccine card request submitted!')),
       );
     }
-  }
-
-  Future<void> showCustomBottomSheet({
-    required List<String> items,
-    required TextEditingController controller,
-    required String title,
-  }) async {
-    return showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (context) {
-        return CustomBottomSheetContent(
-          items: items,
-          controller: controller,
-          title: title,
-          onItemSelected: (item) {
-            controller.text = item;
-            Navigator.pop(context);
-          },
-        );
-      },
-    );
   }
 
   @override

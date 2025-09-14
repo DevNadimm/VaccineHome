@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
-import 'package:vaccine_home/core/utils/widgets/custom_bottom_sheet.dart';
+import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
@@ -79,6 +79,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                 validationLabel: 'Medication type',
                 onTap: () {
                   showCustomBottomSheet(
+                    context: context,
                     items: ['Tablet', 'Capsule', 'Injection', 'Syrup', 'Drops', 'Inhaler', 'Powder', 'Cream', 'Gel', 'Others'],
                     controller: medicationType,
                     title: 'Select Medication',
@@ -234,30 +235,6 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
       //   ToastMessage.medAddFailed();
       // }
     }
-  }
-
-  Future<void> showCustomBottomSheet({
-    required List<String> items,
-    required TextEditingController controller,
-    required String title,
-  }) async {
-    return showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (context) {
-        return CustomBottomSheetContent(
-          items: items,
-          controller: controller,
-          title: title,
-          onItemSelected: (item) {
-            controller.text = item;
-            Navigator.pop(context);
-          },
-        );
-      },
-    );
   }
 
   @override
