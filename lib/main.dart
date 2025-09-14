@@ -1,8 +1,12 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:vaccine_home/app.dart';
+import 'package:vaccine_home/core/services/service_locator.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
+
   return runApp(
     DevicePreview(
       enabled: false,

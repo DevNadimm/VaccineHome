@@ -1,0 +1,142 @@
+import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:intl/intl.dart';
+import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+
+class AddTestPage extends StatefulWidget {
+  static Route route() => MaterialPageRoute(builder: (_) => const AddTestPage());
+
+  const AddTestPage({super.key});
+
+  @override
+  State<AddTestPage> createState() => _AddTestPageState();
+}
+
+class _AddTestPageState extends State<AddTestPage> {
+  final GlobalKey<FormState> globalKey = GlobalKey();
+  final TextEditingController testName = TextEditingController();
+  final TextEditingController testDate = TextEditingController();
+  final TextEditingController testTime = TextEditingController();
+  final TextEditingController description = TextEditingController();
+
+  Future<void> _selectOnlyDate(TextEditingController controller) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null) {
+      controller.text = DateFormat('yyyy-MM-dd').format(picked);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Add Test'),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            HugeIcons.strokeRoundedArrowLeft01,
+            size: 32,
+            color: AppColors.primaryFontColor,
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: globalKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextField(
+                label: 'Test Name',
+                controller: testName,
+                isRequired: true,
+                hintText: 'Enter test name',
+                validationLabel: 'Test name',
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'Next Test Date',
+                hintText: 'Select date',
+                controller: testDate,
+                isRequired: true,
+                readOnly: true,
+                validationLabel: 'Date',
+                onTap: () => _selectOnlyDate(testDate),
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'Next Test Time',
+                hintText: 'Select time',
+                controller: testTime,
+                isRequired: true,
+                readOnly: true,
+                validationLabel: 'Time',
+                onTap: () async {
+                  final TimeOfDay? time = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+                  if (time != null) {
+                    testTime.text = time.format(context);
+                  }
+                },
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'Description',
+                controller: description,
+                isRequired: false,
+                keyboardType: TextInputType.multiline,
+                maxLines: 3,
+                hintText: 'Enter description',
+                validationLabel: 'Description',
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: _saveConsultation,
+                  child: const Text(
+                    'Save Test',
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _saveConsultation() async {
+    if (globalKey.currentState?.validate() ?? false) {
+
+    }
+  }
+
+  @override
+  void dispose() {
+    testName.dispose();
+    testDate.dispose();
+    testTime.dispose();
+    description.dispose();
+    super.dispose();
+  }
+
+  void clearFields() {
+    testName.clear();
+    testDate.clear();
+    testTime.clear();
+    description.clear();
+  }
+}

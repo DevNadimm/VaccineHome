@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.isRequired = false,
     this.suffixText,
     this.keyboardType = TextInputType.text,
+    this.maxLines = 1,
     this.readOnly = false,
     this.onTap,
     required this.validationLabel,
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
   final bool isRequired;
   final String? suffixText;
   final TextInputType keyboardType;
+  final int maxLines;
   final bool readOnly;
   final VoidCallback? onTap;
   final String validationLabel;
@@ -80,6 +82,7 @@ class CustomTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
           ),
           obscureText: obscureText,
+          maxLines: maxLines,
           onChanged: onChanged,
           validator: isRequired
               ? validator ??

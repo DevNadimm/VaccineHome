@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/add_test_page.dart';
 
 class PathologyReminderPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const PathologyReminderPage());
@@ -17,7 +18,7 @@ class PathologyReminderPage extends StatelessWidget {
         title: "Add Test",
         subtitle: "Create a reminder for your pathology/lab tests.",
         onTap: () {
-          // Navigator.push(context, AddPathologyPage.route());
+          Navigator.push(context, AddTestPage.route());
         },
       ),
       SubModule(
