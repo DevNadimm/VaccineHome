@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/pages/vaccine_card_request_page.dart';
 
 class VaccineCardPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const VaccineCardPage());
@@ -13,15 +14,17 @@ class VaccineCardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final vaccineCardServices = [
       SubModule(
-        icon: HugeIcons.strokeRoundedClipboard,
-        title: "Vaccine Card Schedule",
-        subtitle: "Track your upcoming vaccination dates.",
-        onTap: () {},
+        icon: HugeIcons.strokeRoundedStudentCard,
+        title: "Vaccine Card Request",
+        subtitle: "Apply for your digital vaccine card.",
+        onTap: () {
+          Navigator.push(context, VaccineCardRequestPage.route());
+        },
       ),
       SubModule(
-        icon: HugeIcons.strokeRoundedSecurity,
-        title: "Vaccine Card Verification",
-        subtitle: "Verify your digital vaccine card instantly.",
+        icon: HugeIcons.strokeRoundedId,
+        title: "Vaccine Card View",
+        subtitle: "View and download your vaccine card.",
         onTap: () {},
       ),
     ];
