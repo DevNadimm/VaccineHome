@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
@@ -26,17 +25,17 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
   final TextEditingController startDate = TextEditingController();
   final TextEditingController endDate = TextEditingController();
 
-  Future<void> _selectOnlyDate(TextEditingController controller) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2030),
-    );
-    if (picked != null) {
-      controller.text = DateFormat('yyyy-MM-dd').format(picked);
-    }
-  }
+  // Future<void> _selectOnlyDate(TextEditingController controller) async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime.now(),
+  //     lastDate: DateTime(2030),
+  //   );
+  //   if (picked != null) {
+  //     controller.text = DateFormat('yyyy-MM-dd').format(picked);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,35 +86,35 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                 },
               ),
               const SizedBox(height: 16),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: CustomTextField(
-                      label: 'Start Date',
-                      hintText: 'Select date',
-                      controller: startDate,
-                      isRequired: true,
-                      readOnly: true,
-                      validationLabel: 'Start date',
-                      onTap: () => _selectOnlyDate(startDate),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: CustomTextField(
-                      label: 'End Date',
-                      hintText: 'Select date',
-                      controller: endDate,
-                      isRequired: true,
-                      readOnly: true,
-                      validationLabel: 'End date',
-                      onTap: () => _selectOnlyDate(endDate),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
+              // Row(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     Expanded(
+              //       child: CustomTextField(
+              //         label: 'Start Date',
+              //         hintText: 'Select date',
+              //         controller: startDate,
+              //         isRequired: true,
+              //         readOnly: true,
+              //         validationLabel: 'Start date',
+              //         onTap: () => _selectOnlyDate(startDate),
+              //       ),
+              //     ),
+              //     const SizedBox(width: 16),
+              //     Expanded(
+              //       child: CustomTextField(
+              //         label: 'End Date',
+              //         hintText: 'Select date',
+              //         controller: endDate,
+              //         isRequired: true,
+              //         readOnly: true,
+              //         validationLabel: 'End date',
+              //         onTap: () => _selectOnlyDate(endDate),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(height: 16),
               Row(
                 children: [
                   Text(

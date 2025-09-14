@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/utils/widgets/custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 
 class VaccineCardRequestPage extends StatefulWidget {
@@ -69,22 +70,23 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Personal Info
-              CustomTextField(
-                label: 'First Name',
-                controller: firstName,
-                isRequired: true,
-                keyboardType: TextInputType.name,
-                hintText: 'Enter first name',
-                validationLabel: 'First Name',
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(
-                label: 'Last Name',
-                controller: lastName,
-                isRequired: true,
-                keyboardType: TextInputType.name,
-                hintText: 'Enter last name',
-                validationLabel: 'Last Name',
+              RowFields(
+                firstField: CustomTextField(
+                  label: 'First Name',
+                  controller: firstName,
+                  isRequired: true,
+                  keyboardType: TextInputType.name,
+                  hintText: 'Enter first name',
+                  validationLabel: 'First Name',
+                ),
+                lastField: CustomTextField(
+                  label: 'Last Name',
+                  controller: lastName,
+                  isRequired: true,
+                  keyboardType: TextInputType.name,
+                  hintText: 'Enter last name',
+                  validationLabel: 'Last Name',
+                ),
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -105,23 +107,32 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                 validationLabel: 'Mother Name',
               ),
               const SizedBox(height: 16),
-              CustomTextField(
-                label: 'Date of Birth',
-                controller: dateOfBirth,
-                isRequired: true,
-                keyboardType: TextInputType.datetime,
-                hintText: 'Select date of birth',
-                validationLabel: 'Date of Birth',
-                readOnly: true,
-                onTap: () => _selectOnlyDate(dateOfBirth),
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(
-                label: 'Gender',
-                controller: gender,
-                isRequired: true,
-                hintText: 'Enter gender',
-                validationLabel: 'Gender',
+              RowFields(
+                firstField: CustomTextField(
+                  label: 'Date of Birth',
+                  controller: dateOfBirth,
+                  isRequired: true,
+                  keyboardType: TextInputType.datetime,
+                  hintText: 'Select date',
+                  validationLabel: 'Date of Birth',
+                  readOnly: true,
+                  onTap: () => _selectOnlyDate(dateOfBirth),
+                ),
+                lastField: CustomTextField(
+                  label: 'Gender',
+                  controller: gender,
+                  isRequired: true,
+                  hintText: 'Select gender',
+                  validationLabel: 'Gender',
+                  readOnly: true,
+                  onTap: () {
+                    showCustomBottomSheet(
+                      items: ['Male', 'Female', 'Others'],
+                      controller: gender,
+                      title: 'Select Gender',
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -216,6 +227,30 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
     }
   }
 
+  Future<void> showCustomBottomSheet({
+    required List<String> items,
+    required TextEditingController controller,
+    required String title,
+  }) async {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return CustomBottomSheetContent(
+          items: items,
+          controller: controller,
+          title: title,
+          onItemSelected: (item) {
+            controller.text = item;
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
     firstName.dispose();
@@ -248,5 +283,28 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
     phoneNumber.clear();
     whatsAppImo.clear();
     address.clear();
+  }
+}
+
+class RowFields extends StatelessWidget {
+  final Widget firstField;
+  final Widget lastField;
+
+  const RowFields({
+    super.key,
+    required this.firstField,
+    required this.lastField,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: firstField),
+        const SizedBox(width: 10),
+        Expanded(child: lastField),
+      ],
+    );
   }
 }
