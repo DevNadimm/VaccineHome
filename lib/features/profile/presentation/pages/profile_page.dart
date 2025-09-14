@@ -46,6 +46,11 @@ class ProfilePage extends StatelessWidget {
                   onTap: () {},
                 ),
                 ProfileMenuItem(
+                  icon: HugeIcons.strokeRoundedRecord,
+                  title: "Vaccination Records",
+                  onTap: () {},
+                ),
+                ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedCalendar02,
                   title: "Vaccine Schedule",
                   onTap: () {},

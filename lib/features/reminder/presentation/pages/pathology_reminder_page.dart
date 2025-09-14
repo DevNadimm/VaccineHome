@@ -24,9 +24,7 @@ class PathologyReminderPage extends StatelessWidget {
         icon: HugeIcons.strokeRoundedListView,
         title: "My Tests",
         subtitle: "View and manage your pathology test reminders.",
-        onTap: () {
-          // Navigator.push(context, PathologyListPage.route());
-        },
+        onTap: () {},
       ),
     ];
 
