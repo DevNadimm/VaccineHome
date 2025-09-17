@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 import 'package:vaccine_home/features/profile/data/models/profile_menu_item.dart';
+import 'package:vaccine_home/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_header.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_section.dart';
 
@@ -58,7 +59,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedEdit03,
                   title: "Edit Profile",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, EditProfilePage.route());
+                  },
                 ),
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedLockPassword,

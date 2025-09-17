@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/row_fields.dart';
 
 class VaccineCardRequestPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const VaccineCardRequestPage());
@@ -260,28 +261,5 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
     phoneNumber.clear();
     whatsAppImo.clear();
     address.clear();
-  }
-}
-
-class RowFields extends StatelessWidget {
-  final Widget firstField;
-  final Widget lastField;
-
-  const RowFields({
-    super.key,
-    required this.firstField,
-    required this.lastField,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(child: firstField),
-        const SizedBox(width: 10),
-        Expanded(child: lastField),
-      ],
-    );
   }
 }
