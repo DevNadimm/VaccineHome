@@ -5,6 +5,7 @@ class ApiEndpoints {
   // 📦 Auth
   String get registerUser => 'register';
   String get loginUser => 'login';
+  String get updateProfile => 'profile';
 
   // 📦 Reminders
   String get addConsultation => 'doctor-consultation-reminder/store';

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 
@@ -100,6 +101,26 @@ class DioService {
   }) async {
     try {
       return await _dio.delete(endpoint, data: data);
+    } on DioException catch (e) {
+      throw Exception("⚠️ Network error: ${e.message}");
+    }
+  }
+
+  /// Multipart Request
+  Future<Response> postMultipart(
+    String endpoint, {
+    required File file,
+    required String fileFieldName,
+    Map<String, dynamic>? data,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        ...?data,
+        fileFieldName: await MultipartFile.fromFile(file.path,
+            filename: file.path.split('/').last),
+      });
+
+      return await _dio.post(endpoint, data: formData);
     } on DioException catch (e) {
       throw Exception("⚠️ Network error: ${e.message}");
     }

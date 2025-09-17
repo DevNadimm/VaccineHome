@@ -4,6 +4,8 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
+import 'package:vaccine_home/core/services/dio_service.dart';
+import 'package:vaccine_home/core/services/service_locator.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/row_fields.dart';
@@ -163,13 +165,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   void _editProfile() async {
-    if (globalKey.currentState?.validate() ?? false) {}
+    if (globalKey.currentState?.validate() ?? false) {
+      final dioService = serviceLocator<DioService>();
+      Map<String, dynamic> data = {'_method': 'PUT'};
+
+      if (avatar != null) {
+        await dioService.postMultipart(
+          'profile',
+          file: avatar!,
+          fileFieldName: 'avatar',
+          data: data,
+        );
+      } else {
+        await dioService.putRequest('profile', data: data);
+      }
+    }
   }
 
   @override
   void dispose() {
+    name.dispose();
+    email.dispose();
+    phone.dispose();
+    gender.dispose();
+    dateOfBirth.dispose();
+    address.dispose();
     super.dispose();
   }
-
-  void clearFields() {}
 }
