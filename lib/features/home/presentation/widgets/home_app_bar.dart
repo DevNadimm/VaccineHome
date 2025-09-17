@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:vaccine_home/core/constants/colors.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String greetingText;
@@ -23,8 +25,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundImage: AssetImage(userAvatar),
-            backgroundColor: Colors.white,
+            backgroundColor: AppColors.cardColorBold,
+            backgroundImage: userAvatar.isNotEmpty
+                ? CachedNetworkImageProvider('https://vcard.vaccinehomebd.com/storage/app/public/$userAvatar',)
+                : null,
+            child: userAvatar.isEmpty
+                ? const Icon(Icons.person_rounded, size: 22, color: AppColors.white)
+                : null,
           ),
           const SizedBox(width: 16),
           Column(

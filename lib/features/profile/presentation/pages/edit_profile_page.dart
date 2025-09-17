@@ -11,6 +11,7 @@ import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/core/utils/widgets/row_fields.dart';
+import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/upload_avatar_section.dart';
 
@@ -31,6 +32,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController gender = TextEditingController();
   final TextEditingController dateOfBirth = TextEditingController();
   final TextEditingController address = TextEditingController();
+  String? userAvatarUrl;
   File? avatar;
 
   @override
@@ -47,6 +49,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final genderTxt = await AppPreferences.getUserGender() ?? '';
     gender.text = '${genderTxt[0].toUpperCase()}${genderTxt.substring(1)}';
     address.text = await AppPreferences.getUserAddress() ?? '';
+    userAvatarUrl = await AppPreferences.getUserAvatar() ?? '';
+    setState(() {});
   }
 
   Future<void> _selectOnlyDate(TextEditingController controller) async {
@@ -69,7 +73,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           AppNotifier.showToast(state.message, type: MessageType.error);
         }
         if (state is EditProfileSuccess) {
-          Navigator.pop(context);
+          Navigator.pushAndRemoveUntil(context, NavigationPage.route(), (route) => false);
         }
       },
       builder: (context, state) {
@@ -111,6 +115,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             children: [
               UploadProfileImageSection(
                 imageFile: avatar,
+                userAvatarUrl: userAvatarUrl,
                 onImagePicked: (image) => setState(() => avatar = image),
               ),
               const SizedBox(height: 24),

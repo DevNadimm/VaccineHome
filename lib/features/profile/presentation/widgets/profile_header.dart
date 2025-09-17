@@ -1,7 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:vaccine_home/core/constants/asset_paths.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -21,30 +20,35 @@ class ProfileHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Stack(
+        Stack(
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundColor: AppColors.white,
-              backgroundImage: AssetImage(AssetPaths.nadimCorporate),
+              backgroundColor: AppColors.cardColorBold,
+              backgroundImage: avatar.isNotEmpty
+                  ? CachedNetworkImageProvider('https://vcard.vaccinehomebd.com/storage/app/public/$avatar',)
+                  : null,
+              child: avatar.isEmpty
+                  ? const Icon(Icons.person_rounded, size: 60, color: AppColors.white)
+                  : null,
             ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: CircleAvatar(
-                radius: 16,
-                backgroundColor: AppColors.white,
-                child: CircleAvatar(
-                  radius: 15,
-                  backgroundColor: AppColors.primaryColor,
-                  child: Icon(
-                    HugeIcons.strokeRoundedCamera02,
-                    size: 18,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            // Positioned(
+            //   bottom: 0,
+            //   right: 0,
+            //   child: CircleAvatar(
+            //     radius: 16,
+            //     backgroundColor: AppColors.white,
+            //     child: CircleAvatar(
+            //       radius: 15,
+            //       backgroundColor: AppColors.primaryColor,
+            //       child: Icon(
+            //         HugeIcons.strokeRoundedCamera02,
+            //         size: 18,
+            //         color: Colors.white,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
         const SizedBox(height: 16),

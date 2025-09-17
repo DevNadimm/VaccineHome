@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/asset_paths.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/core/utils/helper_functions/greeting_helper.dart';
 import 'package:vaccine_home/features/home/data/models/service.dart';
 import 'package:vaccine_home/features/home/data/repositories/service_repository.dart';
@@ -9,18 +10,41 @@ import 'package:vaccine_home/features/home/presentation/pages/notification_page.
 import 'package:vaccine_home/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/service_card.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const HomePage());
 
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String? userName;
+  String? userAvatar;
+
+  @override
+  void initState() {
+    super.initState();
+    _getPreferences();
+  }
+
+  Future<void> _getPreferences() async {
+    final name = await AppPreferences.getUserName();
+    final avatar = await AppPreferences.getUserAvatar();
+    setState(() {
+      userName = name ?? 'No Name';
+      userAvatar = avatar ?? '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBar(
         greetingText: getGreetingMessage(),
-        userName: 'Nadim Chowdhury',
-        userAvatar: AssetPaths.nadimCorporate,
+        userName: userName ?? 'No Name',
+        userAvatar: userAvatar ?? '',
         onNotificationTap: () {
           Navigator.push(context, NotificationPage.route());
         },
