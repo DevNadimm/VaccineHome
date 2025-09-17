@@ -13,4 +13,8 @@ class Messages {
   static const String editProfileSuccess = "Profile edited successfully!";
   static const String updateProfileFailed = "Failed to update profile. Please try again.";
   static const String updateProfileSuccess = "Profile updated successfully!";
+
+  // Password messages
+  static const String changePasswordFailed = "Failed to change password. Please try again.";
+  static const String changePasswordSuccess = "Password changed successfully!";
 }

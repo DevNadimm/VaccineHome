@@ -5,6 +5,7 @@ import 'package:vaccine_home/features/auth/presentation/blocs/login/login_bloc.d
 import 'package:vaccine_home/features/auth/presentation/blocs/register/register_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/splash_page.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/change_password/change_password_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => LoginBloc()),
         BlocProvider(create: (_) => RegisterBloc()),
         BlocProvider(create: (_) => EditProfileBloc()),
+        BlocProvider(create: (_) => ChangePasswordBloc()),
       ],
       child: MaterialApp(
         title: 'Vaccine Home',
