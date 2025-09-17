@@ -17,4 +17,8 @@ class Messages {
   // Password messages
   static const String changePasswordFailed = "Failed to change password. Please try again.";
   static const String changePasswordSuccess = "Password changed successfully!";
+
+  // Medication messages
+  static const String addMedicationFailed = "Failed to add medication. Please try again.";
+  static const String addMedicationSuccess = "Medication added successfully!";
 }

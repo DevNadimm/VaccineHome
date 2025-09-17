@@ -3,8 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/add_medication/add_medication_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/widgets/time_picker_list_widget.dart';
@@ -22,8 +27,8 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController medicationName = TextEditingController();
   final TextEditingController medicationType = TextEditingController();
-  final TextEditingController startDate = TextEditingController();
-  final TextEditingController endDate = TextEditingController();
+  // final TextEditingController startDate = TextEditingController();
+  // final TextEditingController endDate = TextEditingController();
 
   // Future<void> _selectOnlyDate(TextEditingController controller) async {
   //   final DateTime? picked = await showDatePicker(
@@ -39,6 +44,32 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<AddMedicationBloc, AddMedicationState>(
+      listener: (context, state) {
+        if (state is AddMedicationFailure) {
+          AppNotifier.showToast(Messages.addMedicationFailed, type: MessageType.error);
+        }
+        if (state is AddMedicationSuccess) {
+          clearFields();
+          AppNotifier.showToast(Messages.addMedicationSuccess, type: MessageType.success);
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is AddMedicationLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget content() {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Medication'),
@@ -216,24 +247,14 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
 
   void _saveMedication() async {
     if (globalKey.currentState?.validate() ?? false) {
-      // try {
-      //   final medication = MedicationModel(
-      //     name: medicationName.text.toString(),
-      //     type: medicationType.text.toString(),
-      //     startDate: startDate.text.toString(),
-      //     endDate: endDate.text.toString(),
-      //     time: pickTime.text.toString(),
-      //     whenToTake: intakeTiming,
-      //   );
-      //
-      //   int id = await DBHelper.createMedication(medication);
-      //   medication.id = id; // Update id for notification controller (notification id)
-      //   NotificationController.scheduleMedicationNotifications(medication);
-      //   clearFields();
-      //   ToastMessage.medAddSuccess();
-      // } catch (e) {
-      //   ToastMessage.medAddFailed();
-      // }
+      context.read<AddMedicationBloc>().add(
+        SaveAddMedicationEvent(
+          name: medicationName.text,
+          type: medicationType.text,
+          times: context.read<TimeListCubit>().state.map((e) => e.text).toList(),
+          whenToTake: context.read<IntakeToggleCubit>().state,
+        ),
+      );
     }
   }
 
@@ -241,16 +262,13 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
   void dispose() {
     medicationName.dispose();
     medicationType.dispose();
-    startDate.dispose();
-    endDate.dispose();
     super.dispose();
   }
 
   void clearFields() {
     medicationName.clear();
     medicationType.clear();
-    startDate.clear();
-    endDate.clear();
     context.read<TimeListCubit>().clearControllers();
+    context.read<IntakeToggleCubit>().reset();
   }
 }

@@ -11,8 +11,8 @@ class ApiEndpoints {
   // 📦 Reminders
   String get addConsultation => 'doctor-consultation-reminder/store';
   String get myConsultations => 'doctor-consultation-reminders';
-  String get addMedication => '';
-  String get myMedications => '';
+  String get addMedication => 'medication-reminder/store';
+  String get myMedications => 'medication-reminders';
   String get addTest => '';
   String get myTests => '';
 
