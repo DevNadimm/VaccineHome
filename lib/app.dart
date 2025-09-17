@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vaccine_home/core/utils/themes/theme.dart';
+import 'package:vaccine_home/features/auth/presentation/blocs/login/login_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/blocs/register/register_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/splash_page.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => NavigationCubit()),
         BlocProvider(create: (_) => IntakeToggleCubit()),
         BlocProvider(create: (_) => TimeListCubit()),
+        BlocProvider(create: (_) => LoginBloc()),
         BlocProvider(create: (_) => RegisterBloc()),
       ],
       child: MaterialApp(

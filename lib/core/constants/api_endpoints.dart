@@ -4,6 +4,7 @@ class ApiEndpoints {
 
   // 📦 Auth
   String get registerUser => 'register';
+  String get loginUser => 'login';
 
   // 📦 Reminders
   String get addMedication => '${apiBaseUrl}pathology-reminder/store';

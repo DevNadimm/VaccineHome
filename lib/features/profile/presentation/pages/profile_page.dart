@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:vaccine_home/core/services/app_preferences.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 import 'package:vaccine_home/features/profile/data/models/profile_menu_item.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_header.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_section.dart';
@@ -104,7 +106,10 @@ class ProfilePage extends StatelessWidget {
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedLogout03,
                   title: "Logout",
-                  onTap: () {},
+                  onTap: () async {
+                    await AppPreferences.clearAll();
+                    Navigator.pushReplacement(context, LoginPage.route());
+                  },
                 ),
               ],
             ),

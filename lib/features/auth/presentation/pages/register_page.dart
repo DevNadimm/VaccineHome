@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
@@ -9,7 +10,7 @@ import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/auth/presentation/blocs/register/register_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 import 'package:vaccine_home/features/auth/presentation/widgets/auth_footer.dart';
-import 'package:vaccine_home/features/home/presentation/pages/home_page.dart';
+import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
 
 class RegisterPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const RegisterPage());
@@ -38,7 +39,7 @@ class _SignUpScreenState extends State<RegisterPage> {
         if (state is RegisterSuccess) {
           Navigator.pushAndRemoveUntil(
             context,
-            HomePage.route(),
+            NavigationPage.route(),
             (route) => false,
           );
         }
@@ -62,6 +63,16 @@ class _SignUpScreenState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register an Account'),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            HugeIcons.strokeRoundedArrowLeft01,
+            size: 32,
+            color: AppColors.primaryFontColor,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -151,7 +162,7 @@ class _SignUpScreenState extends State<RegisterPage> {
                   label: "Already have an account? ",
                   actionText: "Sign In",
                   onTap: () {
-                    Navigator.push(context, LoginPage.route());
+                    Navigator.pushAndRemoveUntil(context, LoginPage.route(), (route) => false);
                   },
                 ),
               ],

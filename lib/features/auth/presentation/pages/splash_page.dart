@@ -4,8 +4,8 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
-import 'package:vaccine_home/features/auth/presentation/pages/register_page.dart';
-import 'package:vaccine_home/features/home/presentation/pages/home_page.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
+import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -30,9 +30,9 @@ class _SplashPageState extends State<SplashPage> {
     if (token.isNotEmpty) {
       final dioService = serviceLocator<DioService>();
       await dioService.initAuthToken();
-      Navigator.pushReplacement(context, HomePage.route());
+      Navigator.pushReplacement(context, NavigationPage.route());
     } else {
-      Navigator.pushReplacement(context, RegisterPage.route());
+      Navigator.pushReplacement(context, LoginPage.route());
     }
   }
 

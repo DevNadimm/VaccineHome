@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/auth/presentation/blocs/login/login_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/register_page.dart';
 import 'package:vaccine_home/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
@@ -23,19 +27,38 @@ class _SignUpScreenState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state is LoginFailure) {
+          AppNotifier.showToast(state.message, type: MessageType.error);
+        }
+        if (state is LoginSuccess) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            NavigationPage.route(),
+            (route) => false,
+          );
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is LoginLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget content() {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login to Your Account'),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            HugeIcons.strokeRoundedArrowLeft01,
-            size: 32,
-            color: AppColors.primaryFontColor,
-          ),
-        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -78,13 +101,7 @@ class _SignUpScreenState extends State<LoginPage> {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        NavigationPage.route(),
-                        (route) => false,
-                      );
-                    },
+                    onPressed: () => onTapLogin(),
                     child: const Text('Login'),
                   ),
                 ),
@@ -93,10 +110,9 @@ class _SignUpScreenState extends State<LoginPage> {
                   label: "Don't have an account? ",
                   actionText: "Register",
                   onTap: () {
-                    Navigator.pushAndRemoveUntil(
+                    Navigator.push(
                       context,
                       RegisterPage.route(),
-                      (route) => false,
                     );
                   },
                 ),
@@ -108,8 +124,15 @@ class _SignUpScreenState extends State<LoginPage> {
     );
   }
 
-  void onTapLogin(String email, String password) async {
-    
+  void onTapLogin() {
+    if (_globalKey.currentState?.validate() ?? false) {
+      context.read<LoginBloc>().add(
+        LoginUserEvent(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        ),
+      );
+    }
   }
 
   @override
