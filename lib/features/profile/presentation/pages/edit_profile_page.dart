@@ -1,14 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
-import 'package:vaccine_home/core/services/dio_service.dart';
-import 'package:vaccine_home/core/services/service_locator.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/core/utils/widgets/row_fields.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/upload_avatar_section.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -36,7 +39,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     super.initState();
   }
 
-  Future<void> _getPreferences () async {
+  Future<void> _getPreferences() async {
     name.text = await AppPreferences.getUserName() ?? '';
     email.text = await AppPreferences.getUserEmail() ?? '';
     phone.text = await AppPreferences.getUserPhone() ?? '';
@@ -56,6 +59,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<EditProfileBloc, EditProfileState>(
+      listener: (context, state) {
+        if (state is EditProfileFailure) {
+          AppNotifier.showToast(state.message, type: MessageType.error);
+        }
+        if (state is EditProfileSuccess) {
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is EditProfileLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget content() {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Profile'),
@@ -166,19 +194,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   void _editProfile() async {
     if (globalKey.currentState?.validate() ?? false) {
-      final dioService = serviceLocator<DioService>();
-      Map<String, dynamic> data = {'_method': 'PUT'};
-
-      if (avatar != null) {
-        await dioService.postMultipart(
-          'profile',
-          file: avatar!,
-          fileFieldName: 'avatar',
-          data: data,
-        );
-      } else {
-        await dioService.putRequest('profile', data: data);
-      }
+      context.read<EditProfileBloc>().add(
+        SaveProfileEvent(
+          name: name.text.trim(),
+          email: email.text.trim(),
+          phone: phone.text.trim(),
+          dateOfBirth: dateOfBirth.text.trim(),
+          gender: gender.text.trim(),
+          address: address.text.trim(),
+          avatar: avatar,
+        ),
+      );
     }
   }
 
