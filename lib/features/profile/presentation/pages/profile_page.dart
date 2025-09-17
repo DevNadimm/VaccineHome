@@ -6,8 +6,35 @@ import 'package:vaccine_home/features/profile/data/models/profile_menu_item.dart
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_header.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_section.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String? userName;
+  String? userEmail;
+  String? userAvatar;
+
+  @override
+  void initState() {
+    getPreference();
+    super.initState();
+  }
+
+  Future<void> getPreference() async {
+    final name = await AppPreferences.getUserName();
+    final email = await AppPreferences.getUserEmail();
+    final avatar = await AppPreferences.getUserAvatar();
+
+    setState(() {
+      userName = name;
+      userEmail = email;
+      userAvatar = avatar;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +44,11 @@ class ProfilePage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const ProfileHeader(),
+            ProfileHeader(
+              name: userName?.isNotEmpty == true ? userName! : 'No Name',
+              email: userEmail?.isNotEmpty == true ? userEmail! : 'No Email',
+              avatar: userAvatar ?? '',
+            ),
             const SizedBox(height: 32),
 
             /// Account Section

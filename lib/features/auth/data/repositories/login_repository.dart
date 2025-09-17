@@ -28,7 +28,13 @@ class LoginRepository {
       final model = LoginModel.fromJson(res.data);
 
       dioService.setAuthToken(model.accessToken ?? '');
+
+      // Set app preferences after login
       await AppPreferences.setAccessToken(model.accessToken ?? '');
+      await AppPreferences.setUserName(model.data?.name ?? '');
+      await AppPreferences.setUserEmail(model.data?.email ?? '');
+      await AppPreferences.setUserPhone(model.data?.phone ?? '');
+      await AppPreferences.setUserAvatar(model.data?.avatar ?? '');
 
       return model;
     } else {

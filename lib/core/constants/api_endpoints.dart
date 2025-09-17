@@ -7,7 +7,10 @@ class ApiEndpoints {
   String get loginUser => 'login';
 
   // 📦 Reminders
-  String get addMedication => '${apiBaseUrl}pathology-reminder/store';
-  String get addConsultation => '${apiBaseUrl}doctor-consultation-reminder/store';
-  String get addTest => '${apiBaseUrl}medication-test-reminder/store';
+  String get addConsultation => 'doctor-consultation-reminder/store';
+  String get myConsultations => 'doctor-consultation-reminders';
+  String get addMedication => '';
+  String get myMedications => '';
+  String get addTest => '';
+  String get myTests => '';
 }

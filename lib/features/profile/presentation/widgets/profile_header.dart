@@ -5,7 +5,16 @@ import 'package:vaccine_home/core/constants/asset_paths.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  final String name;
+  final String email;
+  final String avatar;
+
+  const ProfileHeader({
+    super.key,
+    required this.name,
+    required this.email,
+    required this.avatar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +52,7 @@ class ProfileHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Nadim Chowdhury',
+              name,
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 20,
@@ -63,7 +72,7 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
         Text(
-          'nadimm.dev@gmail.com',
+          email,
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontSize: 14,
