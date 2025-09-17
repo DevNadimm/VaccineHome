@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/auth/presentation/blocs/register/register_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 import 'package:vaccine_home/features/auth/presentation/widgets/auth_footer.dart';
+import 'package:vaccine_home/features/home/presentation/pages/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const RegisterPage());
@@ -24,6 +30,35 @@ class _SignUpScreenState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<RegisterBloc, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterFailure) {
+          AppNotifier.showToast(state.message, type: MessageType.error);
+        }
+        if (state is RegisterSuccess) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            HomePage.route(),
+            (route) => false,
+          );
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is RegisterLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget content() {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register an Account'),
@@ -95,7 +130,19 @@ class _SignUpScreenState extends State<RegisterPage> {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_globalKey.currentState?.validate() ?? false) {
+                        context.read<RegisterBloc>().add(
+                          RegisterUserEvent(
+                            name: _nameController.text.trim(),
+                            email: _emailController.text.trim(),
+                            phone: _phoneController.text.trim(),
+                            password: _passwordController.text.trim(),
+                            confirmPassword: _confirmPasswordController.text.trim(),
+                          ),
+                        );
+                      }
+                    },
                     child: const Text('Register'),
                   ),
                 ),
@@ -113,10 +160,6 @@ class _SignUpScreenState extends State<RegisterPage> {
         ),
       ),
     );
-  }
-
-  void onTapRegister(String name, String email, String password) async {
-
   }
 
   @override

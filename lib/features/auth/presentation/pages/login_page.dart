@@ -5,6 +5,7 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/register_page.dart';
 import 'package:vaccine_home/features/auth/presentation/widgets/auth_footer.dart';
+import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
 
 class LoginPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const LoginPage());
@@ -77,7 +78,13 @@ class _SignUpScreenState extends State<LoginPage> {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        NavigationPage.route(),
+                        (route) => false,
+                      );
+                    },
                     child: const Text('Login'),
                   ),
                 ),
@@ -102,7 +109,7 @@ class _SignUpScreenState extends State<LoginPage> {
   }
 
   void onTapLogin(String email, String password) async {
-
+    
   }
 
   @override
