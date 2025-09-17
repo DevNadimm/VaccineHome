@@ -43,6 +43,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
     name.text = await AppPreferences.getUserName() ?? '';
     email.text = await AppPreferences.getUserEmail() ?? '';
     phone.text = await AppPreferences.getUserPhone() ?? '';
+    dateOfBirth.text = await AppPreferences.getUserDOB() ?? '';
+    final genderTxt = await AppPreferences.getUserGender() ?? '';
+    gender.text = '${genderTxt[0].toUpperCase()}${genderTxt.substring(1)}';
+    address.text = await AppPreferences.getUserAddress() ?? '';
   }
 
   Future<void> _selectOnlyDate(TextEditingController controller) async {
@@ -158,7 +162,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   onTap: () {
                     showCustomBottomSheet(
                       context: context,
-                      items: ['Male', 'Female', 'Others'],
+                      items: ['Male', 'Female'],
                       controller: gender,
                       title: 'Select Gender',
                     );

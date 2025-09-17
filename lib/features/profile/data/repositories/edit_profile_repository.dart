@@ -50,6 +50,9 @@ class EditProfileRepository {
       if (model.data?.name != null) await AppPreferences.setUserName(model.data!.name!);
       if (model.data?.email != null) await AppPreferences.setUserEmail(model.data!.email!);
       if (model.data?.phone != null) await AppPreferences.setUserPhone(model.data!.phone!);
+      if (model.data?.dateOfBirth != null) await AppPreferences.setUserDOB(model.data!.dateOfBirth!);
+      if (model.data?.gender != null) await AppPreferences.setUserGender(model.data!.gender!);
+      if (model.data?.address != null) await AppPreferences.setUserAddress(model.data!.address!);
       if (model.data?.avatar != null) await AppPreferences.setUserAvatar(model.data!.avatar!);
 
       return model;

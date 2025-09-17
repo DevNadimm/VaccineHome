@@ -6,4 +6,7 @@ class PreferenceKeys {
   static const userName = 'user-name';
   static const userEmail = 'user-email';
   static const userPhone = 'user-phone';
+  static const userDOB = 'user-dob';
+  static const userGender = 'user-gender';
+  static const userAddress = 'user-address';
 }

@@ -80,6 +80,51 @@ class AppPreferences {
     }
   }
 
+  /// User Date of Birth
+  static Future<String?> getUserDOB() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(PreferenceKeys.userDOB);
+  }
+
+  static Future<void> setUserDOB(String? dob) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (dob != null) {
+      await prefs.setString(PreferenceKeys.userDOB, dob);
+    } else {
+      await prefs.remove(PreferenceKeys.userDOB);
+    }
+  }
+
+  /// User Gender
+  static Future<String?> getUserGender() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(PreferenceKeys.userGender);
+  }
+
+  static Future<void> setUserGender(String? gender) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (gender != null) {
+      await prefs.setString(PreferenceKeys.userGender, gender);
+    } else {
+      await prefs.remove(PreferenceKeys.userGender);
+    }
+  }
+
+  /// User Address
+  static Future<String?> getUserAddress() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(PreferenceKeys.userAddress);
+  }
+
+  static Future<void> setUserAddress(String? address) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (address != null) {
+      await prefs.setString(PreferenceKeys.userAddress, address);
+    } else {
+      await prefs.remove(PreferenceKeys.userAddress);
+    }
+  }
+
   /// Clear all preferences (e.g., on logout)
   static Future<void> clearAll() async {
     final prefs = await SharedPreferences.getInstance();
