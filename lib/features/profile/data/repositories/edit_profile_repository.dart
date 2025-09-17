@@ -38,9 +38,14 @@ class EditProfileRepository {
         file: avatar,
         fileFieldName: 'avatar',
         data: data,
+        errorMessage: Messages.editProfileFailed
       );
     } else {
-      res = await dioService.putRequest(apiEndpoints.editProfile, data: data);
+      res = await dioService.putRequest(
+        apiEndpoints.editProfile,
+        data: data,
+        errorMessage: Messages.editProfileFailed,
+      );
     }
 
     if (res.statusCode == 200 || res.statusCode == 201) {

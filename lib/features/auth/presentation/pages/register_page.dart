@@ -10,7 +10,6 @@ import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/auth/presentation/blocs/register/register_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 import 'package:vaccine_home/features/auth/presentation/widgets/auth_footer.dart';
-import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
 
 class RegisterPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const RegisterPage());
@@ -39,7 +38,7 @@ class _SignUpScreenState extends State<RegisterPage> {
         if (state is RegisterSuccess) {
           Navigator.pushAndRemoveUntil(
             context,
-            NavigationPage.route(),
+            LoginPage.route(),
             (route) => false,
           );
         }

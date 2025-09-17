@@ -60,12 +60,13 @@ class DioService {
   /// GET Request
   Future<Response> getRequest(
     String endpoint, {
+    String? errorMessage,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
       return await _dio.get(endpoint, queryParameters: queryParameters);
     } on DioException catch (e) {
-      throw Exception("⚠️ Network error: ${e.message}");
+      throw Exception(errorMessage ?? "⚠️ Network error: ${e.message}");
     }
   }
 
@@ -86,11 +87,12 @@ class DioService {
   Future<Response> putRequest(
     String endpoint, {
     dynamic data,
+    String? errorMessage,
   }) async {
     try {
       return await _dio.put(endpoint, data: data);
     } on DioException catch (e) {
-      throw Exception("⚠️ Network error: ${e.message}");
+      throw Exception(errorMessage ?? "⚠️ Network error: ${e.message}");
     }
   }
 
@@ -98,11 +100,12 @@ class DioService {
   Future<Response> deleteRequest(
     String endpoint, {
     dynamic data,
+    String? errorMessage,
   }) async {
     try {
       return await _dio.delete(endpoint, data: data);
     } on DioException catch (e) {
-      throw Exception("⚠️ Network error: ${e.message}");
+      throw Exception(errorMessage ?? "⚠️ Network error: ${e.message}");
     }
   }
 
@@ -112,6 +115,7 @@ class DioService {
     required File file,
     required String fileFieldName,
     Map<String, dynamic>? data,
+    String? errorMessage,
   }) async {
     try {
       final formData = FormData.fromMap({
@@ -122,7 +126,7 @@ class DioService {
 
       return await _dio.post(endpoint, data: formData);
     } on DioException catch (e) {
-      throw Exception("⚠️ Network error: ${e.message}");
+      throw Exception(errorMessage ?? "⚠️ Network error: ${e.message}");
     }
   }
 }

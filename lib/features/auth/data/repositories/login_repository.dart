@@ -30,6 +30,7 @@ class LoginRepository {
       dioService.setAuthToken(model.accessToken ?? '');
 
       // Update app preferences if available
+      if (model.accessToken != null) await AppPreferences.setAccessToken(model.accessToken ?? '');
       if (model.data?.name != null) await AppPreferences.setUserName(model.data!.name!);
       if (model.data?.email != null) await AppPreferences.setUserEmail(model.data!.email!);
       if (model.data?.phone != null) await AppPreferences.setUserPhone(model.data!.phone!);
