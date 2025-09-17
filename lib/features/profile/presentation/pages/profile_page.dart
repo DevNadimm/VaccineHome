@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
+import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/profile/data/models/profile_menu_item.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/change_password_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/edit_profile_page.dart';
@@ -18,6 +20,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String? userName;
   String? userEmail;
+  String? userPhone;
   String? userAvatar;
 
   @override
@@ -29,11 +32,13 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> getPreference() async {
     final name = await AppPreferences.getUserName();
     final email = await AppPreferences.getUserEmail();
+    final phone = await AppPreferences.getUserPhone();
     final avatar = await AppPreferences.getUserAvatar();
 
     setState(() {
       userName = name;
       userEmail = email;
+      userPhone = phone;
       userAvatar = avatar;
     });
   }
@@ -49,6 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ProfileHeader(
               name: userName?.isNotEmpty == true ? userName! : 'No Name',
               email: userEmail?.isNotEmpty == true ? userEmail! : 'No Email',
+              phone: userPhone?.isNotEmpty == true ? userPhone! : 'No Phone',
               avatar: userAvatar ?? '',
             ),
             const SizedBox(height: 32),
@@ -145,6 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   title: "Logout",
                   onTap: () async {
                     await AppPreferences.clearAll();
+                    context.read<NavigationCubit>().resetIndex();
                     Navigator.pushReplacement(context, LoginPage.route());
                   },
                 ),

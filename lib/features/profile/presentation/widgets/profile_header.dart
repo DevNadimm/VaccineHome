@@ -6,12 +6,14 @@ import 'package:vaccine_home/core/constants/colors.dart';
 class ProfileHeader extends StatelessWidget {
   final String name;
   final String email;
+  final String phone;
   final String avatar;
 
   const ProfileHeader({
     super.key,
     required this.name,
     required this.email,
+    required this.phone,
     required this.avatar,
   });
 
@@ -75,8 +77,20 @@ class ProfileHeader extends StatelessWidget {
             )
           ],
         ),
+        const SizedBox(height: 4),
         Text(
           email,
+          style: GoogleFonts.poppins(
+            textStyle: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+              color: AppColors.secondaryFontColor,
+            ),
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          phone,
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontSize: 14,

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
@@ -73,6 +74,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           AppNotifier.showToast(state.message, type: MessageType.error);
         }
         if (state is EditProfileSuccess) {
+          AppNotifier.showToast(Messages.editProfileSuccess, type: MessageType.success);
           Navigator.pushAndRemoveUntil(context, NavigationPage.route(), (route) => false);
         }
       },
