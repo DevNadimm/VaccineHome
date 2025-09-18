@@ -13,6 +13,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // await NotificationService.instance.initialize();
+
   return runApp(
     DevicePreview(
       enabled: false,
