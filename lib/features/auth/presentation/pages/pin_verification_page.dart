@@ -6,6 +6,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/set_new_password_page.dart';
 
 class PinVerificationPage extends StatefulWidget {
   static Route route(String email) => MaterialPageRoute(builder: (_) => PinVerificationPage(email: email));
@@ -86,6 +87,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
                     } else {
                       print("PIN entered: $pin");
                       /// TODO: verify PIN logic here
+                      Navigator.push(context, SetNewPasswordPage.route(widget.email, _pinController.text));
                     }
                   },
                   child: const Text("Verify PIN"),
