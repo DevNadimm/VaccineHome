@@ -2,14 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Loader extends StatelessWidget {
-  const Loader({super.key});
+  final Color? color;
+
+  const Loader({super.key, this.color});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: CupertinoActivityIndicator(
         radius: 16,
-        color: Colors.white,
+        color: color ?? Colors.white,
       ),
     );
   }

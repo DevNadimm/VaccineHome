@@ -109,11 +109,6 @@ class _ProfilePageState extends State<ProfilePage> {
               title: "Engagement",
               items: [
                 ProfileMenuItem(
-                  icon: HugeIcons.strokeRoundedDiscount01,
-                  title: "Advertisement / Offers",
-                  onTap: () {},
-                ),
-                ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedComment01,
                   title: "Feedback",
                   onTap: () {},

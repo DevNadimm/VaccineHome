@@ -19,6 +19,9 @@ class ApiEndpoints {
   String get addTest => '';
   String get myTests => '';
 
+  // 📦 Profile
+  String get getAdvertisements => 'advertisements';
+
   // Avatar
   String avatar(String path) => 'https://vcard.vaccinehomebd.com/storage/app/public/$path';
 }
