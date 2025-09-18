@@ -7,6 +7,7 @@ import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/auth/presentation/blocs/login/login_bloc.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/register_page.dart';
 import 'package:vaccine_home/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
@@ -96,7 +97,28 @@ class _SignUpScreenState extends State<LoginPage> {
                   hintText: 'Enter password',
                   validationLabel: 'Confirm Password',
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 4),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, ForgotPasswordPage.route());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Text(
+                        'Forgot password?',
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
                 SizedBox(
                   height: 50,
                   width: double.infinity,
