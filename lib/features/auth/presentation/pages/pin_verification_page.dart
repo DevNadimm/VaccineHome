@@ -84,7 +84,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
                 child: const Text("Verify PIN"),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             Text.rich(
               TextSpan(
                 text: "Haven’t got the email yet? ",
