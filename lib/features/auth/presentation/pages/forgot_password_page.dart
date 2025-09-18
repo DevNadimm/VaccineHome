@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/auth/presentation/blocs/forgot_password/forgot_password_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/pin_verification_page.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -20,15 +26,27 @@ class _SignUpScreenState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        content(),
-        // if (state is LoginLoading)
-        //   Container(
-        //     color: AppColors.black.withOpacity(0.6),
-        //     child: const Loader(),
-        //   ),
-      ],
+    return BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
+      listener: (context, state) {
+        if (state is ForgotPasswordFailure) {
+          AppNotifier.showToast(Messages.sendPinFailed, type: MessageType.error);
+        }
+        if (state is ForgotPasswordSuccess) {
+          Navigator.push(context, PinVerificationPage.route(_emailController.text.trim()));
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is ForgotPasswordLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
     );
   }
 
@@ -93,7 +111,9 @@ class _SignUpScreenState extends State<ForgotPasswordPage> {
 
   void onTapSendPin() {
     if (_globalKey.currentState?.validate() ?? false) {
-      Navigator.push(context, PinVerificationPage.route(_emailController.text));
+      context.read<ForgotPasswordBloc>().add(
+        SendForgotPasswordPinEvent(email: _emailController.text.trim()),
+      );
     }
   }
 
