@@ -39,128 +39,123 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        child: Column(
-          children: [
-            Text.rich(
-              TextSpan(
-                text: "Enter the 4-digit PIN sent to ",
-                style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+        child: Form(
+          key: _globalKey,
+          child: Column(
+            children: [
+              Text.rich(
+                TextSpan(
+                  text: "Enter the 4-digit PIN sent to ",
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.secondaryFontColor,
+                    ),
+                  ),
+                  children: [
+                    TextSpan(
+                      text: widget.email,
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.secondaryFontColor,
+                        ),
+                      ),
+                    ),
+                    const TextSpan(
+                      text: " to verify your account.",
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32),
+              _pinField(context),
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    final pin = _pinController.text.trim();
+                    if (pin.isEmpty) {
+                      AppNotifier.showToast('PIN cannot be empty', type: MessageType.error);
+                    } else if (pin.length < 4) {
+                      AppNotifier.showToast('PIN must be 4 digits', type: MessageType.error);
+                    } else {
+                      print("PIN entered: $pin");
+                      /// TODO: verify PIN logic here
+                    }
+                  },
+                  child: const Text("Verify PIN"),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text.rich(
+                TextSpan(
+                  text: "Haven’t got the email yet? ",
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: AppColors.secondaryFontColor,
                   ),
-                ),
-                children: [
-                  TextSpan(
-                    text: widget.email,
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
+                  children: [
+                    TextSpan(
+                      text: "Resend Email",
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.secondaryFontColor,
+                        color: AppColors.primaryColor,
                       ),
+                      recognizer: TapGestureRecognizer()..onTap = () {
+                        /// TODO: Operations
+                      },
                     ),
-                  ),
-                  const TextSpan(
-                    text: " to verify your account.",
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 32),
-            _pinField(context),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_globalKey.currentState!.validate()) {
-                    final pin = _pinController.text;
-                    /// TODO: Operations
-                  }
-                },
-                child: const Text("Verify PIN"),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Text.rich(
-              TextSpan(
-                text: "Haven’t got the email yet? ",
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.secondaryFontColor,
+                  ],
                 ),
-                children: [
-                  TextSpan(
-                    text: "Resend Email",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor,
-                    ),
-                    recognizer: TapGestureRecognizer()..onTap = () {
-                      /// TODO: Operations
-                    },
-                  ),
-                ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _pinField(BuildContext context) {
-    return Form(
-      key: _globalKey,
-      child: PinCodeTextField(
-        controller: _pinController,
-        length: 4,
-        obscureText: false,
-        keyboardType: TextInputType.number,
-        animationType: AnimationType.scale,
-        backgroundColor: Colors.transparent,
-        autoDisposeControllers: false,
-        enableActiveFill: true,
-        appContext: context,
-        animationDuration: const Duration(milliseconds: 300),
-        textStyle: GoogleFonts.poppins(
-          textStyle: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: AppColors.primaryFontColor,
-          ),
+    return PinCodeTextField(
+      controller: _pinController,
+      length: 4,
+      obscureText: false,
+      keyboardType: TextInputType.number,
+      animationType: AnimationType.scale,
+      backgroundColor: Colors.transparent,
+      autoDisposeControllers: false,
+      enableActiveFill: true,
+      appContext: context,
+      animationDuration: const Duration(milliseconds: 300),
+      textStyle: GoogleFonts.poppins(
+        textStyle: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: AppColors.primaryFontColor,
         ),
-        cursorColor: AppColors.primaryColor,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            AppNotifier.showToast('PIN cannot be empty', type: MessageType.error);
-          }
-          else if (value.length < 4) {
-            AppNotifier.showToast('PIN must be 4 digits', type: MessageType.error);
-            return '';
-          }
-          return null;
-        },
-        pinTheme: PinTheme(
-          shape: PinCodeFieldShape.box,
-          borderRadius: BorderRadius.circular(16),
-          fieldHeight: 64,
-          fieldWidth: 64,
-          borderWidth: 2,
-          fieldOuterPadding: const EdgeInsets.symmetric(horizontal: 8),
-          activeColor: AppColors.primaryColor,
-          selectedColor: AppColors.primaryColor,
-          inactiveColor: AppColors.secondaryFontColor,
-          disabledColor: Colors.grey.shade300,
-          activeFillColor: AppColors.white,
-          selectedFillColor: AppColors.cardOverlay,
-          inactiveFillColor: AppColors.white,
-        ),
+      ),
+      cursorColor: AppColors.primaryColor,
+      pinTheme: PinTheme(
+        shape: PinCodeFieldShape.box,
+        borderRadius: BorderRadius.circular(16),
+        fieldHeight: 64,
+        fieldWidth: 64,
+        borderWidth: 2,
+        fieldOuterPadding: const EdgeInsets.symmetric(horizontal: 8),
+        activeColor: AppColors.primaryColor,
+        selectedColor: AppColors.primaryColor,
+        inactiveColor: AppColors.secondaryFontColor,
+        disabledColor: Colors.grey.shade300,
+        activeFillColor: AppColors.white,
+        selectedFillColor: AppColors.cardOverlay,
+        inactiveFillColor: AppColors.white,
       ),
     );
   }
