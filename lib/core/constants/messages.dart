@@ -21,4 +21,8 @@ class Messages {
   // Medication messages
   static const String addMedicationFailed = "Failed to add medication. Please try again.";
   static const String addMedicationSuccess = "Medication added successfully!";
+
+  // Consultancy messages
+  static const String addConsultationFailed = "Failed to add doctor consultancy. Please try again.";
+  static const String addConsultationSuccess = "Doctor consultancy added successfully!";
 }

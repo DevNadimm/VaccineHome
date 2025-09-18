@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/add_consultation/add_consultation_bloc.dart';
 
 class AddConsultationPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const AddConsultationPage());
@@ -34,6 +40,32 @@ class _AddConsultationPageState extends State<AddConsultationPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<AddConsultationBloc, AddConsultationState>(
+      listener: (context, state) {
+        if (state is AddConsultationFailure) {
+          AppNotifier.showToast(Messages.addConsultationFailed, type: MessageType.error);
+        }
+        if (state is AddConsultationSuccess) {
+          clearFields();
+          AppNotifier.showToast(Messages.addConsultationSuccess, type: MessageType.success);
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is AddConsultationLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget content() {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Consultation'),
@@ -118,7 +150,14 @@ class _AddConsultationPageState extends State<AddConsultationPage> {
 
   void _saveConsultation() async {
     if (globalKey.currentState?.validate() ?? false) {
-
+      context.read<AddConsultationBloc>().add(
+        SaveAddConsultationEvent(
+          doctorName: doctorName.text,
+          nextConsultationDate: consultationDate.text,
+          nextConsultationTime: consultationTime.text,
+          address: address.text,
+        ),
+      );
     }
   }
 
