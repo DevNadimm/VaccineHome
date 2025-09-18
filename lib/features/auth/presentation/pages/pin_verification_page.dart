@@ -1,15 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/auth/presentation/blocs/pin_verification/pin_verification_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/set_new_password_page.dart';
 
 class PinVerificationPage extends StatefulWidget {
   static Route route(String email) => MaterialPageRoute(builder: (_) => PinVerificationPage(email: email));
+
   final String email;
 
   const PinVerificationPage({super.key, required this.email});
@@ -24,6 +29,31 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<PinVerificationBloc, PinVerificationState>(
+      listener: (context, state) {
+        if (state is PinVerificationFailure) {
+          AppNotifier.showToast(Messages.verifyPinFailed, type: MessageType.error);
+        }
+        if (state is PinVerificationSuccess) {
+          Navigator.push(context, SetNewPasswordPage.route(widget.email, _pinController.text));
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is PinVerificationLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget content() {
     return Scaffold(
       appBar: AppBar(
         title: const Text('PIN Verification'),
@@ -85,9 +115,9 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
                     } else if (pin.length < 4) {
                       AppNotifier.showToast('PIN must be 4 digits', type: MessageType.error);
                     } else {
-                      print("PIN entered: $pin");
-                      /// TODO: verify PIN logic here
-                      Navigator.push(context, SetNewPasswordPage.route(widget.email, _pinController.text));
+                      context.read<PinVerificationBloc>().add(
+                        VerifyPinEvent(email: widget.email, pin: pin),
+                      );
                     }
                   },
                   child: const Text("Verify PIN"),
@@ -123,7 +153,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
       ),
     );
   }
-
+  
   Widget _pinField(BuildContext context) {
     return PinCodeTextField(
       controller: _pinController,
