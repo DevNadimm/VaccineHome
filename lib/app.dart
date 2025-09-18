@@ -13,6 +13,7 @@ import 'package:vaccine_home/features/profile/presentation/blocs/change_password
 import 'package:vaccine_home/features/profile/presentation/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/add_consultation/add_consultation_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/add_medication/add_medication_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/add_test/add_test_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
 
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ChangePasswordBloc()),
         BlocProvider(create: (_) => AddMedicationBloc()),
         BlocProvider(create: (_) => AddConsultationBloc()),
+        BlocProvider(create: (_) => AddTestBloc()),
         BlocProvider(create: (_) => ForgotPasswordBloc()),
         BlocProvider(create: (_) => PinVerificationBloc()),
         BlocProvider(create: (_) => SetNewPasswordBloc()),

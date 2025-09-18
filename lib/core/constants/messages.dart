@@ -27,6 +27,10 @@ class Messages {
   static const String addConsultationFailed = "Failed to add doctor consultancy. Please try again.";
   static const String addConsultationSuccess = "Doctor consultancy added successfully!";
 
+  // Pathology Message
+  static const String addTestFailed = "Failed to add test. Please try again.";
+  static const String addTestSuccess = "Test added successfully!";
+
   // Forgot Password messages
   static const String sendPinFailed = "Failed to send PIN. Please try again.";
   static const String pinSent = "PIN sent successfully!";
