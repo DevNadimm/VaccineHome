@@ -5,6 +5,7 @@ import 'package:vaccine_home/features/auth/presentation/blocs/forgot_password/fo
 import 'package:vaccine_home/features/auth/presentation/blocs/login/login_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/blocs/pin_verification/pin_verification_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/blocs/register/register_bloc.dart';
+import 'package:vaccine_home/features/auth/presentation/blocs/set_new_password/set_new_password_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/splash_page.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/change_password/change_password_bloc.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => AddConsultationBloc()),
         BlocProvider(create: (_) => ForgotPasswordBloc()),
         BlocProvider(create: (_) => PinVerificationBloc()),
+        BlocProvider(create: (_) => SetNewPasswordBloc()),
       ],
       child: MaterialApp(
         title: 'Vaccine Home',

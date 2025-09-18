@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/auth/presentation/blocs/set_new_password/set_new_password_bloc.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 
 class SetNewPasswordPage extends StatefulWidget {
-  static Route route(String email, String pin) => MaterialPageRoute(builder: (_) => SetNewPasswordPage(email: email, pin: pin));
+  static Route route(String email, String pin) =>
+      MaterialPageRoute(
+          builder: (_) => SetNewPasswordPage(email: email, pin: pin));
 
   final String email;
   final String pin;
@@ -23,15 +32,28 @@ class _SignUpScreenState extends State<SetNewPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        content(),
-        // if (state is LoginLoading)
-        //   Container(
-        //     color: AppColors.black.withOpacity(0.6),
-        //     child: const Loader(),
-        //   ),
-      ],
+    return BlocConsumer<SetNewPasswordBloc, SetNewPasswordState>(
+      listener: (context, state) {
+        if (state is SetNewPasswordFailure) {
+          AppNotifier.showToast(Messages.setPasswordFailed, type: MessageType.error);
+        }
+        if (state is SetNewPasswordSuccess) {
+          AppNotifier.showToast(Messages.passwordSet, type: MessageType.success);
+          Navigator.pushAndRemoveUntil(context, LoginPage.route(), (route) => false);
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is SetNewPasswordLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
     );
   }
 
@@ -105,7 +127,14 @@ class _SignUpScreenState extends State<SetNewPasswordPage> {
 
   void onTapUpdatePassword() {
     if (_globalKey.currentState?.validate() ?? false) {
-      // Navigator.push(context, PinVerificationPage.route(_emailController.text));
+      context.read<SetNewPasswordBloc>().add(
+        SetPasswordEvent(
+          email: widget.email,
+          pin: widget.pin,
+          newPassword: _passwordController.text.trim(),
+          confirmNewPassword: _confirmPasswordController.text.trim(),
+        ),
+      );
     }
   }
 
