@@ -16,10 +16,9 @@ class VaccineRequestBloc extends Bloc<VaccineRequestEvent, VaccineRequestState> 
     emit(VaccineRequestLoading());
     try {
       final res = await VaccineRequestRepository.requestVaccine(
-        divisionId: event.divisionId,
-        policeStationId: event.policeStationId,
-        productId: event.productId,
         phone: event.phone,
+        address: event.address,
+        productId: event.productId,
       );
       if (res) {
         emit(VaccineRequestSuccess());

@@ -3,15 +3,13 @@ part of 'vaccine_request_bloc.dart';
 abstract class VaccineRequestEvent {}
 
 class SendVaccineRequestEvent extends VaccineRequestEvent {
-  final int divisionId;
-  final int policeStationId;
-  final int productId;
   final String phone;
+  final String address;
+  final int productId;
 
   SendVaccineRequestEvent({
-    required this.divisionId,
-    required this.policeStationId,
-    required this.productId,
     required this.phone,
+    required this.address,
+    required this.productId,
   });
 }

@@ -1,6 +1,19 @@
 part of 'vaccine_product_bloc.dart';
 
-@immutable
-sealed class VaccineProductState {}
+abstract class VaccineProductState {}
 
-final class VaccineProductInitial extends VaccineProductState {}
+class VaccineProductInitial extends VaccineProductState {}
+
+class VaccineProductLoading extends VaccineProductState {}
+
+class VaccineProductSuccess extends VaccineProductState {
+  final List<VaccineProduct> products;
+
+  VaccineProductSuccess(this.products);
+}
+
+class VaccineProductFailure extends VaccineProductState {
+  final String message;
+
+  VaccineProductFailure(this.message);
+}

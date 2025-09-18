@@ -6,19 +6,17 @@ import 'package:vaccine_home/core/services/service_locator.dart';
 
 class VaccineRequestRepository {
   static Future<bool> requestVaccine({
-    required int divisionId,
-    required int policeStationId,
-    required int productId,
     required String phone,
+    required String address,
+    required int productId,
   }) async {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
     final Map<String, dynamic> data = {
-      'division_id': divisionId,
-      'police_station_id': policeStationId,
-      'product_id': productId,
       'phone': phone,
+      'address': address,
+      'product_id': productId,
     };
 
     final Response res = await dioService.postRequest(
