@@ -14,12 +14,7 @@ class VaccineRequestPage extends StatefulWidget {
 
 class _VaccineRequestPageState extends State<VaccineRequestPage> {
   final GlobalKey<FormState> globalKey = GlobalKey();
-  final TextEditingController divisionNameController = TextEditingController();
-  final TextEditingController divisionIdController = TextEditingController();
-  final TextEditingController policeStationNameController = TextEditingController();
-  final TextEditingController policeStationIdController = TextEditingController();
-  final TextEditingController productNameController = TextEditingController();
-  final TextEditingController productIdController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
   @override
@@ -44,36 +39,20 @@ class _VaccineRequestPageState extends State<VaccineRequestPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextField(
-                label: 'Division',
-                controller: divisionNameController,
-                isRequired: true,
-                hintText: 'Enter division',
-                validationLabel: 'Division',
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(
-                label: 'Police Station',
-                controller: policeStationNameController,
-                isRequired: true,
-                hintText: 'Enter police station',
-                validationLabel: 'Police Station',
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(
-                label: 'Product',
-                controller: productNameController,
-                isRequired: true,
-                hintText: 'Enter product',
-                validationLabel: 'Product',
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(
                 label: 'Phone Number',
                 controller: phoneController,
                 isRequired: true,
                 keyboardType: TextInputType.phone,
                 hintText: 'Enter phone number',
                 validationLabel: 'Phone number',
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'Address',
+                controller: addressController,
+                isRequired: true,
+                hintText: 'Enter address',
+                validationLabel: 'Address',
               ),
               const SizedBox(height: 24),
               SizedBox(
@@ -102,23 +81,13 @@ class _VaccineRequestPageState extends State<VaccineRequestPage> {
 
   @override
   void dispose() {
-    divisionNameController.dispose();
-    divisionIdController.dispose();
-    policeStationNameController.dispose();
-    policeStationIdController.dispose();
-    productNameController.dispose();
-    productIdController.dispose();
+    addressController.dispose();
     phoneController.dispose();
     super.dispose();
   }
 
   void clearFields() {
-    divisionNameController.clear();
-    divisionIdController.clear();
-    policeStationNameController.clear();
-    policeStationIdController.clear();
-    productNameController.clear();
-    productIdController.clear();
+    addressController.clear();
     phoneController.clear();
   }
 }

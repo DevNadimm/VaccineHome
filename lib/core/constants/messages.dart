@@ -38,4 +38,9 @@ class Messages {
   static const String pinVerified = "PIN verified successfully!";
   static const String setPasswordFailed = "Failed to set new password. Please try again.";
   static const String passwordSet = "Password set successfully!";
+
+  // Vaccine Request messages
+  static const String vaccineRequestFailed = "Failed to send vaccine request. Please try again.";
+  static const String vaccineRequestSuccess = "Vaccine request submitted successfully!";
+  static const String fetchProductsFailed = "Failed to fetch products. Please try again.";
 }

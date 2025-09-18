@@ -16,6 +16,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/add_medication
 import 'package:vaccine_home/features/reminder/presentation/blocs/add_test/add_test_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
+import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_request/vaccine_request_bloc.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => PinVerificationBloc()),
         BlocProvider(create: (_) => SetNewPasswordBloc()),
         BlocProvider(create: (_) => AdvertisementBloc()),
+        BlocProvider(create: (_) => VaccineRequestBloc()),
       ],
       child: MaterialApp(
         title: 'Vaccine Home',
