@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/pin_verification_page.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const ForgotPasswordPage());
@@ -92,6 +93,7 @@ class _SignUpScreenState extends State<ForgotPasswordPage> {
 
   void onTapSendPin() {
     if (_globalKey.currentState?.validate() ?? false) {
+      Navigator.push(context, PinVerificationPage.route(_emailController.text));
     }
   }
 
