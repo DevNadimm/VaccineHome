@@ -7,6 +7,9 @@ class ApiEndpoints {
   String get loginUser => 'login';
   String get editProfile => 'profile';
   String get changePassword => 'change-password';
+  String get sendPin => 'forgot-password';
+  String get verifyPin => 'verify-reset-pin';
+  String get setNewPassword => 'reset-password';
 
   // 📦 Reminders
   String get addConsultation => 'doctor-consultation-reminder/store';

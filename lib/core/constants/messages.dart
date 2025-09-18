@@ -25,4 +25,12 @@ class Messages {
   // Consultancy messages
   static const String addConsultationFailed = "Failed to add doctor consultancy. Please try again.";
   static const String addConsultationSuccess = "Doctor consultancy added successfully!";
+
+  // Forgot Password messages
+  static const String sendPinFailed = "Failed to send PIN. Please try again.";
+  static const String pinSent = "PIN sent successfully!";
+  static const String verifyPinFailed = "PIN verification failed. Please check the code.";
+  static const String pinVerified = "PIN verified successfully!";
+  static const String setPasswordFailed = "Failed to set new password. Please try again.";
+  static const String passwordSet = "Password set successfully!";
 }
