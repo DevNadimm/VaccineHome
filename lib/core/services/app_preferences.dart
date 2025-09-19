@@ -20,6 +20,22 @@ class AppPreferences {
     await prefs.remove(PreferenceKeys.accessToken);
   }
 
+  /// User ID
+  static Future<int> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(PreferenceKeys.userId) ?? 0;
+  }
+
+  static Future<void> setUserId(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(PreferenceKeys.userId, id);
+  }
+
+  static Future<void> removeUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(PreferenceKeys.userId);
+  }
+
   /// User Avatar
   static Future<String?> getUserAvatar() async {
     final prefs = await SharedPreferences.getInstance();

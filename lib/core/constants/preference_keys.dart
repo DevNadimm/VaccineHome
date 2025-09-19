@@ -9,4 +9,5 @@ class PreferenceKeys {
   static const userDOB = 'user-dob';
   static const userGender = 'user-gender';
   static const userAddress = 'user-address';
+  static const userId = 'user-id';
 }
