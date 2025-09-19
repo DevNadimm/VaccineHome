@@ -183,7 +183,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
         fieldOuterPadding: const EdgeInsets.symmetric(horizontal: 8),
         activeColor: AppColors.primaryColor,
         selectedColor: AppColors.primaryColor,
-        inactiveColor: AppColors.secondaryFontColor,
+        inactiveColor: AppColors.inputBorderColor,
         disabledColor: Colors.grey.shade300,
         activeFillColor: AppColors.white,
         selectedFillColor: AppColors.cardOverlay,
