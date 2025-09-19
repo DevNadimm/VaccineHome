@@ -81,7 +81,7 @@ class NotificationService {
 
     await _localNotification.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
 
-    const initializationSettingsAndroid = AndroidInitializationSettings("@mipmap/ic_launcher");
+    const initializationSettingsAndroid = AndroidInitializationSettings("app_logo_transparent_notification");
 
     const initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid
@@ -110,11 +110,10 @@ class NotificationService {
               "high_important_channel",
               "High Important Notifications",
               channelDescription: "This channel is used for important notifications.",
-              importance: Importance.high,
+              importance: Importance.max,
               priority: Priority.high,
-              icon: "@mipmap/ic_launcher"
+              icon: "app_logo_transparent_notification"
           ),
-
         ),
         payload: message.data.toString(),
       );
