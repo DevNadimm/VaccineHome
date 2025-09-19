@@ -7,6 +7,8 @@ import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/profile/data/models/profile_menu_item.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/change_password_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/edit_profile_page.dart';
+import 'package:vaccine_home/features/profile/presentation/pages/privacy_policy_page.dart';
+import 'package:vaccine_home/features/profile/presentation/pages/terms_and_conditions_page.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_header.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_section.dart';
 
@@ -129,12 +131,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedSecurity,
                   title: "Privacy Policy",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, PrivacyPolicyPage.route());
+                  },
                 ),
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedFile01,
                   title: "Terms & Conditions",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, TermsAndConditionsPage.route());
+                  },
                 ),
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedLogout03,

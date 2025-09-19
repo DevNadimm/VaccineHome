@@ -10,8 +10,7 @@ import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/change_password/change_password_bloc.dart';
 
 class ChangePasswordPage extends StatefulWidget {
-  static Route route() =>
-      MaterialPageRoute(builder: (_) => const ChangePasswordPage());
+  static Route route() => MaterialPageRoute(builder: (_) => const ChangePasswordPage());
 
   const ChangePasswordPage({super.key});
 

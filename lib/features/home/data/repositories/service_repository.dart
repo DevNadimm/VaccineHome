@@ -20,7 +20,7 @@ class ServiceRepository {
       ),
       Service(
         name: 'Vaccine',
-        icon: HugeIcons.strokeRoundedTestTube,
+        icon: HugeIcons.strokeRoundedVaccine,
         onTap: () {
           Navigator.push(context, VaccinePage.route());
         },
@@ -34,7 +34,7 @@ class ServiceRepository {
       ),
       Service(
         name: 'Mental Well Being',
-        icon: HugeIcons.strokeRoundedSmile,
+        icon: HugeIcons.strokeRoundedBrain02,
         onTap: () {
           Navigator.push(context, MentalWellBeingPage.route());
         },
