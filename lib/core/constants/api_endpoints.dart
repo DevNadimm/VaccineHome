@@ -26,6 +26,9 @@ class ApiEndpoints {
   String get vaccineRequest => 'vaccine/products/order';
   String get products => 'vaccine/products';
 
-  // Avatar
+  // 📦 Misc
+  String get notifications => 'notifications';
+
+  // 📦 Avatar
   String avatar(String path) => 'https://vcard.vaccinehomebd.com/storage/app/public/$path';
 }

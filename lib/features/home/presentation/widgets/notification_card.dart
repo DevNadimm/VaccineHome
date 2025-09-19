@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
-import 'package:vaccine_home/features/home/data/models/notification.dart';
+import 'package:vaccine_home/features/home/data/models/notification_model.dart';
 
 class NotificationCard extends StatelessWidget {
-  final NotificationModel notification;
+  final NotificationData notification;
 
   const NotificationCard({
     super.key,
@@ -70,7 +70,7 @@ class NotificationCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        notification.title,
+                        notification.data?.title ?? 'No Title',
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontSize: 16,
@@ -81,7 +81,7 @@ class NotificationCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        notification.message,
+                        notification.data?.message ?? 'No Message',
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontSize: 13,

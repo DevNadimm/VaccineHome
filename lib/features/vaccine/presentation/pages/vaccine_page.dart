@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/vaccine/presentation/pages/online_vaccine_appoinment_page.dart';
 import 'package:vaccine_home/features/vaccine/presentation/pages/vaccine_request_page.dart';
 
 class VaccinePage extends StatelessWidget {
@@ -31,7 +32,9 @@ class VaccinePage extends StatelessWidget {
         icon: HugeIcons.strokeRoundedCalendar02,
         title: "Online Vaccine Appointment",
         subtitle: "Book your vaccine appointments online.",
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, OnlineVaccineAppointmentPage.route());
+        },
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedBulb,

@@ -43,4 +43,11 @@ class Messages {
   static const String vaccineRequestFailed = "Failed to send vaccine request. Please try again.";
   static const String vaccineRequestSuccess = "Vaccine request submitted successfully!";
   static const String fetchProductsFailed = "Failed to fetch products. Please try again.";
+
+  // Notifications
+  static const String fetchNotificationsFailed = "Failed to load notifications. Please try again.";
+  static const String markAsReadFailed = "Failed to mark notification as read. Please try again.";
+  static const String markAsReadSuccess = "Notification marked as read.";
+  static const String clearNotificationsSuccess = "All notifications cleared successfully!";
+  static const String clearNotificationsFailed = "Failed to clear notifications. Please try again.";
 }
