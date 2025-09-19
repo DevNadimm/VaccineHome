@@ -34,8 +34,19 @@ class ServiceCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(service.iconPath, scale: 6),
-                const SizedBox(height: 6),
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Icon(
+                    service.icon,
+                    size: 32,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Text(
                   service.name,
                   style: GoogleFonts.poppins(

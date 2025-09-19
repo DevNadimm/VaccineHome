@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:vaccine_home/core/constants/asset_paths.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/features/home/data/models/service.dart';
 import 'package:vaccine_home/features/mental_well_being/presentation/pages/mental_well_being_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/reminder_page.dart';
@@ -13,28 +13,28 @@ class ServiceRepository {
     return [
       Service(
         name: 'Reminder',
-        iconPath: AssetPaths.reminderIcon,
+        icon: HugeIcons.strokeRoundedNotification03,
         onTap: () {
           Navigator.push(context, ReminderPage.route());
         },
       ),
       Service(
         name: 'Vaccine',
-        iconPath: AssetPaths.vaccineIcon,
+        icon: HugeIcons.strokeRoundedTestTube,
         onTap: () {
           Navigator.push(context, VaccinePage.route());
         },
       ),
       Service(
         name: 'Vaccine Card',
-        iconPath: AssetPaths.vaccineCardIcon,
+        icon: HugeIcons.strokeRoundedId,
         onTap: () {
           Navigator.push(context, VaccineCardPage.route());
         },
       ),
       Service(
         name: 'Mental Well Being',
-        iconPath: AssetPaths.mentalWellBeingIcon,
+        icon: HugeIcons.strokeRoundedSmile,
         onTap: () {
           Navigator.push(context, MentalWellBeingPage.route());
         },
