@@ -91,13 +91,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   onTap: () {},
                 ),
                 ProfileMenuItem(
-                  icon: HugeIcons.strokeRoundedRecord,
-                  title: "Vaccination Records",
-                  onTap: () {},
-                ),
-                ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedCalendar02,
-                  title: "Vaccine Schedule",
+                  title: "Vaccine Schedule / Record",
                   onTap: () {},
                 ),
               ],
