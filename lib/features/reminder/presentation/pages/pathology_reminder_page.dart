@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/add_test_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/my_tests_page.dart';
 
 class PathologyReminderPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const PathologyReminderPage());
@@ -25,7 +26,9 @@ class PathologyReminderPage extends StatelessWidget {
         icon: HugeIcons.strokeRoundedListView,
         title: "My Tests",
         subtitle: "View and manage your pathology test reminders.",
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, MyTestsPage.route());
+        },
       ),
     ];
 

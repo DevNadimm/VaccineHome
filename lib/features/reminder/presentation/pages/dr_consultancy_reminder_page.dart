@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/add_consultation_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/my_consultations_page.dart';
 
 class DrConsultancyReminderPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const DrConsultancyReminderPage());
@@ -26,7 +27,7 @@ class DrConsultancyReminderPage extends StatelessWidget {
         title: "My Consultations",
         subtitle: "View and manage your doctor visit reminders.",
         onTap: () {
-          // Navigator.push(context, ConsultancyListPage.route());
+          Navigator.push(context, MyConsultationsPage.route());
         },
       ),
     ];

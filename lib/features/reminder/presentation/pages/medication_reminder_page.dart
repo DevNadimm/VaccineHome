@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/add_medication_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/my_medications_page.dart';
 
 class MedicationReminderPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const MedicationReminderPage());
@@ -26,7 +27,7 @@ class MedicationReminderPage extends StatelessWidget {
         title: "My Medications",
         subtitle: "View and manage your saved reminders.",
         onTap: () {
-          // TODO: Navigate to medication list page
+          Navigator.push(context, MyMedicationsPage.route());
         },
       ),
     ];

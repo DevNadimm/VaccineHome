@@ -23,14 +23,14 @@ class ReminderPage extends StatelessWidget {
           Navigator.push(context, MedicationReminderPage.route());
         },
       ),
-      SubModule(
-        icon: HugeIcons.strokeRoundedHealth,
-        title: "Diet Reminder",
-        subtitle: "Stay healthy with proper meals.",
-        onTap: () {
-          // Navigator.push(context, DrConsultancyReminderPage.route());
-        },
-      ),
+      // SubModule(
+      //   icon: HugeIcons.strokeRoundedHealth,
+      //   title: "Diet Reminder",
+      //   subtitle: "Stay healthy with proper meals.",
+      //   onTap: () {
+      //     // Navigator.push(context, DrConsultancyReminderPage.route());
+      //   },
+      // ),
       SubModule(
         icon: HugeIcons.strokeRoundedStethoscope,
         title: "Dr Consultancy Reminder",
