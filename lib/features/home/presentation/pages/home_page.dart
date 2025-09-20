@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/asset_paths.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/core/utils/helper_functions/greeting_helper.dart';
+import 'package:vaccine_home/core/utils/widgets/advertisement_carousel_slider.dart';
 import 'package:vaccine_home/features/home/data/models/service.dart';
 import 'package:vaccine_home/features/home/data/repositories/service_repository.dart';
+import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
 import 'package:vaccine_home/features/home/presentation/pages/notification_page.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/service_card.dart';
@@ -51,40 +54,64 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(32),
-                child: Image.asset(AssetPaths.banner),
+              BlocBuilder<AdvertisementBloc, AdvertisementState>(
+                builder: (context, state) {
+                  if (state is AdvertisementSuccess) {
+                    return AdvertisementCarouselSlider(
+                      imageUrls: state.model.advertisements?.map((e) => e.image ?? '').toList() ?? [],
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(32),
+                        child: Image.asset(
+                          AssetPaths.banner,
+                          height: 220,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  }
+                },
               ),
               const SizedBox(height: 34),
-              Text(
-                'Services',
-                style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryFontColor,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Services',
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryFontColor,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                  ),
+                  itemCount: ServiceRepository.services(context).length,
+                  itemBuilder: (context, index) {
+                    Service service = ServiceRepository.services(context)[index];
+                    return ServiceCard(service: service);
+                  },
                 ),
-                itemCount: ServiceRepository.services(context).length,
-                itemBuilder: (context, index) {
-                  Service service = ServiceRepository.services(context)[index];
-                  return ServiceCard(service: service);
-                },
               ),
             ],
           ),

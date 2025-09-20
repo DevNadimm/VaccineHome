@@ -12,7 +12,7 @@ class AssetPaths {
   static const String loading = '$_iconPath/loading.png';
 
   /// Local
-  static const String banner = '$_localPath/banner.jpg';
+  static const String banner = '$_localPath/vaccine_home_banner.jpg';
   static const String nadimCorporate = '$_localPath/nadim_corporate.png';
 
   /// Logos
