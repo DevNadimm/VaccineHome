@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
 import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
+import 'package:vaccine_home/features/reminder/data/models/medication_model.dart';
 
 class MedicationRepository {
   static Future<bool> addMedication({
@@ -35,6 +36,23 @@ class MedicationRepository {
       return true;
     } else {
       throw Exception(Messages.addMedicationFailed);
+    }
+  }
+
+  static Future<List<Medication>> fetchMyMedications() async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final Response res = await dioService.getRequest(
+      apiEndpoints.myMedications,
+      errorMessage: Messages.myMedicationsFailed,
+    );
+
+    if (res.statusCode == 200) {
+      final model = MedicationModel.fromJson(res.data);
+      return model.data ?? [];
+    } else {
+      throw Exception(Messages.myMedicationsFailed);
     }
   }
 }

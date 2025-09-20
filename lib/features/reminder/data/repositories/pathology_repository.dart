@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
 import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
+import 'package:vaccine_home/features/reminder/data/models/pathology_model.dart';
 
 class PathologyRepository {
   static Future<bool> addTest({
@@ -35,6 +36,23 @@ class PathologyRepository {
       return true;
     } else {
       throw Exception(Messages.addTestFailed);
+    }
+  }
+
+  static Future<List<Pathology>> fetchMyTests() async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final Response res = await dioService.getRequest(
+      apiEndpoints.myTests,
+      errorMessage: Messages.myTestsFailed,
+    );
+
+    if (res.statusCode == 200) {
+      final model = PathologyModel.fromJson(res.data);
+      return model.data ?? [];
+    } else {
+      throw Exception(Messages.myTestsFailed);
     }
   }
 }

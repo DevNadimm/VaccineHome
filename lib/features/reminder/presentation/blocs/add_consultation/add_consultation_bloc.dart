@@ -4,8 +4,7 @@ import 'package:vaccine_home/features/reminder/data/repositories/dr_consultancy_
 part 'add_consultation_event.dart';
 part 'add_consultation_state.dart';
 
-class AddConsultationBloc
-    extends Bloc<AddConsultationEvent, AddConsultationState> {
+class AddConsultationBloc extends Bloc<AddConsultationEvent, AddConsultationState> {
   AddConsultationBloc() : super(AddConsultationInitial()) {
     on<SaveAddConsultationEvent>(_onSaveAddConsultation);
   }

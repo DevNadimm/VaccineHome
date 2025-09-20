@@ -54,4 +54,9 @@ class Messages {
   static const String markAsReadSuccess = "Notification marked as read.";
   static const String clearNotificationsSuccess = "All notifications cleared successfully!";
   static const String clearNotificationsFailed = "Failed to clear notifications. Please try again.";
+
+  // My Data Fetching
+  static const String myTestsFailed = "Failed to fetch tests. Please try again.";
+  static const String myConsultationsFailed = "Failed to fetch consultations. Please try again.";
+  static const String myMedicationsFailed = "Failed to fetch medications. Please try again.";
 }
