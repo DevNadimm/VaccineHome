@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vaccine_home/features/reminder/data/repositories/add_medication_repository.dart';
+import 'package:vaccine_home/features/reminder/data/repositories/medication_repository.dart';
 
 part 'add_medication_event.dart';
 part 'add_medication_state.dart';
@@ -15,7 +15,7 @@ class AddMedicationBloc extends Bloc<AddMedicationEvent, AddMedicationState> {
   ) async {
     emit(AddMedicationLoading());
     try {
-      final res = await AddMedicationRepository.addMedication(
+      final res = await MedicationRepository.addMedication(
         name: event.name,
         type: event.type,
         times: event.times,

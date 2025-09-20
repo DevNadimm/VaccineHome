@@ -5,36 +5,36 @@ import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
 import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
 
-class AddMedicationRepository {
-  static Future<bool> addMedication({
-    required String name,
-    required String type,
-    required List<String> times,
-    required String whenToTake,
+class DrConsultancyRepository {
+  static Future<bool> addConsultation({
+    required String doctorName,
+    required String nextConsultationDate,
+    required String nextConsultationTime,
+    required String address,
   }) async {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
-    // Convert all times to 24-hour format
-    final List<String> convertedTimes = times.map((t) => TimeConversionHelper.to24Hour(t)).toList();
+    // Convert time to 24-hour format
+    final String convertedTime = TimeConversionHelper.to24Hour(nextConsultationTime);
 
     final Map<String, dynamic> data = {
-      'medication_name': name,
-      'medication_type': type,
-      'times': convertedTimes,
-      'when_to_take': whenToTake,
+      'doctor_name': doctorName,
+      'next_consultation_date': nextConsultationDate,
+      'next_consultation_time': convertedTime,
+      'address': address,
     };
 
     final Response res = await dioService.postRequest(
-      apiEndpoints.addMedication,
+      apiEndpoints.addConsultation,
       data: data,
-      errorMessage: Messages.addMedicationFailed,
+      errorMessage: Messages.addConsultationFailed,
     );
 
     if (res.statusCode == 200 || res.statusCode == 201) {
       return true;
     } else {
-      throw Exception(Messages.addMedicationFailed);
+      throw Exception(Messages.addConsultationFailed);
     }
   }
 }

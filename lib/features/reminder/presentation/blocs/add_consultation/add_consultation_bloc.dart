@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vaccine_home/features/reminder/data/repositories/add_consultation_repository.dart';
+import 'package:vaccine_home/features/reminder/data/repositories/dr_consultancy_repository.dart';
 
 part 'add_consultation_event.dart';
 part 'add_consultation_state.dart';
@@ -16,7 +16,7 @@ class AddConsultationBloc
   ) async {
     emit(AddConsultationLoading());
     try {
-      final res = await AddConsultationRepository.addConsultation(
+      final res = await DrConsultancyRepository.addConsultation(
         doctorName: event.doctorName,
         nextConsultationDate: event.nextConsultationDate,
         nextConsultationTime: event.nextConsultationTime,

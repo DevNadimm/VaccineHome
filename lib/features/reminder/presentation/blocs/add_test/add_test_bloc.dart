@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vaccine_home/features/reminder/data/repositories/add_test_repository.dart';
+import 'package:vaccine_home/features/reminder/data/repositories/pathology_repository.dart';
 
 part 'add_test_event.dart';
 part 'add_test_state.dart';
@@ -15,7 +15,7 @@ class AddTestBloc extends Bloc<AddTestEvent, AddTestState> {
   ) async {
     emit(AddTestLoading());
     try {
-      final res = await AddTestRepository.addTest(
+      final res = await PathologyRepository.addTest(
         testName: event.testName,
         nextTestDate: event.nextTestDate,
         nextTestTime: event.nextTestTime,
