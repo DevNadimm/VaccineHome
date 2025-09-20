@@ -9,7 +9,7 @@ import 'package:vaccine_home/features/auth/presentation/blocs/set_new_password/s
 import 'package:vaccine_home/features/auth/presentation/pages/splash_page.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/notification/notification_bloc.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
-import 'package:vaccine_home/features/profile/presentation/blocs/advertisement/advertisement_bloc.dart';
+import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/change_password/change_password_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/add_consultation/add_consultation_bloc.dart';
@@ -20,12 +20,14 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubi
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_request/vaccine_request_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_card_request/vaccine_card_request_bloc.dart';
+import 'package:vaccine_home/main.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => NavigationCubit()),
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => VaccineProductBloc()),
       ],
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         title: 'Vaccine Home',
         debugShowCheckedModeBanner: false,
         theme: theme,

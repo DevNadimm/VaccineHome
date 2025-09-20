@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vaccine_home/features/profile/data/models/advertisement_model.dart';
-import 'package:vaccine_home/features/profile/data/repositories/advertisement_repository.dart';
+import 'package:vaccine_home/features/home/data/models/advertisement_model.dart';
+import 'package:vaccine_home/features/home/data/repositories/advertisement_repository.dart';
 
 part 'advertisement_event.dart';
 part 'advertisement_state.dart';

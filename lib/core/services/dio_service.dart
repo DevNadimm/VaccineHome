@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
+import 'package:vaccine_home/main.dart';
 
 class DioService {
   final Dio _dio;
@@ -31,8 +34,17 @@ class DioService {
           print("✅ Response [${response.statusCode}]: ${response.data}");
           return handler.next(response);
         },
-        onError: (DioException e, handler) {
+        onError: (DioException e, handler) async {
           print("❌ Dio Error: ${e.message}");
+
+          if (e.response?.statusCode == 401) {
+            await AppPreferences.clearAll();
+            navigatorKey.currentState?.pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => const LoginPage()),
+              (route) => false,
+            );
+          }
+
           return handler.next(e);
         },
       ),
