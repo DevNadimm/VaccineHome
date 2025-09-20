@@ -16,7 +16,7 @@ class VaccineRequestRepository {
     final Map<String, dynamic> data = {
       'phone': phone,
       'address': address,
-      'product_id': productId,
+      'vaccine_product_id': productId,
     };
 
     final Response res = await dioService.postRequest(
