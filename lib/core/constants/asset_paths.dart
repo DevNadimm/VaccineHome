@@ -2,10 +2,14 @@ class AssetPaths {
   AssetPaths._();
 
   /// Base paths
-  // static const String _iconPath = 'assets/images/icons';
+  static const String _iconPath = 'assets/images/icons';
   static const String _illustrationPath = 'assets/images/illustrations';
   static const String _localPath = 'assets/images/local';
   static const String _logoPath = 'assets/images/logos';
+
+  /// Icons
+  static const String error = '$_iconPath/error.png';
+  static const String loading = '$_iconPath/loading.png';
 
   /// Local
   static const String banner = '$_localPath/banner.jpg';
