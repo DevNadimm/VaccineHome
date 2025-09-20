@@ -6,6 +6,7 @@ import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/notification/notification_bloc.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/empty_notification_widget.dart';
+import 'package:vaccine_home/features/home/presentation/widgets/notification_action_bottom_sheet_content.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/notification_card.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -40,6 +41,20 @@ class _NotificationPageState extends State<NotificationPage> {
             color: AppColors.primaryFontColor,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(context: context, builder: (_) {
+                return const NotificationActionBottomSheetContent();
+              });
+            },
+            icon: const Icon(
+              HugeIcons.strokeRoundedMoreVertical,
+              size: 32,
+              color: AppColors.primaryFontColor,
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<NotificationBloc, NotificationState>(
         builder: (context, state) {
