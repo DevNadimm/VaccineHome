@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/core/utils/widgets/row_fields.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_card_request/vaccine_card_request_bloc.dart';
 
 class VaccineCardRequestPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const VaccineCardRequestPage());
@@ -45,12 +51,43 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
       lastDate: DateTime(2030),
     );
     if (picked != null) {
-      controller.text = DateFormat('yyyy-MM-dd').format(picked);
+      controller.text = DateFormat('dd-MM-yyyy').format(picked);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<VaccineCardRequestBloc, VaccineCardRequestState>(
+      listener: (context, state) {
+        if (state is VaccineCardRequestFailure) {
+          AppNotifier.showToast(
+            Messages.vaccineCardRequestFailed,
+            type: MessageType.error,
+          );
+        } else if (state is VaccineCardRequestSuccess) {
+          clearFields();
+          AppNotifier.showToast(
+            Messages.vaccineCardRequestSuccess,
+            type: MessageType.success,
+          );
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is VaccineCardRequestLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              )
+          ],
+        );
+      },
+    );
+  }
+
+  Widget content() {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vaccine Card Request'),
@@ -70,7 +107,6 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Personal Info
               RowFields(
                 firstField: CustomTextField(
                   label: 'First Name',
@@ -129,7 +165,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                   onTap: () {
                     showCustomBottomSheet(
                       context: context,
-                      items: ['Male', 'Female', 'Others'],
+                      items: ['Male', 'Female'],
                       controller: gender,
                       title: 'Select Gender',
                     );
@@ -145,8 +181,6 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                 validationLabel: 'Nationality',
               ),
               const SizedBox(height: 24),
-
-              // Identity Docs
               CustomTextField(
                 label: 'Birth Certificate No',
                 controller: birthCertificateNo,
@@ -159,14 +193,12 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               CustomTextField(
                 label: 'Passport No',
                 controller: passportNo,
-                isRequired: false,
-                keyboardType: TextInputType.number,
+                isRequired: true,
+                keyboardType: TextInputType.text,
                 hintText: 'Enter passport number',
                 validationLabel: 'Passport No',
               ),
               const SizedBox(height: 24),
-
-              // Contact Info
               CustomTextField(
                 label: 'Email',
                 controller: email,
@@ -188,7 +220,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               CustomTextField(
                 label: 'WhatsApp / Imo',
                 controller: whatsAppImo,
-                isRequired: false,
+                isRequired: true,
                 keyboardType: TextInputType.phone,
                 hintText: 'Enter WhatsApp or Imo number',
                 validationLabel: 'WhatsApp/Imo',
@@ -203,8 +235,6 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                 validationLabel: 'Address',
               ),
               const SizedBox(height: 24),
-
-              // Submit Button
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -222,9 +252,22 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
 
   void _submitRequest() {
     if (globalKey.currentState?.validate() ?? false) {
-      clearFields();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Vaccine card request submitted!')),
+      context.read<VaccineCardRequestBloc>().add(
+        SubmitVaccineCardRequestEvent(
+          firstNameEnglish: firstName.text.trim(),
+          lastNameEnglish: lastName.text.trim(),
+          gender: gender.text.trim(),
+          birthDate: dateOfBirth.text.trim(),
+          father: fatherName.text.trim(),
+          mother: matherName.text.trim(),
+          address: address.text.trim(),
+          email: email.text.trim(),
+          phoneNumber: phoneNumber.text.trim(),
+          whatsappImo: whatsAppImo.text.trim(),
+          passportNo: passportNo.text.trim(),
+          birthCertificateNumber: birthCertificateNo.text.trim(),
+          presentNationality: nationality.text.trim(),
+        ),
       );
     }
   }

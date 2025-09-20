@@ -70,6 +70,7 @@ class VaccineProductCard extends StatelessWidget {
                                 style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
                                     fontSize: 14,
+                                    fontWeight: FontWeight.w500,
                                     color: AppColors.secondaryFontColor,
                                   ),
                                 ),
@@ -82,7 +83,7 @@ class VaccineProductCard extends StatelessWidget {
                             children: [
                               const Icon(
                                 HugeIcons.strokeRoundedUser,
-                                size: 16,
+                                size: 20,
                                 color: AppColors.secondaryFontColor,
                               ),
                               const SizedBox(width: 4),
@@ -91,6 +92,7 @@ class VaccineProductCard extends StatelessWidget {
                                 style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
                                     fontSize: 14,
+                                    fontWeight: FontWeight.w500,
                                     color: AppColors.secondaryFontColor,
                                   ),
                                 ),

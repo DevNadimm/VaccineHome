@@ -19,6 +19,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_request/vaccine_request_bloc.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_card_request/vaccine_card_request_bloc.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => SetNewPasswordBloc()),
         BlocProvider(create: (_) => AdvertisementBloc()),
         BlocProvider(create: (_) => VaccineRequestBloc()),
+        BlocProvider(create: (_) => VaccineCardRequestBloc()),
         BlocProvider(create: (_) => NotificationBloc()),
         BlocProvider(create: (_) => VaccineProductBloc()),
       ],
