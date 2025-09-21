@@ -7,7 +7,8 @@ part 'my_consultations_state.dart';
 
 class MyConsultationsBloc extends Bloc<MyConsultationsEvent, MyConsultationsState> {
   MyConsultationsBloc() : super(MyConsultationsInitial()) {
-    on<MyConsultationsEvent>(_onFetchMyConsultations);
+    on<FetchMyConsultationsEvent>(_onFetchMyConsultations);
+    on<DeleteConsultationEvent>(_onDeleteConsultation);
   }
 
   Future<void> _onFetchMyConsultations(
@@ -21,6 +22,25 @@ class MyConsultationsBloc extends Bloc<MyConsultationsEvent, MyConsultationsStat
       emit(MyConsultationsLoaded(myConsultations));
     } catch (e) {
       emit(MyConsultationsFailure(e.toString()));
+    }
+  }
+
+  Future<void> _onDeleteConsultation(
+    DeleteConsultationEvent event,
+    Emitter<MyConsultationsState> emit,
+  ) async {
+    if (state is MyConsultationsLoaded) {
+      final currentState = state as MyConsultationsLoaded;
+
+      final updatedList = List<DrConsultancy>.from(currentState.myConsultations)..removeWhere((med) => med.id == event.id);
+
+      emit(MyConsultationsLoaded(updatedList));
+
+      try {
+        await DrConsultancyRepository.deleteConsultation(event.id);
+      } catch (e) {
+        emit(MyConsultationsLoaded(currentState.myConsultations));
+      }
     }
   }
 }

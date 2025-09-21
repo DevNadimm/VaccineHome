@@ -3,7 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
-import 'package:vaccine_home/features/reminder/presentation/pages/add_consultation_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/consultation_form_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/my_consultations_page.dart';
 
 class DrConsultationReminderPage extends StatelessWidget {
@@ -19,7 +19,7 @@ class DrConsultationReminderPage extends StatelessWidget {
         title: "Add Consultation",
         subtitle: "Create a new reminder for doctor visits.",
         onTap: () {
-          Navigator.push(context, AddConsultationPage.route());
+          Navigator.push(context, ConsultationFormPage.route());
         },
       ),
       SubModule(

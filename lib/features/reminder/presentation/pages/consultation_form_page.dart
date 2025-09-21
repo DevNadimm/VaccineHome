@@ -5,26 +5,42 @@ import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/reminder/data/models/dr_consultancy_model.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/consultation_form/consultation_form_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_consultations/my_consultations_bloc.dart';
 
-class AddConsultationPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const AddConsultationPage());
+class ConsultationFormPage extends StatefulWidget {
+  static Route route({DrConsultancy? consultation}) => MaterialPageRoute(builder: (_) => ConsultationFormPage(consultation: consultation));
 
-  const AddConsultationPage({super.key});
+  final DrConsultancy? consultation;
+
+  const ConsultationFormPage({super.key, this.consultation});
 
   @override
-  State<AddConsultationPage> createState() => _AddConsultationPageState();
+  State<ConsultationFormPage> createState() => _ConsultationFormPageState();
 }
 
-class _AddConsultationPageState extends State<AddConsultationPage> {
+class _ConsultationFormPageState extends State<ConsultationFormPage> {
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController doctorName = TextEditingController();
   final TextEditingController consultationDate = TextEditingController();
   final TextEditingController consultationTime = TextEditingController();
   final TextEditingController address = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.consultation != null) {
+      doctorName.text = widget.consultation!.doctorName ?? '';
+      consultationDate.text = widget.consultation!.nextConsultationDate ?? '';
+      consultationTime.text = widget.consultation!.nextConsultationTime != null ? TimeConversionHelper.to12Hour(widget.consultation!.nextConsultationTime!) : '';
+      address.text = widget.consultation!.address ?? '';
+    }
+  }
 
   Future<void> _selectOnlyDate(TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -43,11 +59,21 @@ class _AddConsultationPageState extends State<AddConsultationPage> {
     return BlocConsumer<ConsultationFormBloc, ConsultationFormState>(
       listener: (context, state) {
         if (state is ConsultationFormFailure) {
-          AppNotifier.showToast(Messages.addConsultationFailed, type: MessageType.error);
+          AppNotifier.showToast(
+            widget.consultation == null ? Messages.addConsultationFailed : Messages.editConsultationFailed,
+            type: MessageType.error,
+          );
         }
         if (state is ConsultationFormSuccess) {
+          AppNotifier.showToast(
+            widget.consultation == null ? Messages.addConsultationSuccess : Messages.editConsultationSuccess,
+            type: MessageType.success,
+          );
           clearFields();
-          AppNotifier.showToast(Messages.addConsultationSuccess, type: MessageType.success);
+          if (widget.consultation != null) {
+            context.read<MyConsultationsBloc>().add(FetchMyConsultationsEvent());
+            Navigator.pop(context);
+          }
         }
       },
       builder: (context, state) {
@@ -68,11 +94,9 @@ class _AddConsultationPageState extends State<AddConsultationPage> {
   Widget content() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Consultation'),
+        title: Text(widget.consultation == null ? 'Add Consultation' : 'Edit Consultation'),
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(
             HugeIcons.strokeRoundedArrowLeft01,
             size: 32,
@@ -126,7 +150,7 @@ class _AddConsultationPageState extends State<AddConsultationPage> {
               CustomTextField(
                 label: 'Address',
                 controller: address,
-                isRequired: false,
+                isRequired: true,
                 hintText: 'Enter address',
                 validationLabel: 'Address',
               ),
@@ -136,9 +160,7 @@ class _AddConsultationPageState extends State<AddConsultationPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _saveConsultation,
-                  child: const Text(
-                    'Save Consultation',
-                  ),
+                  child: const Text('Save Consultation'),
                 ),
               ),
             ],
@@ -148,10 +170,11 @@ class _AddConsultationPageState extends State<AddConsultationPage> {
     );
   }
 
-  void _saveConsultation() async {
+  void _saveConsultation() {
     if (globalKey.currentState?.validate() ?? false) {
       context.read<ConsultationFormBloc>().add(
         SaveConsultationEvent(
+          id: widget.consultation?.id,
           doctorName: doctorName.text,
           nextConsultationDate: consultationDate.text,
           nextConsultationTime: consultationTime.text,
