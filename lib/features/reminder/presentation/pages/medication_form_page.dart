@@ -59,11 +59,11 @@ class _MedicationFormPageState extends State<MedicationFormPage> {
             widget.medication == null ? Messages.addMedicationSuccess : Messages.editMedicationSuccess,
             type: MessageType.success,
           );
+          clearFields();
           if (widget.medication != null) {
             context.read<MyMedicationsBloc>().add(FetchMyMedicationsEvent());
+            Navigator.pop(context);
           }
-          if (widget.medication == null) clearFields();
-          if (widget.medication != null) Navigator.pop(context);
         }
       },
       builder: (context, state) {
