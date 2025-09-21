@@ -6,6 +6,7 @@ import 'package:vaccine_home/core/utils/widgets/empty_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_consultations/my_consultations_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/widgets/consultation_card.dart';
 
 class MyConsultationsPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const MyConsultationsPage());
@@ -47,7 +48,7 @@ class _MyConsultationsPageState extends State<MyConsultationsPage> {
               itemCount: state.myConsultations.length,
               itemBuilder: (context, index) {
                 final consultation = state.myConsultations[index];
-                return Text(consultation.doctorName ?? '');
+                return ConsultationCard(consultation: consultation);
               },
             );
           } else if (state is MyConsultationsLoading) {
