@@ -23,6 +23,12 @@ class MedicationCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
+        border: const Border(
+          left: BorderSide(
+            width: 4,
+            color: AppColors.primaryColor,
+          ),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
