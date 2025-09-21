@@ -15,7 +15,7 @@ class VaccinePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final vaccineServices = [
       SubModule(
-        icon: HugeIcons.strokeRoundedHealth,
+        icon: HugeIcons.strokeRoundedVaccine,
         title: "Vaccine List & Request",
         subtitle: "Browse vaccine list, details, and request a vaccine.",
         onTap: () {
