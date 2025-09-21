@@ -1,14 +1,16 @@
-part of 'add_consultation_bloc.dart';
+part of 'consultation_form_bloc.dart';
 
-abstract class AddConsultationEvent {}
+abstract class ConsultationFormEvent {}
 
-class SaveAddConsultationEvent extends AddConsultationEvent {
+class SaveConsultationEvent extends ConsultationFormEvent {
+  final int? id;
   final String doctorName;
   final String nextConsultationDate;
   final String nextConsultationTime;
   final String address;
 
-  SaveAddConsultationEvent({
+  SaveConsultationEvent({
+    this.id,
     required this.doctorName,
     required this.nextConsultationDate,
     required this.nextConsultationTime,

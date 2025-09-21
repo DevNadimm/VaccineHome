@@ -14,6 +14,8 @@ class ApiEndpoints {
   // 📦 Reminders
   String get addConsultation => 'doctor-consultation-reminder/store';
   String get myConsultations => 'doctor-consultation-reminders';
+  String deleteConsultation(int id) => 'doctor-consultation-reminder/$id/delete';
+  String updateConsultation(int id) => 'doctor-consultation-reminder/$id/update';
   String get addMedication => 'medication-reminder/store';
   String get myMedications => 'medication-reminders';
   String deleteMedication(int id) => 'medication-reminder/$id/delete';

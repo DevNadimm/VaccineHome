@@ -12,7 +12,7 @@ import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/change_password/change_password_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/edit_profile/edit_profile_bloc.dart';
-import 'package:vaccine_home/features/reminder/presentation/blocs/add_consultation/add_consultation_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/consultation_form/consultation_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/medication_form/medication_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_consultations/my_consultations_bloc.dart';
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => EditProfileBloc()),
         BlocProvider(create: (_) => ChangePasswordBloc()),
         BlocProvider(create: (_) => MedicationFormBloc()),
-        BlocProvider(create: (_) => AddConsultationBloc()),
+        BlocProvider(create: (_) => ConsultationFormBloc()),
         BlocProvider(create: (_) => TestFormBloc()),
         BlocProvider(create: (_) => ForgotPasswordBloc()),
         BlocProvider(create: (_) => PinVerificationBloc()),

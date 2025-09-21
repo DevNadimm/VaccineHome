@@ -16,7 +16,6 @@ class DrConsultancyRepository {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
-    // Convert time to 24-hour format
     final String convertedTime = TimeConversionHelper.to24Hour(nextConsultationTime);
 
     final Map<String, dynamic> data = {
@@ -53,6 +52,54 @@ class DrConsultancyRepository {
       return model.data ?? [];
     } else {
       throw Exception(Messages.myConsultationsFailed);
+    }
+  }
+
+  static Future<bool> updateConsultation({
+    required int id,
+    required String doctorName,
+    required String nextConsultationDate,
+    required String nextConsultationTime,
+    required String address,
+  }) async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final String convertedTime = TimeConversionHelper.to24Hour(nextConsultationTime);
+
+    final Map<String, dynamic> data = {
+      'doctor_name': doctorName,
+      'next_consultation_date': nextConsultationDate,
+      'next_consultation_time': convertedTime,
+      'address': address,
+    };
+
+    final Response res = await dioService.putRequest(
+      apiEndpoints.updateConsultation(id),
+      data: data,
+      errorMessage: Messages.editConsultationFailed,
+    );
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(Messages.editConsultationFailed);
+    }
+  }
+
+  static Future<bool> deleteConsultation(int id) async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final Response res = await dioService.deleteRequest(
+      apiEndpoints.deleteConsultation(id),
+      errorMessage: Messages.deleteConsultationFailed,
+    );
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(Messages.deleteConsultationFailed);
     }
   }
 }
