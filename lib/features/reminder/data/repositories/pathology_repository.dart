@@ -55,4 +55,53 @@ class PathologyRepository {
       throw Exception(Messages.myTestsFailed);
     }
   }
+
+  static Future<bool> updateTest({
+    required int id,
+    required String testName,
+    required String nextTestDate,
+    required String nextTestTime,
+    required String description,
+  }) async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    // Convert time to 24-hour format
+    final String convertedTime = TimeConversionHelper.to24Hour(nextTestTime);
+
+    final Map<String, dynamic> data = {
+      'test_name': testName,
+      'next_test_date': nextTestDate,
+      'next_test_time': convertedTime,
+      'description': description,
+    };
+
+    final Response res = await dioService.putRequest(
+      apiEndpoints.updateTest(id),
+      data: data,
+      errorMessage: Messages.editTestFailed,
+    );
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(Messages.editTestFailed);
+    }
+  }
+
+  static Future<bool> deleteTest(int id) async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final Response res = await dioService.deleteRequest(
+      apiEndpoints.deleteTest(id),
+      errorMessage: Messages.deleteTestFailed,
+    );
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(Messages.deleteTestFailed);
+    }
+  }
 }

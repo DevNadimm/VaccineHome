@@ -5,15 +5,20 @@ import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/reminder/data/models/pathology_model.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_tests/my_tests_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/test_form/test_form_bloc.dart';
 
 class TestFormPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const TestFormPage());
+  static Route route({Pathology? test}) => MaterialPageRoute(builder: (_) => TestFormPage(test: test));
 
-  const TestFormPage({super.key});
+  final Pathology? test;
+
+  const TestFormPage({super.key, this.test});
 
   @override
   State<TestFormPage> createState() => _TestFormPageState();
@@ -25,6 +30,17 @@ class _TestFormPageState extends State<TestFormPage> {
   final TextEditingController testDate = TextEditingController();
   final TextEditingController testTime = TextEditingController();
   final TextEditingController description = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.test != null) {
+      testName.text = widget.test!.testName ?? '';
+      testDate.text = widget.test!.nextTestDate ?? '';
+      testTime.text = widget.test!.nextTestTime != null ? TimeConversionHelper.to12Hour(widget.test!.nextTestTime!) : '';
+      description.text = widget.test!.description ?? '';
+    }
+  }
 
   Future<void> _selectOnlyDate(TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -43,11 +59,21 @@ class _TestFormPageState extends State<TestFormPage> {
     return BlocConsumer<TestFormBloc, TestFormState>(
       listener: (context, state) {
         if (state is TestFormFailure) {
-          AppNotifier.showToast(Messages.addTestFailed, type: MessageType.error);
+          AppNotifier.showToast(
+            widget.test == null ? Messages.addTestFailed : Messages.editTestFailed,
+            type: MessageType.error,
+          );
         }
         if (state is TestFormSuccess) {
+          AppNotifier.showToast(
+            widget.test == null ? Messages.addTestSuccess : Messages.editTestSuccess,
+            type: MessageType.success,
+          );
           clearFields();
-          AppNotifier.showToast(Messages.addTestSuccess, type: MessageType.success);
+          if (widget.test != null) {
+            context.read<MyTestsBloc>().add(FetchMyTestsEvent());
+            Navigator.pop(context);
+          }
         }
       },
       builder: (context, state) {
@@ -68,11 +94,9 @@ class _TestFormPageState extends State<TestFormPage> {
   Widget content() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Test'),
+        title: Text(widget.test == null ? 'Add Test' : 'Edit Test'),
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(
             HugeIcons.strokeRoundedArrowLeft01,
             size: 32,
@@ -137,10 +161,8 @@ class _TestFormPageState extends State<TestFormPage> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: _saveConsultation,
-                  child: const Text(
-                    'Save Test',
-                  ),
+                  onPressed: _saveTest,
+                  child: const Text('Save Test'),
                 ),
               ),
             ],
@@ -150,10 +172,11 @@ class _TestFormPageState extends State<TestFormPage> {
     );
   }
 
-  void _saveConsultation() async {
+  void _saveTest() {
     if (globalKey.currentState?.validate() ?? false) {
       context.read<TestFormBloc>().add(
         SaveTestFormEvent(
+          id: widget.test?.id,
           testName: testName.text,
           nextTestDate: testDate.text,
           nextTestTime: testTime.text,

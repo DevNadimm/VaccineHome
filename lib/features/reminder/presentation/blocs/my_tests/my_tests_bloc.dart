@@ -7,7 +7,8 @@ part 'my_tests_state.dart';
 
 class MyTestsBloc extends Bloc<MyTestsEvent, MyTestsState> {
   MyTestsBloc() : super(MyTestsInitial()) {
-    on<MyTestsEvent>(_onFetchMyTests);
+    on<FetchMyTestsEvent>(_onFetchMyTests);
+    on<DeleteTestEvent>(_onDeleteTest);
   }
 
   Future<void> _onFetchMyTests(
@@ -20,6 +21,25 @@ class MyTestsBloc extends Bloc<MyTestsEvent, MyTestsState> {
       emit(MyTestsLoaded(myTests));
     } catch (e) {
       emit(MyTestsFailure(e.toString()));
+    }
+  }
+
+  Future<void> _onDeleteTest(
+    DeleteTestEvent event,
+    Emitter<MyTestsState> emit,
+  ) async {
+    if (state is MyTestsLoaded) {
+      final currentState = state as MyTestsLoaded;
+
+      final updatedList = List<Pathology>.from(currentState.myTests)..removeWhere((test) => test.id == event.id);
+
+      emit(MyTestsLoaded(updatedList));
+
+      try {
+        await PathologyRepository.deleteTest(event.id);
+      } catch (e) {
+        emit(MyTestsLoaded(currentState.myTests));
+      }
     }
   }
 }

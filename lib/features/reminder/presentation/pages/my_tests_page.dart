@@ -6,6 +6,7 @@ import 'package:vaccine_home/core/utils/widgets/empty_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_tests/my_tests_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/test_form_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/widgets/pathology_card.dart';
 
 class MyTestsPage extends StatefulWidget {
@@ -50,8 +51,12 @@ class _MyTestsPageState extends State<MyTestsPage> {
                   final test = state.myTests[index];
                   return PathologyCard(
                   test: test,
-                  onEdit: () {},
-                  onDelete: () {},
+                  onEdit: () {
+                    Navigator.push(context, TestFormPage.route(test: test));
+                  },
+                  onDelete: () {
+                    context.read<MyTestsBloc>().add(DeleteTestEvent(test.id ?? 0));
+                  },
                 );
               },
               );

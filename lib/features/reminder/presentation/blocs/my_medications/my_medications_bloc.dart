@@ -39,7 +39,6 @@ class MyMedicationsBloc extends Bloc<MyMedicationsEvent, MyMedicationsState> {
         await MedicationRepository.deleteMedication(event.id);
       } catch (e) {
         emit(MyMedicationsLoaded(currentState.myMedications));
-        emit(MyMedicationsFailure(e.toString()));
       }
     }
   }

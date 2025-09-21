@@ -15,12 +15,24 @@ class TestFormBloc extends Bloc<TestFormEvent, TestFormState> {
   ) async {
     emit(TestFormLoading());
     try {
-      final res = await PathologyRepository.addTest(
-        testName: event.testName,
-        nextTestDate: event.nextTestDate,
-        nextTestTime: event.nextTestTime,
-        description: event.description,
-      );
+      bool res;
+      if (event.id == null) {
+        res = await PathologyRepository.addTest(
+          testName: event.testName,
+          nextTestDate: event.nextTestDate,
+          nextTestTime: event.nextTestTime,
+          description: event.description,
+        );
+      } else {
+        res = await PathologyRepository.updateTest(
+          id: event.id!,
+          testName: event.testName,
+          nextTestDate: event.nextTestDate,
+          nextTestTime: event.nextTestTime,
+          description: event.description,
+        );
+      }
+
       if (res) {
         emit(TestFormSuccess());
       } else {
