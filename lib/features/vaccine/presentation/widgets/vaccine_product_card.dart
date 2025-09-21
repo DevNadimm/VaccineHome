@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_cached_image.dart';
-import 'package:vaccine_home/features/reminder/presentation/pages/vaccine_details_page.dart';
 import 'package:vaccine_home/features/vaccine/data/models/vaccine_product_model.dart';
+import 'package:vaccine_home/features/vaccine/presentation/pages/vaccine_details_page.dart';
 
 class VaccineProductCard extends StatelessWidget {
   final VaccineProduct vaccineProduct;
