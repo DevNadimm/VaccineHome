@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/empty_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
@@ -41,7 +44,10 @@ class _MyTestsPageState extends State<MyTestsPage> {
           ),
         ),
       ),
-        body: BlocBuilder<MyTestsBloc, MyTestsState>(
+        body: BlocConsumer<MyTestsBloc, MyTestsState>(
+          listener: (context, state) {
+            AppNotifier.showToast(Messages.deleteTestFailed, type: MessageType.error);
+          },
           builder: (context, state) {
             if (state is MyTestsLoaded && state.myTests.isNotEmpty) {
               return ListView.builder(

@@ -17,3 +17,5 @@ class MyConsultationsFailure extends MyConsultationsState {
 
   MyConsultationsFailure(this.message);
 }
+
+class DeleteConsultationFailure extends MyConsultationsState {}

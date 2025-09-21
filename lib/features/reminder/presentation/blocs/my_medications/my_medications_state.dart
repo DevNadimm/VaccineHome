@@ -17,3 +17,5 @@ class MyMedicationsFailure extends MyMedicationsState {
 
   MyMedicationsFailure(this.message);
 }
+
+class DeleteMedicationFailure extends MyMedicationsState {}

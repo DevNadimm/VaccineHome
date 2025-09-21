@@ -39,6 +39,7 @@ class MyConsultationsBloc extends Bloc<MyConsultationsEvent, MyConsultationsStat
       try {
         await DrConsultancyRepository.deleteConsultation(event.id);
       } catch (e) {
+        emit(DeleteConsultationFailure());
         emit(MyConsultationsLoaded(currentState.myConsultations));
       }
     }

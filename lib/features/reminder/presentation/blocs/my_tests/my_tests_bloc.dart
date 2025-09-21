@@ -38,6 +38,7 @@ class MyTestsBloc extends Bloc<MyTestsEvent, MyTestsState> {
       try {
         await PathologyRepository.deleteTest(event.id);
       } catch (e) {
+        emit(DeleteTestFailure());
         emit(MyTestsLoaded(currentState.myTests));
       }
     }

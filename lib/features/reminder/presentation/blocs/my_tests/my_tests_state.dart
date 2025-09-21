@@ -17,3 +17,5 @@ class MyTestsFailure extends MyTestsState {
 
   MyTestsFailure(this.message);
 }
+
+class DeleteTestFailure extends MyTestsState {}
