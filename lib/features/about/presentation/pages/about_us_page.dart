@@ -3,10 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/features/about/presentation/widgets/branding_section.dart';
 
-class AboutPage extends StatelessWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const AboutPage());
+class AboutUsPage extends StatelessWidget {
+  static Route route() => MaterialPageRoute(builder: (_) => const AboutUsPage());
 
-  const AboutPage({super.key});
+  const AboutUsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

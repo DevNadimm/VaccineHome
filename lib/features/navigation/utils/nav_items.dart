@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:vaccine_home/features/about/presentation/pages/about_page.dart';
+import 'package:vaccine_home/features/about/presentation/pages/about_us_page.dart';
 import 'package:vaccine_home/features/home/presentation/pages/home_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/profile_page.dart';
 
 List<Widget> bottomNavScreens = [
   const HomePage(),
-  const AboutPage(),
+  const AboutUsPage(),
   const ProfilePage(),
 ];
 
