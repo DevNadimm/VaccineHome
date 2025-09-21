@@ -71,4 +71,37 @@ class MedicationRepository {
       throw Exception(Messages.deleteMedicationFailed);
     }
   }
+
+  static Future<bool> updateMedication({
+    required int id,
+    required String name,
+    required String type,
+    required List<String> times,
+    required String whenToTake,
+  }) async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    // Convert all times to 24-hour format
+    final List<String> convertedTimes = times.map((t) => TimeConversionHelper.to24Hour(t)).toList();
+
+    final Map<String, dynamic> data = {
+      'medication_name': name,
+      'medication_type': type,
+      'times': convertedTimes,
+      'when_to_take': whenToTake,
+    };
+
+    final Response res = await dioService.putRequest(
+      apiEndpoints.updateMedication(id),
+      data: data,
+      errorMessage: Messages.editMedicationFailed,
+    );
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(Messages.editMedicationFailed);
+    }
+  }
 }

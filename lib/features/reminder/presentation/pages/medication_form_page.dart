@@ -6,59 +6,71 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
+import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
-import 'package:vaccine_home/features/reminder/presentation/blocs/add_medication/add_medication_bloc.dart';
+import 'package:vaccine_home/features/reminder/data/models/medication_model.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/medication_form/medication_form_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/widgets/time_picker_list_widget.dart';
 
-class AddMedicationPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const AddMedicationPage());
+class MedicationFormPage extends StatefulWidget {
+  static Route route({Medication? medication}) => MaterialPageRoute(builder: (_) => MedicationFormPage(medication: medication));
 
-  const AddMedicationPage({super.key});
+  final Medication? medication;
+
+  const MedicationFormPage({super.key, this.medication});
 
   @override
-  State<AddMedicationPage> createState() => _AddMedicationPageState();
+  State<MedicationFormPage> createState() => _MedicationFormPageState();
 }
 
-class _AddMedicationPageState extends State<AddMedicationPage> {
+class _MedicationFormPageState extends State<MedicationFormPage> {
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController medicationName = TextEditingController();
   final TextEditingController medicationType = TextEditingController();
-  // final TextEditingController startDate = TextEditingController();
-  // final TextEditingController endDate = TextEditingController();
 
-  // Future<void> _selectOnlyDate(TextEditingController controller) async {
-  //   final DateTime? picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime.now(),
-  //     lastDate: DateTime(2030),
-  //   );
-  //   if (picked != null) {
-  //     controller.text = DateFormat('yyyy-MM-dd').format(picked);
-  //   }
-  // }
+  @override
+  void initState() {
+    super.initState();
+    if (widget.medication != null) {
+      medicationName.text = widget.medication!.medicationName ?? '';
+      medicationType.text = widget.medication!.medicationType ?? '';
+      context.read<TimeListCubit>().setTimes(widget.medication!.times?.map((t) => TimeConversionHelper.to12Hour(t)).toList() ?? []);
+      context.read<IntakeToggleCubit>().changeIntake(widget.medication!.whenToTake ?? 'Before Meals');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddMedicationBloc, AddMedicationState>(
+    return BlocConsumer<MedicationFormBloc, MedicationFormState>(
       listener: (context, state) {
-        if (state is AddMedicationFailure) {
-          AppNotifier.showToast(Messages.addMedicationFailed, type: MessageType.error);
+        if (state is MedicationFormFailure) {
+          AppNotifier.showToast(
+            widget.medication == null ? Messages.addMedicationFailed : Messages.editMedicationFailed,
+            type: MessageType.error,
+          );
         }
-        if (state is AddMedicationSuccess) {
-          clearFields();
-          AppNotifier.showToast(Messages.addMedicationSuccess, type: MessageType.success);
+        if (state is MedicationFormSuccess) {
+          AppNotifier.showToast(
+            widget.medication == null ? Messages.addMedicationSuccess : Messages.editMedicationSuccess,
+            type: MessageType.success,
+          );
+          if (widget.medication != null) {
+            context.read<MyMedicationsBloc>().add(FetchMyMedicationsEvent());
+          }
+          if (widget.medication == null) clearFields();
+          if (widget.medication != null) Navigator.pop(context);
         }
       },
       builder: (context, state) {
         return Stack(
           children: [
             content(),
-            if (state is AddMedicationLoading)
+            if (state is MedicationFormLoading)
               Container(
                 color: AppColors.black.withOpacity(0.6),
                 child: const Loader(),
@@ -72,7 +84,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
   Widget content() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Medication'),
+        title: Text(widget.medication == null ? 'Add Medication' : 'Edit Medication'),
         leading: IconButton(
           onPressed: () {
             context.read<IntakeToggleCubit>().reset();
@@ -118,35 +130,6 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                 },
               ),
               const SizedBox(height: 16),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     Expanded(
-              //       child: CustomTextField(
-              //         label: 'Start Date',
-              //         hintText: 'Select date',
-              //         controller: startDate,
-              //         isRequired: true,
-              //         readOnly: true,
-              //         validationLabel: 'Start date',
-              //         onTap: () => _selectOnlyDate(startDate),
-              //       ),
-              //     ),
-              //     const SizedBox(width: 16),
-              //     Expanded(
-              //       child: CustomTextField(
-              //         label: 'End Date',
-              //         hintText: 'Select date',
-              //         controller: endDate,
-              //         isRequired: true,
-              //         readOnly: true,
-              //         validationLabel: 'End date',
-              //         onTap: () => _selectOnlyDate(endDate),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(height: 16),
               Row(
                 children: [
                   Text(
@@ -245,10 +228,11 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
     );
   }
 
-  void _saveMedication() async {
+  void _saveMedication() {
     if (globalKey.currentState?.validate() ?? false) {
-      context.read<AddMedicationBloc>().add(
-        SaveAddMedicationEvent(
+      context.read<MedicationFormBloc>().add(
+        SaveMedicationEvent(
+          id: widget.medication?.id,
           name: medicationName.text,
           type: medicationType.text,
           times: context.read<TimeListCubit>().state.map((e) => e.text).toList(),

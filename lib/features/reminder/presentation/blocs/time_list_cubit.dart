@@ -46,4 +46,10 @@ class TimeListCubit extends Cubit<List<TextEditingController>> {
       print(controller.text);
     }
   }
+
+  /// Set times (for edit mode)
+  void setTimes(List<String> times) {
+    final controllers = times.map((t) => TextEditingController(text: t)).toList();
+    emit(controllers.isNotEmpty ? controllers : [TextEditingController()]);
+  }
 }

@@ -1,14 +1,16 @@
-part of 'add_medication_bloc.dart';
+part of 'medication_form_bloc.dart';
 
-abstract class AddMedicationEvent {}
+abstract class MedicationFormEvent {}
 
-class SaveAddMedicationEvent extends AddMedicationEvent {
+class SaveMedicationEvent extends MedicationFormEvent {
+  final int? id;
   final String name;
   final String type;
   final List<String> times;
   final String whenToTake;
 
-  SaveAddMedicationEvent({
+  SaveMedicationEvent({
+    this.id,
     required this.name,
     required this.type,
     required this.times,

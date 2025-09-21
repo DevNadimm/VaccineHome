@@ -3,7 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
-import 'package:vaccine_home/features/reminder/presentation/pages/add_medication_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/medication_form_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/my_medications_page.dart';
 
 class MedicationReminderPage extends StatelessWidget {
@@ -19,7 +19,7 @@ class MedicationReminderPage extends StatelessWidget {
         title: "Add Medication",
         subtitle: "Create a new reminder for your medicines.",
         onTap: () {
-          Navigator.push(context, AddMedicationPage.route());
+          Navigator.push(context, MedicationFormPage.route());
         },
       ),
       SubModule(

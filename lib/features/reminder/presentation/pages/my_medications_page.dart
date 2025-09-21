@@ -6,6 +6,7 @@ import 'package:vaccine_home/core/utils/widgets/empty_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/medication_form_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/widgets/medication_card.dart';
 
 class MyMedicationsPage extends StatefulWidget {
@@ -50,7 +51,9 @@ class _MyMedicationsPageState extends State<MyMedicationsPage> {
                 final medication = state.myMedications[index];
                 return MedicationCard(
                   medication: medication,
-                  onEdit: () {},
+                  onEdit: () {
+                    Navigator.push(context, MedicationFormPage.route(medication: medication));
+                  },
                   onDelete: () {
                     context.read<MyMedicationsBloc>().add(DeleteMedicationEvent(medication.id ?? 0));
                   },
