@@ -29,6 +29,7 @@ class ApiEndpoints {
 
   // 📦 Misc
   String get notifications => 'notifications';
+  String get readNotification => 'notifications/mark-as-read';
 
   // 📦 Avatar
   String avatar(String path) => 'https://vcard.vaccinehomebd.com/storage/app/public/$path';

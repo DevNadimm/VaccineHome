@@ -8,6 +8,7 @@ part 'notification_state.dart';
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   NotificationBloc() : super(NotificationInitial()) {
     on<FetchNotificationsEvent>(_onFetchNotifications);
+    on<ReadNotificationsEvent>(_onReadNotification);
   }
 
   Future<void> _onFetchNotifications(
@@ -20,6 +21,17 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       emit(NotificationLoaded(notifications));
     } catch (e) {
       emit(NotificationFailure(e.toString()));
+    }
+  }
+
+  Future<void> _onReadNotification(
+    ReadNotificationsEvent event,
+    Emitter<NotificationState> emit,
+  ) async {
+    final res = await NotificationRepository.readNotification(event.id);
+    if (res) {
+      final notifications = await NotificationRepository.fetchNotifications();
+      emit(NotificationLoaded(notifications));
     }
   }
 }

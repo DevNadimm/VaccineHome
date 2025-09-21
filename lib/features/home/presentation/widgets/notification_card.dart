@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/features/home/data/models/notification_model.dart';
+import 'package:vaccine_home/features/home/presentation/pages/notification_view_page.dart';
 
 class NotificationCard extends StatelessWidget {
   final NotificationData notification;
@@ -30,7 +31,9 @@ class NotificationCard extends StatelessWidget {
         color: AppColors.cardColor,
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, NotificationViewPage.route(notification));
+          },
           borderRadius: BorderRadius.circular(16),
           splashColor: AppColors.primaryColor.withOpacity(0.15),
           highlightColor: Colors.transparent,

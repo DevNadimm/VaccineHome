@@ -21,4 +21,25 @@ class NotificationRepository {
       throw Exception(Messages.fetchNotificationsFailed);
     }
   }
+
+  static Future<bool> readNotification(String id) async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final data = {
+      "notification_id": id
+    };
+
+    final Response res = await dioService.postRequest(
+      apiEndpoints.readNotification,
+      data: data,
+      errorMessage: Messages.markAsReadFailed,
+    );
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(Messages.markAsReadFailed);
+    }
+  }
 }
