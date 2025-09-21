@@ -17,6 +17,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/add_medication
 import 'package:vaccine_home/features/reminder/presentation/blocs/add_test/add_test_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_consultations/my_consultations_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_request/vaccine_request_bloc.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => NotificationBloc()),
         BlocProvider(create: (_) => VaccineProductBloc()),
         BlocProvider(create: (_) => MyConsultationsBloc()),
+        BlocProvider(create: (_) => MyMedicationsBloc()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

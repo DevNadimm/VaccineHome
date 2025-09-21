@@ -23,7 +23,7 @@ class _MyConsultationsPageState extends State<MyConsultationsPage> {
     super.initState();
   }
 
-  _fetchMyConsultations() => context.read<MyConsultationsBloc>().add(FetchMyConsultations());
+  _fetchMyConsultations() => context.read<MyConsultationsBloc>().add(FetchMyConsultationsEvent());
 
   @override
   Widget build(BuildContext context) {

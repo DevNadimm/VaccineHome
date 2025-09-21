@@ -2,4 +2,4 @@ part of 'my_consultations_bloc.dart';
 
 abstract class MyConsultationsEvent {}
 
-class FetchMyConsultations extends MyConsultationsEvent {}
+class FetchMyConsultationsEvent extends MyConsultationsEvent {}
