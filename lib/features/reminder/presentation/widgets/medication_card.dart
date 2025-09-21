@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
-import 'package:vaccine_home/features/vaccine/presentation/widgets/vaccine_chip.dart';
+import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
 import 'package:vaccine_home/features/reminder/data/models/medication_model.dart';
 
 class MedicationCard extends StatelessWidget {
   final Medication medication;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
-  const MedicationCard({super.key, required this.medication});
+  const MedicationCard({
+    super.key,
+    required this.medication,
+    this.onEdit,
+    this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,127 +39,103 @@ class MedicationCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      medication.medicationName ?? 'Unnamed Medication',
-                      style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.primaryFontColor,
-                        ),
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  if (medication.medicationType != null && medication.medicationType!.isNotEmpty)
-                    VaccineChip(
-                      label: medication.medicationType!,
-                      icon: HugeIcons.strokeRoundedMedicine02,
-                    ),
-                ],
-              ),
+              _buildHeader(),
               const SizedBox(height: 12),
-              Row(
-                children: [
-                  const Icon(
-                    HugeIcons.strokeRoundedClock01,
-                    color: AppColors.primaryFontColor,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    medication.times?.isNotEmpty == true
-                        ? medication.times!.join(", ")
-                        : "No time set",
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.secondaryFontColor,
-                      ),
-                    ),
-                  ),
-                ],
+              _buildInfoRow(
+                icon: HugeIcons.strokeRoundedMedicine02,
+                text: medication.medicationType ?? 'Not specified',
               ),
               const SizedBox(height: 8),
-              Row(
-                children: [
-                  const Icon(
-                    HugeIcons.strokeRoundedCalendar02,
-                    color: AppColors.primaryFontColor,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      medication.whenToTake ?? 'Not specified',
-                      style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                          fontSize: 14,
-                          color: AppColors.secondaryFontColor,
-                        ),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+              _buildInfoRow(
+                icon: HugeIcons.strokeRoundedClock01,
+                text: (medication.times?.isNotEmpty ?? false)
+                    ? medication.times!.map((t) => TimeConversionHelper.to12Hour(t)).join(", ")
+                    : "No time set",
+              ),
+              const SizedBox(height: 8),
+              _buildInfoRow(
+                icon: HugeIcons.strokeRoundedCalendar02,
+                text: medication.whenToTake ?? 'Not specified',
               ),
               const SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: AppColors.primaryColor.withOpacity(0.1),
-                            side: const BorderSide(width: 1, color: AppColors.primaryColor,)
-                        ),
-                        child: Text(
-                          'Edit',
-                          style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: AppColors.error.withOpacity(0.1),
-                            side: const BorderSide(width: 1, color: AppColors.error,)
-                        ),
-                        child: Text(
-                          'Delete',
-                          style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )
+              _buildActions(),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _buildHeader() {
+    return Text(
+      medication.medicationName ?? 'Unnamed Medication',
+      style: GoogleFonts.poppins(
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+        color: AppColors.primaryFontColor,
+      ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+  Widget _buildInfoRow({required IconData icon, required String text}) {
+    return Row(
+      children: [
+        Icon(icon, color: AppColors.primaryFontColor, size: 20),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            text,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              color: AppColors.secondaryFontColor,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
+  Widget _buildActions() {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildActionButton(
+            label: 'Edit',
+            color: AppColors.primaryColor,
+            onPressed: onEdit,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _buildActionButton(
+            label: 'Delete',
+            color: AppColors.error,
+            onPressed: onDelete,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionButton({
+    required String label,
+    required Color color,
+    VoidCallback? onPressed,
+  }) {
+    return SizedBox(
+      height: 50,
+      child: ElevatedButton(
+        onPressed: onPressed ?? () {},
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          backgroundColor: color.withOpacity(0.1),
+          side: BorderSide(width: 1, color: color),
+        ),
+        child: Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w600,
+            color: AppColors.black,
           ),
         ),
       ),
