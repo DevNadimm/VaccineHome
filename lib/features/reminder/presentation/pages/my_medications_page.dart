@@ -6,6 +6,7 @@ import 'package:vaccine_home/core/utils/widgets/empty_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/widgets/medication_card.dart';
 
 class MyMedicationsPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const MyMedicationsPage());
@@ -47,7 +48,7 @@ class _MyMedicationsPageState extends State<MyMedicationsPage> {
               itemCount: state.myMedications.length,
               itemBuilder: (context, index) {
                 final medication = state.myMedications[index];
-                return Text(medication.medicationName ?? '');
+                return MedicationCard(medication: medication);
               },
             );
           } else if (state is MyMedicationsLoading) {
