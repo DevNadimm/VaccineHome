@@ -20,6 +20,8 @@ class ApiEndpoints {
   String updateMedication(int id) => 'medication-reminder/$id/update';
   String get addTest => 'medication-test-reminder/store';
   String get myTests => 'medication-test-reminders';
+  String deleteTest(int id) => 'medication-test-reminder/$id/delete';
+  String updateTest(int id) => 'medication-test-reminder/$id/update';
 
   // 📦 Profile
   String get getAdvertisements => 'advertisements';
