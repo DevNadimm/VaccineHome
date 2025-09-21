@@ -165,7 +165,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                   onTap: () {
                     showCustomBottomSheet(
                       context: context,
-                      items: ['Male', 'Female'],
+                      items: ['Male', 'Female', 'Other'],
                       controller: gender,
                       title: 'Select Gender',
                     );

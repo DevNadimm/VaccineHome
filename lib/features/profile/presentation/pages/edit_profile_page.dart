@@ -169,7 +169,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   onTap: () {
                     showCustomBottomSheet(
                       context: context,
-                      items: ['Male', 'Female'],
+                      items: ['Male', 'Female', 'Other'],
                       controller: gender,
                       title: 'Select Gender',
                     );
