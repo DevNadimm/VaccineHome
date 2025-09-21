@@ -46,7 +46,9 @@ class _MyTestsPageState extends State<MyTestsPage> {
       ),
         body: BlocConsumer<MyTestsBloc, MyTestsState>(
           listener: (context, state) {
-            AppNotifier.showToast(Messages.deleteTestFailed, type: MessageType.error);
+            if (state is DeleteTestFailure) {
+              AppNotifier.showToast(Messages.deleteTestFailed, type: MessageType.error);
+            }
           },
           builder: (context, state) {
             if (state is MyTestsLoaded && state.myTests.isNotEmpty) {

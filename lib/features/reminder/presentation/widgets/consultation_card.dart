@@ -86,6 +86,7 @@ class ConsultationCard extends StatelessWidget {
 
   Widget _buildInfoRow({required IconData icon, required String text}) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(icon, color: AppColors.primaryFontColor, size: 20),
         const SizedBox(width: 6),
@@ -96,6 +97,7 @@ class ConsultationCard extends StatelessWidget {
               fontSize: 14,
               color: AppColors.secondaryFontColor,
             ),
+            maxLines: 4,
             overflow: TextOverflow.ellipsis,
           ),
         ),
