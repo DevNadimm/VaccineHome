@@ -9,6 +9,7 @@ import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/auth/presentation/blocs/forgot_password/forgot_password_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/blocs/pin_verification/pin_verification_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/set_new_password_page.dart';
 
@@ -141,8 +142,8 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
                         color: AppColors.primaryColor,
                       ),
                       recognizer: TapGestureRecognizer()..onTap = () {
-                        /// TODO: Operations
-                      },
+                        onTapResendEmail();
+                      }
                     ),
                   ],
                 ),
@@ -152,6 +153,14 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
         ),
       ),
     );
+  }
+
+  void onTapResendEmail() {
+    if (_globalKey.currentState?.validate() ?? false) {
+      context.read<ForgotPasswordBloc>().add(
+        SendForgotPasswordPinEvent(email: widget.email),
+      );
+    }
   }
   
   Widget _pinField(BuildContext context) {
