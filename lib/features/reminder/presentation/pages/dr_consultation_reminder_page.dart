@@ -6,10 +6,10 @@ import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/add_consultation_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/my_consultations_page.dart';
 
-class DrConsultancyReminderPage extends StatelessWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const DrConsultancyReminderPage());
+class DrConsultationReminderPage extends StatelessWidget {
+  static Route route() => MaterialPageRoute(builder: (_) => const DrConsultationReminderPage());
 
-  const DrConsultancyReminderPage({super.key});
+  const DrConsultationReminderPage({super.key});
 
   @override
   Widget build(BuildContext context) {

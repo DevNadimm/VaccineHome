@@ -3,7 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
-import 'package:vaccine_home/features/reminder/presentation/pages/dr_consultancy_reminder_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/dr_consultation_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/medication_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/pathology_reminder_page.dart';
 
@@ -33,10 +33,10 @@ class ReminderPage extends StatelessWidget {
       // ),
       SubModule(
         icon: HugeIcons.strokeRoundedStethoscope,
-        title: "Dr Consultancy Reminder",
+        title: "Dr Consultation Reminder",
         subtitle: "Get notified for your appointments.",
         onTap: () {
-          Navigator.push(context, DrConsultancyReminderPage.route());
+          Navigator.push(context, DrConsultationReminderPage.route());
         },
       ),
       SubModule(
