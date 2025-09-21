@@ -22,14 +22,26 @@ class Messages {
   // Medication messages
   static const String addMedicationFailed = "Failed to add medication. Please try again.";
   static const String addMedicationSuccess = "Medication added successfully!";
+  static const String editMedicationFailed = "Failed to update medication. Please try again.";
+  static const String editMedicationSuccess = "Medication updated successfully!";
+  static const String deleteMedicationFailed = "Failed to delete medication. Please try again.";
+  static const String deleteMedicationSuccess = "Medication deleted successfully!";
 
   // Consultancy messages
   static const String addConsultationFailed = "Failed to add doctor consultancy. Please try again.";
   static const String addConsultationSuccess = "Doctor consultancy added successfully!";
+  static const String editConsultationFailed = "Failed to update doctor consultancy. Please try again.";
+  static const String editConsultationSuccess = "Doctor consultancy updated successfully!";
+  static const String deleteConsultationFailed = "Failed to delete doctor consultancy. Please try again.";
+  static const String deleteConsultationSuccess = "Doctor consultancy deleted successfully!";
 
-  // Pathology Message
+  // Pathology messages
   static const String addTestFailed = "Failed to add test. Please try again.";
   static const String addTestSuccess = "Test added successfully!";
+  static const String editTestFailed = "Failed to update test. Please try again.";
+  static const String editTestSuccess = "Test updated successfully!";
+  static const String deleteTestFailed = "Failed to delete test. Please try again.";
+  static const String deleteTestSuccess = "Test deleted successfully!";
 
   // Forgot Password messages
   static const String sendPinFailed = "Failed to send PIN. Please try again.";

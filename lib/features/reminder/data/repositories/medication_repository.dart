@@ -55,4 +55,20 @@ class MedicationRepository {
       throw Exception(Messages.myMedicationsFailed);
     }
   }
+
+  static Future<bool> deleteMedication(int id) async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final Response res = await dioService.deleteRequest(
+      apiEndpoints.deleteMedication(id),
+      errorMessage: Messages.deleteMedicationFailed,
+    );
+
+    if (res.statusCode == 200 || res.statusCode == 204) {
+      return true;
+    } else {
+      throw Exception(Messages.deleteMedicationFailed);
+    }
+  }
 }

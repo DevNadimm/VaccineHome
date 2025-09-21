@@ -7,11 +7,12 @@ part 'my_medications_state.dart';
 
 class MyMedicationsBloc extends Bloc<MyMedicationsEvent, MyMedicationsState> {
   MyMedicationsBloc() : super(MyMedicationsInitial()) {
-    on<MyMedicationsEvent>(_onFetchMyMedications);
+    on<FetchMyMedicationsEvent>(_onFetchMyMedications);
+    on<DeleteMedicationEvent>(_onDeleteMedication);
   }
 
   Future<void> _onFetchMyMedications(
-    MyMedicationsEvent event,
+    FetchMyMedicationsEvent event,
     Emitter<MyMedicationsState> emit,
   ) async {
     emit(MyMedicationsLoading());
@@ -20,6 +21,26 @@ class MyMedicationsBloc extends Bloc<MyMedicationsEvent, MyMedicationsState> {
       emit(MyMedicationsLoaded(myMedications));
     } catch (e) {
       emit(MyMedicationsFailure(e.toString()));
+    }
+  }
+
+  Future<void> _onDeleteMedication(
+    DeleteMedicationEvent event,
+    Emitter<MyMedicationsState> emit,
+  ) async {
+    if (state is MyMedicationsLoaded) {
+      final currentState = state as MyMedicationsLoaded;
+
+      final updatedList = List<Medication>.from(currentState.myMedications)..removeWhere((med) => med.id == event.id);
+
+      emit(MyMedicationsLoaded(updatedList));
+
+      try {
+        await MedicationRepository.deleteMedication(event.id);
+      } catch (e) {
+        emit(MyMedicationsLoaded(currentState.myMedications));
+        emit(MyMedicationsFailure(e.toString()));
+      }
     }
   }
 }

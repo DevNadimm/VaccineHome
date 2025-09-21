@@ -48,7 +48,13 @@ class _MyMedicationsPageState extends State<MyMedicationsPage> {
               itemCount: state.myMedications.length,
               itemBuilder: (context, index) {
                 final medication = state.myMedications[index];
-                return MedicationCard(medication: medication);
+                return MedicationCard(
+                  medication: medication,
+                  onEdit: () {},
+                  onDelete: () {
+                    context.read<MyMedicationsBloc>().add(DeleteMedicationEvent(medication.id ?? 0));
+                  },
+                );
               },
             );
           } else if (state is MyMedicationsLoading) {
