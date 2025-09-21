@@ -1,14 +1,16 @@
-part of 'add_test_bloc.dart';
+part of 'test_form_bloc.dart';
 
-abstract class AddTestEvent {}
+abstract class TestFormEvent {}
 
-class SaveAddTestEvent extends AddTestEvent {
+class SaveTestFormEvent extends TestFormEvent {
+  final int? id;
   final String testName;
   final String nextTestDate;
   final String nextTestTime;
   final String description;
 
-  SaveAddTestEvent({
+  SaveTestFormEvent({
+    this.id,
     required this.testName,
     required this.nextTestDate,
     required this.nextTestTime,

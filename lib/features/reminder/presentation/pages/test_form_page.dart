@@ -8,18 +8,18 @@ import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
-import 'package:vaccine_home/features/reminder/presentation/blocs/add_test/add_test_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/test_form/test_form_bloc.dart';
 
-class AddTestPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const AddTestPage());
+class TestFormPage extends StatefulWidget {
+  static Route route() => MaterialPageRoute(builder: (_) => const TestFormPage());
 
-  const AddTestPage({super.key});
+  const TestFormPage({super.key});
 
   @override
-  State<AddTestPage> createState() => _AddTestPageState();
+  State<TestFormPage> createState() => _TestFormPageState();
 }
 
-class _AddTestPageState extends State<AddTestPage> {
+class _TestFormPageState extends State<TestFormPage> {
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController testName = TextEditingController();
   final TextEditingController testDate = TextEditingController();
@@ -40,12 +40,12 @@ class _AddTestPageState extends State<AddTestPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddTestBloc, AddTestState>(
+    return BlocConsumer<TestFormBloc, TestFormState>(
       listener: (context, state) {
-        if (state is AddTestFailure) {
+        if (state is TestFormFailure) {
           AppNotifier.showToast(Messages.addTestFailed, type: MessageType.error);
         }
-        if (state is AddTestSuccess) {
+        if (state is TestFormSuccess) {
           clearFields();
           AppNotifier.showToast(Messages.addTestSuccess, type: MessageType.success);
         }
@@ -54,7 +54,7 @@ class _AddTestPageState extends State<AddTestPage> {
         return Stack(
           children: [
             content(),
-            if (state is AddTestLoading)
+            if (state is TestFormLoading)
               Container(
                 color: AppColors.black.withOpacity(0.6),
                 child: const Loader(),
@@ -152,8 +152,8 @@ class _AddTestPageState extends State<AddTestPage> {
 
   void _saveConsultation() async {
     if (globalKey.currentState?.validate() ?? false) {
-      context.read<AddTestBloc>().add(
-        SaveAddTestEvent(
+      context.read<TestFormBloc>().add(
+        SaveTestFormEvent(
           testName: testName.text,
           nextTestDate: testDate.text,
           nextTestTime: testTime.text,
