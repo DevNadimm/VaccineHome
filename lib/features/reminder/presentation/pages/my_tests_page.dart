@@ -6,6 +6,7 @@ import 'package:vaccine_home/core/utils/widgets/empty_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_tests/my_tests_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/widgets/pathology_card.dart';
 
 class MyTestsPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const MyTestsPage());
@@ -47,8 +48,12 @@ class _MyTestsPageState extends State<MyTestsPage> {
                 itemCount: state.myTests.length,
                 itemBuilder: (context, index) {
                   final test = state.myTests[index];
-                  return Text(test.testName ?? '');
-                },
+                  return PathologyCard(
+                  test: test,
+                  onEdit: () {},
+                  onDelete: () {},
+                );
+              },
               );
             } else if (state is MyTestsLoading) {
               return const Loader(color: AppColors.black);
