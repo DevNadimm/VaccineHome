@@ -4,7 +4,6 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   final String videoUrl;
@@ -84,6 +83,13 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     _controller.seekTo(newPosition < totalDuration ? newPosition : totalDuration);
   }
 
+  void _seekTo(Duration position) {
+    _controller.seekTo(position);
+    setState(() {
+      currentPosition = position;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +110,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   Widget _buildVideoPlayer(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Container(
@@ -137,20 +143,28 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
               ),
             ),
           ),
-          const SizedBox(width: 10),
           Expanded(
-            child: LinearPercentIndicator(
-              lineHeight: 6.0,
-              percent: totalDuration.inMilliseconds > 0
-                  ? (currentPosition.inMilliseconds / totalDuration.inMilliseconds).clamp(0.0, 1.0)
-                  : 0.0,
-              backgroundColor: AppColors.cardColorBold,
-              progressColor: AppColors.primaryColor,
-              barRadius: const Radius.circular(3),
-              padding: EdgeInsets.zero,
+            child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                activeTrackColor: AppColors.primaryColorTransparent,
+                inactiveTrackColor: AppColors.cardColorBold,
+                trackHeight: 6.0,
+                thumbColor: AppColors.primaryColor,
+                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+                overlayColor: Colors.red.withAlpha(32),
+                overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
+              ),
+              child: Slider(
+                min: 0,
+                max: totalDuration.inMilliseconds.toDouble(),
+                value: currentPosition.inMilliseconds.clamp(0, totalDuration.inMilliseconds).toDouble(),
+                onChanged: (value) {
+                  final newPosition = Duration(milliseconds: value.toInt());
+                  _seekTo(newPosition);
+                },
+              ),
             ),
           ),
-          const SizedBox(width: 10),
           Text(
             _formatDuration(totalDuration),
             style: GoogleFonts.poppins(
@@ -168,7 +182,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   Widget _buildControlBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -187,7 +201,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   Widget _buildVideoInfo() {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

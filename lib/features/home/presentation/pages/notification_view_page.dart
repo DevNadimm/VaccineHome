@@ -27,6 +27,8 @@ class _NotificationViewPageState extends State<NotificationViewPage> {
 
   @override
   Widget build(BuildContext context) {
+    final notification = widget.notification;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -37,12 +39,59 @@ class _NotificationViewPageState extends State<NotificationViewPage> {
             color: AppColors.primaryFontColor,
           ),
         ),
+        title: const Text("Notification"),
       ),
-      body: const SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [],
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 2,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                if (notification.data?.title != null)
+                  Text(
+                    notification.data!.title!,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryFontColor,
+                    ),
+                  ),
+
+                const SizedBox(height: 12),
+
+                // Message
+                if (notification.data?.message != null)
+                  Text(
+                    notification.data!.message!,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppColors.secondaryFontColor,
+                      height: 1.5,
+                    ),
+                  ),
+
+                const SizedBox(height: 20),
+
+                // Time ago
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    notification.timeAgo,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

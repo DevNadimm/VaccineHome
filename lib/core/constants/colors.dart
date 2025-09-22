@@ -26,7 +26,7 @@ class AppColors {
   static const Color info = Color(0xFF2196F3);
 
   // Transparent Variants
-  static const Color primaryColorTransparent = Color(0x806a1b9a);
+  static const Color primaryColorTransparent = Color(0x80a54fd8);
   static const Color cardOverlay = Color(0x11CCCCCC);
 
   // Input Border Color
