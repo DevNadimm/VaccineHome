@@ -8,6 +8,7 @@ import 'package:vaccine_home/features/auth/presentation/blocs/register/register_
 import 'package:vaccine_home/features/auth/presentation/blocs/set_new_password/set_new_password_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/splash_page.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/notification/notification_bloc.dart';
+import 'package:vaccine_home/features/mental_well_being/presentation/blocs/mental_well_being/mental_well_being_bloc.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/change_password/change_password_bloc.dart';
@@ -31,31 +32,44 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
+        // Navigation
         BlocProvider(create: (_) => NavigationCubit()),
-        BlocProvider(create: (_) => IntakeToggleCubit()),
-        BlocProvider(create: (_) => TimeListCubit()),
+
+        // Auth
         BlocProvider(create: (_) => LoginBloc()),
         BlocProvider(create: (_) => RegisterBloc()),
-        BlocProvider(create: (_) => EditProfileBloc()),
-        BlocProvider(create: (_) => ChangePasswordBloc()),
-        BlocProvider(create: (_) => MedicationFormBloc()),
-        BlocProvider(create: (_) => ConsultationFormBloc()),
-        BlocProvider(create: (_) => TestFormBloc()),
         BlocProvider(create: (_) => ForgotPasswordBloc()),
         BlocProvider(create: (_) => PinVerificationBloc()),
         BlocProvider(create: (_) => SetNewPasswordBloc()),
-        BlocProvider(create: (_) => AdvertisementBloc()),
-        BlocProvider(create: (_) => VaccineRequestBloc()),
-        BlocProvider(create: (_) => VaccineCardRequestBloc()),
-        BlocProvider(create: (_) => NotificationBloc()),
-        BlocProvider(create: (_) => VaccineProductBloc()),
+
+        // Profile
+        BlocProvider(create: (_) => EditProfileBloc()),
+        BlocProvider(create: (_) => ChangePasswordBloc()),
+
+        // Reminder / My Records
+        BlocProvider(create: (_) => IntakeToggleCubit()),
+        BlocProvider(create: (_) => TimeListCubit()),
+        BlocProvider(create: (_) => MedicationFormBloc()),
+        BlocProvider(create: (_) => ConsultationFormBloc()),
+        BlocProvider(create: (_) => TestFormBloc()),
         BlocProvider(create: (_) => MyConsultationsBloc()),
         BlocProvider(create: (_) => MyMedicationsBloc()),
         BlocProvider(create: (_) => MyTestsBloc()),
+
+        // Vaccine
+        BlocProvider(create: (_) => VaccineRequestBloc()),
+        BlocProvider(create: (_) => VaccineCardRequestBloc()),
+        BlocProvider(create: (_) => VaccineProductBloc()),
         BlocProvider(create: (_) => OnlineVaccineAppointmentBloc()),
+
+        // Home / Advertisement / Notification
+        BlocProvider(create: (_) => AdvertisementBloc()),
+        BlocProvider(create: (_) => NotificationBloc()),
+
+        // Mental Well Being
+        BlocProvider(create: (_) => MentalWellBeingBloc()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

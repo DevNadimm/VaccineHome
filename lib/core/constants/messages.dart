@@ -77,4 +77,9 @@ class Messages {
   static const String myTestsFailed = "Failed to fetch tests. Please try again.";
   static const String myConsultationsFailed = "Failed to fetch consultations. Please try again.";
   static const String myMedicationsFailed = "Failed to fetch medications. Please try again.";
+
+  // Mental Well Being
+  static const String mentalWellBeingFailed = "Failed to fetch mental well-being data. Please try again.";
+  static const String mentalWellBeingVideoFailed = "Failed to load mental well-being videos. Please try again.";
+  static const String mentalWellBeingArticlesFailed = "Failed to load mental well-being articles. Please try again.";
 }
