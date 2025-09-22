@@ -9,3 +9,7 @@ class ReadNotificationsEvent extends NotificationEvent {
 
   ReadNotificationsEvent(this.id);
 }
+
+class ReadAllNotificationsEvent extends NotificationEvent {}
+
+class DeleteAllNotificationsEvent extends NotificationEvent {}

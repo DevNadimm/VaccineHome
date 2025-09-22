@@ -41,10 +41,13 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     ReadAllNotificationsEvent event,
     Emitter<NotificationState> emit,
   ) async {
-    final res = await NotificationRepository.markAllNotificationsAsRead();
-    if (res) {
-      final notifications = await NotificationRepository.fetchNotifications();
-      emit(NotificationLoaded(notifications));
+    final currentState = state;
+    if (currentState is NotificationLoaded) {
+      final res = await NotificationRepository.markAllNotificationsAsRead();
+      if (res) {
+        final notifications = await NotificationRepository.fetchNotifications();
+        emit(NotificationLoaded(notifications));
+      }
     }
   }
 
@@ -52,14 +55,17 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     DeleteAllNotificationsEvent event,
     Emitter<NotificationState> emit,
   ) async {
-    emit(NotificationLoading());
-    try {
-      final res = await NotificationRepository.deleteAllNotifications();
-      if (res) {
-        emit(DeleteAllNotificationsSuccess());
+    final currentState = state;
+    if (currentState is NotificationLoaded) {
+      emit(NotificationLoading());
+      try {
+        final res = await NotificationRepository.deleteAllNotifications();
+        if (res) {
+          emit(DeleteAllNotificationsSuccess());
+        }
+      } catch (e) {
+        emit(DeleteAllNotificationsFailure());
       }
-    } catch (e) {
-      emit(DeleteAllNotificationsFailure());
     }
   }
 }

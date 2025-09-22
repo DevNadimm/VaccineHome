@@ -3,7 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 
 class NotificationActionBottomSheetContent extends StatelessWidget {
-  const NotificationActionBottomSheetContent({super.key});
+  final VoidCallback onMarkAllNotificationsAsRead;
+  final VoidCallback onDeleteAllNotifications;
+
+  const NotificationActionBottomSheetContent({
+    super.key,
+    required this.onMarkAllNotificationsAsRead,
+    required this.onDeleteAllNotifications,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +56,7 @@ class NotificationActionBottomSheetContent extends StatelessWidget {
             height: 50,
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: onMarkAllNotificationsAsRead,
               child: const Text('Mark all as read'),
             ),
           ),
@@ -58,7 +65,7 @@ class NotificationActionBottomSheetContent extends StatelessWidget {
             height: 50,
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: onDeleteAllNotifications,
               child: const Text('Delete all notifications'),
             ),
           ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/notification/notification_bloc.dart';
@@ -44,9 +47,21 @@ class _NotificationPageState extends State<NotificationPage> {
         actions: [
           IconButton(
             onPressed: () {
-              showModalBottomSheet(context: context, builder: (_) {
-                return const NotificationActionBottomSheetContent();
-              });
+              showModalBottomSheet(
+                context: context,
+                builder: (_) {
+                  return NotificationActionBottomSheetContent(
+                    onMarkAllNotificationsAsRead: () {
+                      context.read<NotificationBloc>().add(ReadAllNotificationsEvent());
+                      Navigator.pop(context);
+                    },
+                    onDeleteAllNotifications: () {
+                      context.read<NotificationBloc>().add(DeleteAllNotificationsEvent());
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              );
             },
             icon: const Icon(
               HugeIcons.strokeRoundedMoreVertical,
@@ -56,7 +71,12 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
         ],
       ),
-      body: BlocBuilder<NotificationBloc, NotificationState>(
+      body: BlocConsumer<NotificationBloc, NotificationState>(
+        listener: (context, state) {
+          if (state is DeleteAllNotificationsFailure) {
+            AppNotifier.showToast(Messages.deleteAllNotificationsFailed, type: MessageType.error);
+          }
+        },
         builder: (context, state) {
           if (state is NotificationLoaded && (state.notificationModel.notifications?.isNotEmpty ?? false)) {
             final notifications = state.notificationModel.notifications!;

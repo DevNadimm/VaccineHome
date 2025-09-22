@@ -22,7 +22,7 @@ class NotificationRepository {
     }
   }
 
-  static Future<bool> readNotification(String id) async {
+  static Future<bool> markNotificationAsRead(String id) async {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
@@ -40,6 +40,38 @@ class NotificationRepository {
       return true;
     } else {
       throw Exception(Messages.markAsReadFailed);
+    }
+  }
+
+  static Future<bool> markAllNotificationsAsRead() async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final Response res = await dioService.postRequest(
+      apiEndpoints.readNotification,
+      errorMessage: Messages.markAllAsReadFailed,
+    );
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(Messages.markAllAsReadFailed);
+    }
+  }
+
+  static Future<bool> deleteAllNotifications() async {
+    final dioService = serviceLocator<DioService>();
+    final apiEndpoints = serviceLocator<ApiEndpoints>();
+
+    final Response res = await dioService.deleteRequest(
+      apiEndpoints.deleteAllNotification,
+      errorMessage: Messages.deleteAllNotificationsFailed,
+    );
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception(Messages.deleteAllNotificationsFailed);
     }
   }
 }

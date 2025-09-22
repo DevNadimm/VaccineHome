@@ -17,3 +17,7 @@ class NotificationFailure extends NotificationState {
 
   NotificationFailure(this.message);
 }
+
+class DeleteAllNotificationsSuccess extends NotificationState {}
+
+class DeleteAllNotificationsFailure extends NotificationState {}
