@@ -31,7 +31,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   void initState() {
     super.initState();
-
     final videoId = YoutubePlayer.convertUrlToId(widget.videoUrl);
 
     _controller = YoutubePlayerController(
@@ -61,171 +60,162 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     });
   }
 
-  String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, "0");
-    final minutes = twoDigits(duration.inMinutes.remainder(60));
-    final seconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$minutes:$seconds";
-  }
-
-  void _playPause() {
-    if (_controller.value.isPlaying) {
-      _controller.pause();
-    } else {
-      _controller.play();
-    }
-  }
-
-  void _seekBackward() {
-    final currentPosition = _controller.value.position;
-    final newPosition = currentPosition - const Duration(seconds: 10);
-    _controller.seekTo(newPosition > Duration.zero ? newPosition : Duration.zero);
-  }
-
-  void _seekForward() {
-    final currentPosition = _controller.value.position;
-    final totalDuration = _controller.metadata.duration;
-    final newPosition = currentPosition + const Duration(seconds: 10);
-    _controller.seekTo(newPosition < totalDuration ? newPosition : totalDuration);
-  }
-
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  String _formatDuration(Duration duration) {
+    final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return "$minutes:$seconds";
+  }
+
+  void _playPause() => isPlaying ? _controller.pause() : _controller.play();
+
+  void _seekBackward() {
+    final newPosition = _controller.value.position - const Duration(seconds: 10);
+    _controller.seekTo(newPosition > Duration.zero ? newPosition : Duration.zero);
+  }
+
+  void _seekForward() {
+    final newPosition = _controller.value.position + const Duration(seconds: 10);
+    _controller.seekTo(newPosition < totalDuration ? newPosition : totalDuration);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Video Player'
-        ),
-        leading: const AppBarBackBtn()
+        title: const Text('Video Player'),
+        leading: const AppBarBackBtn(),
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.25,
-                color: AppColors.backgroundColor,
-                child: YoutubePlayer(
-                  controller: _controller,
-                  showVideoProgressIndicator: false,
-                  progressIndicatorColor: Colors.transparent,
-                  topActions: const [],
-                  bottomActions: const [],
-                ),
+          _buildVideoPlayer(context),
+          _buildProgressBar(context),
+          _buildControlBar(),
+          _buildVideoInfo(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVideoPlayer(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.25,
+          color: AppColors.backgroundColor,
+          child: YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: false,
+            topActions: const [],
+            bottomActions: const [],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProgressBar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: [
+          Text(
+            _formatDuration(currentPosition),
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                color: AppColors.secondaryFontColor,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      _formatDuration(currentPosition),
-                      style: const TextStyle(
-                        color: AppColors.secondaryFontColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: LinearPercentIndicator(
-                        lineHeight: 6.0,
-                        percent: totalDuration.inMilliseconds > 0 ? (currentPosition.inMilliseconds / totalDuration.inMilliseconds).clamp(0.0, 1.0) : 0.0,
-                        backgroundColor: AppColors.cardColorBold,
-                        progressColor: AppColors.primaryColor,
-                        animation: false,
-                        barRadius: const Radius.circular(3),
-                        padding: EdgeInsets.zero,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      _formatDuration(totalDuration),
-                      style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                          color: AppColors.secondaryFontColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildControlButton(
-                  icon: HugeIcons.strokeRoundedGoBackward10Sec,
-                  onPressed: _seekBackward,
-                ),
-                _buildControlButton(
-                  icon: isPlaying
-                      ? HugeIcons.strokeRoundedPause
-                      : HugeIcons.strokeRoundedPlay,
-                  onPressed: _playPause,
-                  isMainButton: true,
-                ),
-                _buildControlButton(
-                  icon: HugeIcons.strokeRoundedGoForward10Sec,
-                  onPressed: _seekForward,
-                ),
-              ],
-            ),
-          ),
+          const SizedBox(width: 10),
           Expanded(
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.videoTitle,
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        color: AppColors.primaryFontColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Published: ${widget.publishedDate}',
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        color: AppColors.secondaryFontColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ],
+            child: LinearPercentIndicator(
+              lineHeight: 6.0,
+              percent: totalDuration.inMilliseconds > 0
+                  ? (currentPosition.inMilliseconds / totalDuration.inMilliseconds).clamp(0.0, 1.0)
+                  : 0.0,
+              backgroundColor: AppColors.cardColorBold,
+              progressColor: AppColors.primaryColor,
+              barRadius: const Radius.circular(3),
+              padding: EdgeInsets.zero,
+            ),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            _formatDuration(totalDuration),
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                color: AppColors.secondaryFontColor,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildControlBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildControlButton(icon: HugeIcons.strokeRoundedGoBackward10Sec, onPressed: _seekBackward),
+          _buildControlButton(
+            icon: isPlaying ? HugeIcons.strokeRoundedPause : HugeIcons.strokeRoundedPlay,
+            onPressed: _playPause,
+            isMainButton: true,
+          ),
+          _buildControlButton(icon: HugeIcons.strokeRoundedGoForward10Sec, onPressed: _seekForward),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVideoInfo() {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.videoTitle,
+              style: GoogleFonts.poppins(
+                textStyle: const TextStyle(
+                  color: AppColors.primaryFontColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Published: ${widget.publishedDate}',
+              style: GoogleFonts.poppins(
+                textStyle: const TextStyle(
+                  color: AppColors.secondaryFontColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -246,9 +236,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         icon: Icon(
           icon,
           color: isMainButton ? Colors.white : AppColors.secondaryFontColor,
-          size: isMainButton ? 26 : 26,
+          size: 26,
         ),
-        padding: EdgeInsets.all(isMainButton ? 12 : 12),
+        padding: const EdgeInsets.all(12),
       ),
     );
   }
