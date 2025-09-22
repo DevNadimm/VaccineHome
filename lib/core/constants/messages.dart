@@ -66,6 +66,10 @@ class Messages {
   static const String markAsReadSuccess = "Notification marked as read.";
   static const String clearNotificationsSuccess = "All notifications cleared successfully!";
   static const String clearNotificationsFailed = "Failed to clear notifications. Please try again.";
+  static const String markAllAsReadSuccess = "All notifications marked as read.";
+  static const String markAllAsReadFailed = "Failed to mark all notifications as read. Please try again.";
+  static const String deleteAllNotificationsSuccess = "All notifications deleted successfully!";
+  static const String deleteAllNotificationsFailed = "Failed to delete all notifications. Please try again.";
 
   // My Data Fetching
   static const String myTestsFailed = "Failed to fetch tests. Please try again.";

@@ -9,6 +9,8 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   NotificationBloc() : super(NotificationInitial()) {
     on<FetchNotificationsEvent>(_onFetchNotifications);
     on<ReadNotificationsEvent>(_onReadNotification);
+    on<ReadAllNotificationsEvent>(_onReadAllNotifications);
+    on<DeleteAllNotificationsEvent>(_onDeleteAllNotifications);
   }
 
   Future<void> _onFetchNotifications(
@@ -28,10 +30,36 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     ReadNotificationsEvent event,
     Emitter<NotificationState> emit,
   ) async {
-    final res = await NotificationRepository.readNotification(event.id);
+    final res = await NotificationRepository.markNotificationAsRead(event.id);
     if (res) {
       final notifications = await NotificationRepository.fetchNotifications();
       emit(NotificationLoaded(notifications));
+    }
+  }
+
+  Future<void> _onReadAllNotifications(
+    ReadAllNotificationsEvent event,
+    Emitter<NotificationState> emit,
+  ) async {
+    final res = await NotificationRepository.markAllNotificationsAsRead();
+    if (res) {
+      final notifications = await NotificationRepository.fetchNotifications();
+      emit(NotificationLoaded(notifications));
+    }
+  }
+
+  Future<void> _onDeleteAllNotifications(
+    DeleteAllNotificationsEvent event,
+    Emitter<NotificationState> emit,
+  ) async {
+    emit(NotificationLoading());
+    try {
+      final res = await NotificationRepository.deleteAllNotifications();
+      if (res) {
+        emit(DeleteAllNotificationsSuccess());
+      }
+    } catch (e) {
+      emit(DeleteAllNotificationsFailure());
     }
   }
 }
