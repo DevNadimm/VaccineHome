@@ -9,18 +9,21 @@ class AdvertisementCarouselSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool singleImage = imageUrls.length <= 1;
+
     return CarouselSlider(
       options: CarouselOptions(
         height: 220,
-        autoPlay: true,
-        enlargeCenterPage: true,
+        autoPlay: !singleImage,
+        enableInfiniteScroll: !singleImage,
         viewportFraction: 0.92,
+        enlargeCenterPage: !singleImage,
         aspectRatio: 16 / 9,
         autoPlayInterval: const Duration(seconds: 6),
         autoPlayAnimationDuration: const Duration(milliseconds: 800),
+        scrollPhysics: singleImage ? const NeverScrollableScrollPhysics() : null,
       ),
-      items: imageUrls.map(
-        (url) {
+      items: imageUrls.map((url) {
           return ClipRRect(
             borderRadius: BorderRadius.circular(32),
             child: CustomCachedImage(

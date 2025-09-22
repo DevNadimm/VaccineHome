@@ -61,22 +61,15 @@ class _HomePageState extends State<HomePage> {
               BlocBuilder<AdvertisementBloc, AdvertisementState>(
                 builder: (context, state) {
                   if (state is AdvertisementSuccess) {
-                    return AdvertisementCarouselSlider(
-                      imageUrls: state.model.advertisements?.map((e) => e.image ?? '').toList() ?? [],
-                    );
+                    final imageUrls = state.model.advertisements?.where((e) => e.isActive == true).map((e) => e.image ?? '').where((url) => url.isNotEmpty).toList() ??[];
+
+                    if (imageUrls.isEmpty) {
+                      return _buildDefaultBanner();
+                    }
+
+                    return AdvertisementCarouselSlider(imageUrls: imageUrls);
                   } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(32),
-                        child: Image.asset(
-                          AssetPaths.banner,
-                          height: 220,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
+                    return _buildDefaultBanner();
                   }
                 },
               ),
@@ -115,6 +108,21 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDefaultBanner() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(32),
+        child: Image.asset(
+          AssetPaths.banner,
+          height: 220,
+          width: double.infinity,
+          fit: BoxFit.cover,
         ),
       ),
     );
