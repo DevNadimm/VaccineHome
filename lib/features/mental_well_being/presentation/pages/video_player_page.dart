@@ -201,7 +201,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   Widget _buildVideoInfo() {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
