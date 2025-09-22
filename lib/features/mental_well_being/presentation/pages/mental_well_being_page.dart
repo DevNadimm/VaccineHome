@@ -14,9 +14,9 @@ class MentalWellBeingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final mentalWellBeingServices = [
       SubModule(
-        icon: HugeIcons.strokeRoundedLibrary,
-        title: "Health Tips",
-        subtitle: "Daily tips to keep your health in check.",
+        icon: HugeIcons.strokeRoundedBrain03,
+        title: "Wellness Insights",
+        subtitle: "Practical tips and advice to boost your mental well-being daily.",
         onTap: () {
           Navigator.push(
             context,
@@ -31,15 +31,9 @@ class MentalWellBeingPage extends StatelessWidget {
         },
       ),
       SubModule(
-        icon: HugeIcons.strokeRoundedSmile,
-        title: "Stress Management",
-        subtitle: "Relax and manage stress effectively.",
-        onTap: () {},
-      ),
-      SubModule(
-        icon: HugeIcons.strokeRoundedUser,
-        title: "Online Consultancy",
-        subtitle: "Talk to a consultant for mental well-being.",
+        icon: HugeIcons.strokeRoundedVideo01,
+        title: "Wellness Visuals",
+        subtitle: "Visuals to support mental health and calm your mind.",
         onTap: () {},
       ),
     ];
