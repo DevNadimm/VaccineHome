@@ -20,6 +20,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_tests/my_tests_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/test_form/test_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
+import 'package:vaccine_home/features/vaccine/presentation/blocs/online_vaccine_appointment/online_vaccine_appointment_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_request/vaccine_request_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_card_request/vaccine_card_request_bloc.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => MyConsultationsBloc()),
         BlocProvider(create: (_) => MyMedicationsBloc()),
         BlocProvider(create: (_) => MyTestsBloc()),
+        BlocProvider(create: (_) => OnlineVaccineAppointmentBloc()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/constants/messages.dart';
+import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
+import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/vaccine/presentation/blocs/online_vaccine_appointment/online_vaccine_appointment_bloc.dart';
 
 class OnlineVaccineAppointmentPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const OnlineVaccineAppointmentPage());
@@ -44,15 +50,33 @@ class _OnlineVaccineAppointmentPageState extends State<OnlineVaccineAppointmentP
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        content(),
-        // if (state is AddAppointmentLoading)
-        //   Container(
-        //     color: AppColors.black.withOpacity(0.6),
-        //     child: const Loader(),
-        //   ),
-      ],
+    return BlocConsumer<OnlineVaccineAppointmentBloc, OnlineVaccineAppointmentState>(
+      listener: (context, state) {
+        if (state is OnlineVaccineAppointmentFailure) {
+          AppNotifier.showToast(
+            Messages.bookVaccineAppointmentFailed,
+            type: MessageType.error,
+          );
+        } else if (state is OnlineVaccineAppointmentSuccess) {
+          clearFields();
+          AppNotifier.showToast(
+            Messages.bookVaccineAppointmentSuccess,
+            type: MessageType.success,
+          );
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          children: [
+            content(),
+            if (state is OnlineVaccineAppointmentLoading)
+              Container(
+                color: AppColors.black.withOpacity(0.6),
+                child: const Loader(),
+              ),
+          ],
+        );
+      },
     );
   }
 
@@ -130,14 +154,14 @@ class _OnlineVaccineAppointmentPageState extends State<OnlineVaccineAppointmentP
 
   void _saveAppointment() {
     if (globalKey.currentState?.validate() ?? false) {
-      // context.read<AddAppointmentBloc>().add(
-      //   SaveAddAppointmentEvent(
-      //     patientName: patientName.text,
-      //     phone: phone.text,
-      //     appointmentDate: appointmentDate.text,
-      //     appointmentTime: appointmentTime.text,
-      //   ),
-      // );
+      context.read<OnlineVaccineAppointmentBloc>().add(
+        BookVaccineAppointmentEvent(
+          name: patientName.text,
+          phone: phone.text,
+          date: appointmentDate.text,
+          time: appointmentTime.text,
+        ),
+      );
     }
   }
 

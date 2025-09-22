@@ -55,6 +55,8 @@ class Messages {
   static const String vaccineRequestFailed = "Failed to send vaccine request. Please try again.";
   static const String vaccineRequestSuccess = "Vaccine request submitted successfully!";
   static const String fetchProductsFailed = "Failed to fetch products. Please try again.";
+  static const String bookVaccineAppointmentFailed = "Failed to book vaccine appointment. Please try again.";
+  static const String bookVaccineAppointmentSuccess = "Vaccine appointment booked successfully!";
 
   // Vaccine Card Request messages
   static const String vaccineCardRequestFailed = "Failed to submit vaccine card request. Please try again.";
