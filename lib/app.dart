@@ -13,6 +13,7 @@ import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/change_password/change_password_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/edit_profile/edit_profile_bloc.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/faq/faq_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/feedback/feedback_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/rating_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/consultation_form/consultation_form_bloc.dart';
@@ -76,6 +77,9 @@ class MyApp extends StatelessWidget {
         // Feedback
         BlocProvider(create: (_) => FeedbackBloc()),
         BlocProvider(create: (_) => RatingCubit()),
+
+        // FAQ
+        BlocProvider(create: (_) => FAQBloc()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

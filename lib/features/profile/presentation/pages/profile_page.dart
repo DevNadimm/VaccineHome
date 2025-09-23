@@ -7,6 +7,7 @@ import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/profile/data/models/profile_menu_item.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/change_password_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/edit_profile_page.dart';
+import 'package:vaccine_home/features/profile/presentation/pages/faq_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/feedbacks_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/privacy_policy_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/terms_and_conditions_page.dart';
@@ -116,7 +117,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedHelpCircle,
                   title: "FAQ",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, FAQPage.route());
+                  },
                 ),
               ],
             ),

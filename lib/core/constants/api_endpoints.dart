@@ -39,6 +39,7 @@ class ApiEndpoints {
   String get readNotification => 'notifications/mark-as-read';
   String get deleteAllNotification => 'notifications/delete-all';
   String get mentalWellBeings => 'mental-well-beings';
+  String get faqs => 'faqs';
 
   // 📦 Feedback
   String get feedbacks => 'feedbacks';
