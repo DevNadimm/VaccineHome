@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/features/home/data/models/notification_model.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/notification/notification_bloc.dart';
 
@@ -31,67 +32,74 @@ class _NotificationViewPageState extends State<NotificationViewPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            HugeIcons.strokeRoundedArrowLeft01,
-            size: 32,
-            color: AppColors.primaryFontColor,
-          ),
-        ),
-        title: const Text("Notification"),
+        leading: const AppBarBackBtn(),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          elevation: 2,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title
-                if (notification.data?.title != null)
-                  Text(
-                    notification.data!.title!,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryFontColor,
-                    ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                notification.data!.title!,
+                style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryFontColor,
                   ),
-
-                const SizedBox(height: 12),
-
-                // Message
-                if (notification.data?.message != null)
-                  Text(
-                    notification.data!.message!,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: AppColors.secondaryFontColor,
-                      height: 1.5,
-                    ),
+                ),
+              ),
+              Text(
+                notification.timeAgo,
+                style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                    fontSize: 14,
+                    color: AppColors.secondaryFontColor,
+                    fontWeight: FontWeight.w400,
                   ),
-
-                const SizedBox(height: 20),
-
-                // Time ago
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    notification.timeAgo,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                height: 3,
+                width: 75,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppColors.cardColor,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 16,
+                          offset: const Offset(0, 0),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      notification.data!.message!,
+                      style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          color: AppColors.secondaryFontColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -67,29 +67,7 @@ class VaccineProductCard extends StatelessWidget {
                       const SizedBox(height: 6),
                       Row(
                         children: [
-                          if (vaccineProduct.productType != null)
-                            Row(
-                              children: [
-                                const Icon(
-                                  HugeIcons.strokeRoundedVaccine,
-                                  size: 20,
-                                  color: AppColors.secondaryFontColor,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  "${vaccineProduct.productType![0].toUpperCase()}${vaccineProduct.productType!.substring(1)}",
-                                  style: GoogleFonts.poppins(
-                                    textStyle: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.secondaryFontColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          if (vaccineProduct.gender != null) ...[
-                            const SizedBox(width: 12),
+                          if (vaccineProduct.gender != null)
                             Row(
                               children: [
                                 const Icon(
@@ -110,7 +88,29 @@ class VaccineProductCard extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ],
+                          if (vaccineProduct.productType != null)
+                            Row(
+                              children: [
+                                const SizedBox(width: 12),
+                                const Icon(
+                                  HugeIcons.strokeRoundedDeliveryBox01,
+                                  size: 20,
+                                  color: AppColors.secondaryFontColor,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  "${vaccineProduct.productType![0].toUpperCase()}${vaccineProduct.productType!.substring(1)}",
+                                  style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.secondaryFontColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
                         ],
                       ),
                       const SizedBox(height: 8),
