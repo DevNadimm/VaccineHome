@@ -4,14 +4,32 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_cached_image.dart';
 import 'package:vaccine_home/features/mental_well_being/data/models/mental_well_being_model.dart';
+import 'package:vaccine_home/features/mental_well_being/presentation/pages/video_player_page.dart';
 
-class WellnessInsightCard extends StatelessWidget {
-  final MentalWellBeingItem insight;
+class WellnessVisualCard extends StatelessWidget {
+  final MentalWellBeingItem visual;
 
-  const WellnessInsightCard({super.key, required this.insight});
+  const WellnessVisualCard({super.key, required this.visual});
+
+  String? _getYoutubeThumbnail(String? url) {
+    if (url == null) return null;
+    try {
+      final uri = Uri.parse(url);
+      if (uri.queryParameters.containsKey('v')) {
+        final videoId = uri.queryParameters['v'];
+        return 'https://img.youtube.com/vi/$videoId/hqdefault.jpg';
+      } else if (uri.pathSegments.isNotEmpty) {
+        final videoId = uri.pathSegments.last;
+        return 'https://img.youtube.com/vi/$videoId/hqdefault.jpg';
+      }
+    } catch (_) {}
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final thumbnailUrl = _getYoutubeThumbnail(visual.youtubeVideoLink);
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -29,7 +47,7 @@ class WellnessInsightCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           onTap: () {
-            // Later: navigate to ArticleDetailsPage if you want
+            Navigator.push(context, VideoPlayerPage.route(videoUrl: visual.youtubeVideoLink ?? '', videoTitle: visual.title ?? '', publishedDate: DateConversionHelper.fromCustomFormat(visual.createdAt ?? '')));
           },
           borderRadius: BorderRadius.circular(16),
           splashColor: AppColors.primaryColor.withOpacity(0.15),
@@ -38,11 +56,28 @@ class WellnessInsightCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: CustomCachedImage(
-                  imageUrl: insight.image ?? '',
-                  height: 115,
-                  width: 115,
-                  fit: BoxFit.cover,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CustomCachedImage(
+                      imageUrl: thumbnailUrl ?? '',
+                      height: 87,
+                      width: 154,
+                      fit: BoxFit.cover,
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white70,
+                        shape: BoxShape.circle,
+                      ),
+                      padding: const EdgeInsets.all(2),
+                      child: const Icon(
+                        Icons.play_arrow_rounded,
+                        color: AppColors.primaryColor,
+                        size: 22,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Expanded(
@@ -52,7 +87,7 @@ class WellnessInsightCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        insight.title ?? 'Untitled Insight',
+                        visual.title ?? 'Untitled Visual',
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontSize: 16,
@@ -61,12 +96,12 @@ class WellnessInsightCard extends StatelessWidget {
                             height: 1.2,
                           ),
                         ),
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        DateConversionHelper.fromCustomFormat(insight.createdAt ?? ''),
+                        DateConversionHelper.fromCustomFormat(visual.createdAt ?? ''),
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontSize: 13,
@@ -77,20 +112,6 @@ class WellnessInsightCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 6),
-                      if (insight.description != null && insight.description!.isNotEmpty)
-                        Text(
-                          insight.description!,
-                          style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.secondaryFontColor,
-                            ),
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
                     ],
                   ),
                 ),

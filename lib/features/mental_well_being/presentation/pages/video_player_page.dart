@@ -6,6 +6,8 @@ import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerPage extends StatefulWidget {
+  static Route route({required String videoUrl, required String videoTitle, required String publishedDate}) => MaterialPageRoute(builder: (_) => VideoPlayerPage(videoUrl: videoUrl, videoTitle: videoTitle, publishedDate: publishedDate));
+
   final String videoUrl;
   final String videoTitle;
   final String publishedDate;
@@ -98,6 +100,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         leading: const AppBarBackBtn(),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildVideoPlayer(context),
           _buildProgressBar(context),
@@ -219,7 +222,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Published: ${widget.publishedDate}',
+              widget.publishedDate,
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   color: AppColors.secondaryFontColor,

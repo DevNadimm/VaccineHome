@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
 import 'package:vaccine_home/features/mental_well_being/presentation/pages/wellness_insights_page.dart';
+import 'package:vaccine_home/features/mental_well_being/presentation/pages/wellness_visuals_page.dart';
 
 class MentalWellBeingPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const MentalWellBeingPage());
@@ -25,7 +26,9 @@ class MentalWellBeingPage extends StatelessWidget {
         icon: HugeIcons.strokeRoundedVideo01,
         title: "Wellness Visuals",
         subtitle: "Visuals to support mental health and calm your mind.",
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, WellnessVisualsPage.route());
+        },
       ),
     ];
 
