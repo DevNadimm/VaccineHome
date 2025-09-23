@@ -6,6 +6,7 @@ import 'package:vaccine_home/core/utils/widgets/empty_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/feedback/feedback_bloc.dart';
+import 'package:vaccine_home/features/profile/presentation/pages/submit_feedback_page.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/feedback_card.dart';
 
 class FeedbacksPage extends StatefulWidget {
@@ -59,6 +60,23 @@ class _FeedbacksPageState extends State<FeedbacksPage> {
             );
           }
         },
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, SubmitFeedbackPage.route());
+              },
+              child: const Text(
+                "Submit Your Feedback",
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

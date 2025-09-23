@@ -86,4 +86,5 @@ class Messages {
   // Feedback
   static const String feedbackFetchFailed = "Failed to fetch feedback. Please try again.";
   static const String feedbackSubmitFailed = "Failed to submit feedback. Please try again.";
+  static const String feedbackSubmitSuccess = "Feedback submitted successfully!";
 }
