@@ -81,7 +81,9 @@ class NotificationData {
 
     final diff = DateTime.now().difference(date);
 
-    if (diff.inMinutes < 60) {
+    if (diff.inSeconds < 60) {
+      return "Just now";
+    } else if (diff.inMinutes < 60) {
       return "${diff.inMinutes}m ago";
     } else if (diff.inHours < 24) {
       return "${diff.inHours}h ago";
