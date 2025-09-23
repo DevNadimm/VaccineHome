@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
@@ -77,10 +78,10 @@ class FeedbackCard extends StatelessWidget {
                                     final rating = double.tryParse(feedback.rating ?? "0") ?? 0;
                                     return Icon(
                                       index < rating
-                                          ? Icons.star_rounded
-                                          : Icons.star_border_rounded,
+                                          ? CupertinoIcons.star_fill
+                                          : CupertinoIcons.star,
                                       size: 16,
-                                      color: Colors.orange,
+                                      color: Colors.amber,
                                     );
                                   }),
                                 ),
