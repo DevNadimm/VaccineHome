@@ -16,8 +16,8 @@ class VaccinePage extends StatelessWidget {
     final vaccineServices = [
       SubModule(
         icon: HugeIcons.strokeRoundedVaccine,
-        title: "Vaccine List & Request",
-        subtitle: "Browse vaccine list, details, and request a vaccine.",
+        title: "Vaccine List & Order",
+        subtitle: "Browse vaccine list, details, and order a vaccine.",
         onTap: () {
           Navigator.push(context, VaccineListPage.route());
         },
@@ -30,12 +30,12 @@ class VaccinePage extends StatelessWidget {
           Navigator.push(context, OnlineVaccineAppointmentPage.route());
         },
       ),
-      SubModule(
-        icon: HugeIcons.strokeRoundedBulb,
-        title: "Vaccine Recommendation",
-        subtitle: "Get personalized vaccine recommendations.",
-        onTap: () {},
-      ),
+      // SubModule(
+      //   icon: HugeIcons.strokeRoundedBulb,
+      //   title: "Vaccine Recommendation",
+      //   subtitle: "Get personalized vaccine recommendations.",
+      //   onTap: () {},
+      // ),
     ];
 
     return Scaffold(

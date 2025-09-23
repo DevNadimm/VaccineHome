@@ -111,7 +111,7 @@ class VaccineDetailsPage extends StatelessWidget {
                 Navigator.push(context, VaccineRequestPage.route(vaccine.id ?? 0));
               },
               child: const Text(
-                "Request This Vaccine",
+                "Order Now",
               ),
             ),
           ),

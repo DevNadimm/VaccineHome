@@ -39,8 +39,8 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
       );
 
       if (success) {
-        emit(SubmitFeedbackSuccess());
         final feedbacks = await FeedbackRepository.getFeedbacks();
+        emit(SubmitFeedbackSuccess());
         emit(FeedbackLoaded(feedbacks));
       } else {
         emit(SubmitFeedbackFailure("Failed to submit feedback"));

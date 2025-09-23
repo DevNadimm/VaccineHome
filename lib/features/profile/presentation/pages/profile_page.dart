@@ -90,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
               items: [
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedHealth,
-                  title: "Vaccine Request History",
+                  title: "Vaccine Order History",
                   onTap: () {},
                 ),
                 ProfileMenuItem(

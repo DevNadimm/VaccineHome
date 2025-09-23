@@ -66,7 +66,7 @@ class _VaccineRequestPageState extends State<VaccineRequestPage> {
   Widget content() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vaccine Request'),
+        title: const Text('Vaccine Order'),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(
@@ -105,7 +105,7 @@ class _VaccineRequestPageState extends State<VaccineRequestPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _submitRequest,
-                  child: const Text('Submit Request'),
+                  child: const Text('Submit Order'),
                 ),
               ),
             ],
