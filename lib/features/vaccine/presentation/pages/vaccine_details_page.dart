@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_cached_image.dart';
 import 'package:vaccine_home/features/vaccine/data/models/vaccine_product_model.dart';
-import 'package:vaccine_home/features/vaccine/presentation/pages/vaccine_request_page.dart';
+import 'package:vaccine_home/features/vaccine/presentation/pages/vaccine_order_page.dart';
 import 'package:vaccine_home/features/vaccine/presentation/widgets/vaccine_chip.dart';
 import 'package:vaccine_home/features/vaccine/presentation/widgets/vaccine_info_tile.dart';
 
@@ -21,14 +22,7 @@ class VaccineDetailsPage extends StatelessWidget {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('Vaccine Details'),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            HugeIcons.strokeRoundedArrowLeft01,
-            size: 32,
-            color: AppColors.primaryFontColor,
-          ),
-        ),
+        leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -108,7 +102,7 @@ class VaccineDetailsPage extends StatelessWidget {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(context, VaccineRequestPage.route(vaccine.id ?? 0));
+                Navigator.push(context, VaccineOrderPage.route(vaccine.id ?? 0));
               },
               child: const Text(
                 "Order Now",

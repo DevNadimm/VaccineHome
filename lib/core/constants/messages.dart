@@ -51,9 +51,9 @@ class Messages {
   static const String setPasswordFailed = "Failed to set new password. Please try again.";
   static const String passwordSet = "Password set successfully!";
 
-  // Vaccine Request messages
-  static const String vaccineRequestFailed = "Failed to send vaccine request. Please try again.";
-  static const String vaccineRequestSuccess = "Vaccine request submitted successfully!";
+  // Vaccine Order messages
+  static const String vaccineOrderFailed = "Failed to send vaccine order. Please try again.";
+  static const String vaccineOrderSuccess = "Vaccine order submitted successfully!";
   static const String fetchProductsFailed = "Failed to fetch products. Please try again.";
   static const String bookVaccineAppointmentFailed = "Failed to book vaccine appointment. Please try again.";
   static const String bookVaccineAppointmentSuccess = "Vaccine appointment booked successfully!";

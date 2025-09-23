@@ -4,8 +4,8 @@ import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
 
-class VaccineRequestRepository {
-  static Future<bool> requestVaccine({
+class VaccineOrderRepository {
+  static Future<bool> orderVaccine({
     required String phone,
     required String address,
     required int productId,
@@ -22,13 +22,13 @@ class VaccineRequestRepository {
     final Response res = await dioService.postRequest(
       apiEndpoints.vaccineRequest,
       data: data,
-      errorMessage: Messages.vaccineRequestFailed,
+      errorMessage: Messages.vaccineOrderFailed,
     );
 
     if (res.statusCode == 200 || res.statusCode == 201) {
       return true;
     } else {
-      throw Exception(Messages.vaccineRequestFailed);
+      throw Exception(Messages.vaccineOrderFailed);
     }
   }
 }

@@ -7,20 +7,20 @@ import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
-import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_request/vaccine_request_bloc.dart';
+import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_order/vaccine_order_bloc.dart';
 
-class VaccineRequestPage extends StatefulWidget {
-  static Route route(int id) => MaterialPageRoute(builder: (_) => VaccineRequestPage(productId: id));
+class VaccineOrderPage extends StatefulWidget {
+  static Route route(int id) => MaterialPageRoute(builder: (_) => VaccineOrderPage(productId: id));
 
   final int productId;
 
-  const VaccineRequestPage({super.key, required this.productId});
+  const VaccineOrderPage({super.key, required this.productId});
 
   @override
-  State<VaccineRequestPage> createState() => _VaccineRequestPageState();
+  State<VaccineOrderPage> createState() => _VaccineOrderPageState();
 }
 
-class _VaccineRequestPageState extends State<VaccineRequestPage> {
+class _VaccineOrderPageState extends State<VaccineOrderPage> {
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
@@ -32,17 +32,17 @@ class _VaccineRequestPageState extends State<VaccineRequestPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<VaccineRequestBloc, VaccineRequestState>(
+    return BlocConsumer<VaccineOrderBloc, VaccineOrderState>(
       listener: (context, state) {
-        if (state is VaccineRequestFailure) {
+        if (state is VaccineOrderFailure) {
           AppNotifier.showToast(
-            Messages.vaccineRequestFailed,
+            Messages.vaccineOrderFailed,
             type: MessageType.error,
           );
-        } else if (state is VaccineRequestSuccess) {
+        } else if (state is VaccineOrderSuccess) {
           clearFields();
           AppNotifier.showToast(
-            Messages.vaccineRequestSuccess,
+            Messages.vaccineOrderSuccess,
             type: MessageType.success,
           );
           Navigator.pop(context);
@@ -52,7 +52,7 @@ class _VaccineRequestPageState extends State<VaccineRequestPage> {
         return Stack(
           children: [
             content(),
-            if (state is VaccineRequestLoading)
+            if (state is VaccineOrderLoading)
               Container(
                 color: AppColors.black.withOpacity(0.6),
                 child: const Loader(),
@@ -104,7 +104,7 @@ class _VaccineRequestPageState extends State<VaccineRequestPage> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: _submitRequest,
+                  onPressed: _submitOrder,
                   child: const Text('Submit Order'),
                 ),
               ),
@@ -115,10 +115,10 @@ class _VaccineRequestPageState extends State<VaccineRequestPage> {
     );
   }
 
-  void _submitRequest() {
+  void _submitOrder() {
     if (globalKey.currentState?.validate() ?? false) {
-      context.read<VaccineRequestBloc>().add(
-        SendVaccineRequestEvent(
+      context.read<VaccineOrderBloc>().add(
+        SendVaccineOrderEvent(
           phone: _phoneController.text,
           address: _addressController.text,
           productId: widget.productId,
