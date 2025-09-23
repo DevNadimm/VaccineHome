@@ -37,21 +37,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // Navigation
+        // 🔹 Core Navigation
         BlocProvider(create: (_) => NavigationCubit()),
 
-        // Auth
+        // 🔹 Auth
         BlocProvider(create: (_) => LoginBloc()),
         BlocProvider(create: (_) => RegisterBloc()),
         BlocProvider(create: (_) => ForgotPasswordBloc()),
         BlocProvider(create: (_) => PinVerificationBloc()),
         BlocProvider(create: (_) => SetNewPasswordBloc()),
 
-        // Profile
+        // 🔹 Profile
         BlocProvider(create: (_) => EditProfileBloc()),
         BlocProvider(create: (_) => ChangePasswordBloc()),
+        BlocProvider(create: (_) => FeedbackBloc()),
+        BlocProvider(create: (_) => RatingCubit()),
+        BlocProvider(create: (_) => FAQBloc()),
 
-        // Reminder / My Records
+        // 🔹 Reminder / My Records
         BlocProvider(create: (_) => IntakeToggleCubit()),
         BlocProvider(create: (_) => TimeListCubit()),
         BlocProvider(create: (_) => MedicationFormBloc()),
@@ -61,25 +64,18 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => MyMedicationsBloc()),
         BlocProvider(create: (_) => MyTestsBloc()),
 
-        // Vaccine
+        // 🔹 Vaccine
         BlocProvider(create: (_) => VaccineOrderBloc()),
         BlocProvider(create: (_) => VaccineCardRequestBloc()),
         BlocProvider(create: (_) => VaccineProductBloc()),
         BlocProvider(create: (_) => OnlineVaccineAppointmentBloc()),
 
-        // Home / Advertisement / Notification
+        // 🔹 Home
         BlocProvider(create: (_) => AdvertisementBloc()),
         BlocProvider(create: (_) => NotificationBloc()),
 
-        // Mental Well Being
+        // 🔹 Mental Well Being
         BlocProvider(create: (_) => MentalWellBeingBloc()),
-
-        // Feedback
-        BlocProvider(create: (_) => FeedbackBloc()),
-        BlocProvider(create: (_) => RatingCubit()),
-
-        // FAQ
-        BlocProvider(create: (_) => FAQBloc()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,
