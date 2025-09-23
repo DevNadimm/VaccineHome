@@ -3,7 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
-import 'package:vaccine_home/features/mental_well_being/presentation/pages/video_player_page.dart';
+import 'package:vaccine_home/features/mental_well_being/presentation/pages/wellness_insights_page.dart';
 
 class MentalWellBeingPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const MentalWellBeingPage());
@@ -18,16 +18,7 @@ class MentalWellBeingPage extends StatelessWidget {
         title: "Wellness Insights",
         subtitle: "Practical tips and advice to boost your mental well-being daily.",
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const VideoPlayerPage(
-                videoUrl: 'https://www.youtube.com/watch?v=h0mKvhxky0Q&list=RDh0mKvhxky0Q&start_radio=1',
-                videoTitle: 'Chaudhary Amit Trivedi feat Mame Khan, Coke Studio @ MTV Season 2',
-                publishedDate: 'Oct 25, 2009',
-              ),
-            ),
-          );
+          Navigator.push(context, WellnessInsightsPage.route());
         },
       ),
       SubModule(
