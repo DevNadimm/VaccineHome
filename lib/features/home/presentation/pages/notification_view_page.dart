@@ -33,6 +33,7 @@ class _NotificationViewPageState extends State<NotificationViewPage> {
     return Scaffold(
       appBar: AppBar(
         leading: const AppBarBackBtn(),
+        title: const Text('Notification'),
       ),
       body: SafeArea(
         child: Padding(

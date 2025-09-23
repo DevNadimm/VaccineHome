@@ -18,6 +18,7 @@ class WellnessInsightViewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const AppBarBackBtn(),
+        title: const Text('Wellness Insight'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
