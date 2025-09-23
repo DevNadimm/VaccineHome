@@ -40,6 +40,9 @@ class ApiEndpoints {
   String get deleteAllNotification => 'notifications/delete-all';
   String get mentalWellBeings => 'mental-well-beings';
 
+  // 📦 Feedback
+  String get feedbacks => 'feedbacks';
+
   // 📦 Avatar
   String avatar(String path) => 'https://vcard.vaccinehomebd.com/storage/app/public/$path';
 }
