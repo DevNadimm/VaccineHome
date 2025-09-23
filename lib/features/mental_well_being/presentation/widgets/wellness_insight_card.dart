@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_cached_image.dart';
 import 'package:vaccine_home/features/mental_well_being/data/models/mental_well_being_model.dart';
+import 'package:vaccine_home/features/mental_well_being/presentation/pages/wellness_insight_view_page.dart';
 
 class WellnessInsightCard extends StatelessWidget {
   final MentalWellBeingItem insight;
@@ -29,7 +30,7 @@ class WellnessInsightCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           onTap: () {
-            // Later: navigate to ArticleDetailsPage if you want
+            Navigator.push(context, WellnessInsightViewPage.route(insight));
           },
           borderRadius: BorderRadius.circular(16),
           splashColor: AppColors.primaryColor.withOpacity(0.15),

@@ -90,7 +90,7 @@ class _NotificationViewPageState extends State<NotificationViewPage> {
                       notification.data!.message!,
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           color: AppColors.secondaryFontColor,
                           fontWeight: FontWeight.w500,
                         ),
