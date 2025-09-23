@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const PrivacyPolicyPage());
@@ -57,14 +57,7 @@ For questions regarding privacy, data requests, or complaints, contact us at sup
     return Scaffold(
       appBar: AppBar(
         title: const Text('Privacy Policy'),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            HugeIcons.strokeRoundedArrowLeft01,
-            size: 32,
-            color: AppColors.primaryFontColor,
-          ),
-        ),
+        leading: const AppBarBackBtn(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(0),

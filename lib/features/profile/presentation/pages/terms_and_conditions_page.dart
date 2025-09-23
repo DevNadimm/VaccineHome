@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
+import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 
 class TermsAndConditionsPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const TermsAndConditionsPage());
@@ -52,14 +52,7 @@ By using Vaccine Home, you acknowledge that you have read, understood, and agree
     return Scaffold(
       appBar: AppBar(
         title: const Text('Terms & Conditions'),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            HugeIcons.strokeRoundedArrowLeft01,
-            size: 32,
-            color: AppColors.primaryFontColor,
-          ),
-        ),
+        leading: const AppBarBackBtn(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(0),
