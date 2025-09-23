@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
@@ -12,9 +12,7 @@ import 'package:vaccine_home/features/auth/presentation/blocs/set_new_password/s
 import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 
 class SetNewPasswordPage extends StatefulWidget {
-  static Route route(String email, String pin) =>
-      MaterialPageRoute(
-          builder: (_) => SetNewPasswordPage(email: email, pin: pin));
+  static Route route(String email, String pin) => MaterialPageRoute(builder: (_) => SetNewPasswordPage(email: email, pin: pin));
 
   final String email;
   final String pin;
@@ -61,16 +59,7 @@ class _SignUpScreenState extends State<SetNewPasswordPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Set a New Password'),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            HugeIcons.strokeRoundedArrowLeft01,
-            size: 32,
-            color: AppColors.primaryFontColor,
-          ),
-        ),
+        leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
         child: Padding(

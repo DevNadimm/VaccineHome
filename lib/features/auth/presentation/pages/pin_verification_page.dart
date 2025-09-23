@@ -2,11 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/auth/presentation/blocs/forgot_password/forgot_password_bloc.dart';
@@ -58,16 +58,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('PIN Verification'),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            HugeIcons.strokeRoundedArrowLeft01,
-            size: 32,
-            color: AppColors.primaryFontColor,
-          ),
-        ),
+        leading: const AppBarBackBtn(),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
