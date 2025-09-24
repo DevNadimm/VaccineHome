@@ -39,6 +39,7 @@ class ApiEndpoints {
 
   // 📦 Profile
   String get getAdvertisements => 'advertisements';
+  String get getVaccineOrderHistory => 'vaccine/products/orders';
 
   // 📦 Vaccine
   String get vaccineRequest => 'vaccine/products/order';

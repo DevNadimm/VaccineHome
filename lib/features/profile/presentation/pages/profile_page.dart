@@ -11,6 +11,7 @@ import 'package:vaccine_home/features/profile/presentation/pages/faq_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/feedbacks_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/privacy_policy_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/terms_and_conditions_page.dart';
+import 'package:vaccine_home/features/profile/presentation/pages/vaccine_order_history_page.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_header.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_section.dart';
 
@@ -92,7 +93,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedHealth,
                   title: "Vaccine Order History",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, VaccineOrderHistoryPage.route());
+                  },
                 ),
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedCalendar02,

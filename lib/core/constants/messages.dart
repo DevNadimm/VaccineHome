@@ -17,6 +17,7 @@ class Messages {
   static const String updateProfileSuccess = "Profile updated successfully!";
   static const String profilePictureUploadFailed = "Failed to upload profile picture. Please try again.";
   static const String profilePictureUploadSuccess = "Profile picture updated successfully!";
+  static const String orderFetchFailed = "Failed to fetch vaccine order history. Please try again.";
 
   // ------------------- Password -------------------
   static const String changePasswordFailed = "Failed to change password. Please try again.";

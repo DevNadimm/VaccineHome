@@ -16,6 +16,7 @@ import 'package:vaccine_home/features/profile/presentation/blocs/edit_profile/ed
 import 'package:vaccine_home/features/profile/presentation/blocs/faq/faq_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/feedback/feedback_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/rating_cubit.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/vaccine_order_history/vaccine_order_history_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/consultation_form/consultation_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/meal_reminder_form/meal_reminder_form_bloc.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => FeedbackBloc()),
         BlocProvider(create: (_) => RatingCubit()),
         BlocProvider(create: (_) => FAQBloc()),
+        BlocProvider(create: (_) => VaccineOrderHistoryBloc()),
 
         // 🔹 Reminder / My Records
         BlocProvider(create: (_) => IntakeToggleCubit()),
