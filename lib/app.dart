@@ -18,12 +18,18 @@ import 'package:vaccine_home/features/profile/presentation/blocs/feedback/feedba
 import 'package:vaccine_home/features/profile/presentation/blocs/rating_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/consultation_form/consultation_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/meal_reminder_form/meal_reminder_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/medication_form/medication_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_consultations/my_consultations_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_meal_reminders/my_meal_reminders_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_sleep_reminders/my_sleep_reminders_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_tests/my_tests_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_water_reminders/my_water_reminders_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/sleep_reminder_form/sleep_reminder_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/test_form/test_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/water_reminder_form/water_reminder_form_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/online_vaccine_appointment/online_vaccine_appointment_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_order/vaccine_order_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
@@ -63,6 +69,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => MyConsultationsBloc()),
         BlocProvider(create: (_) => MyMedicationsBloc()),
         BlocProvider(create: (_) => MyTestsBloc()),
+        BlocProvider(create: (_) => MealReminderFormBloc()),
+        BlocProvider(create: (_) => SleepReminderFormBloc()),
+        BlocProvider(create: (_) => WaterReminderFormBloc()),
+        BlocProvider(create: (_) => MyMealRemindersBloc()),
+        BlocProvider(create: (_) => MyWaterRemindersBloc()),
+        BlocProvider(create: (_) => MySleepRemindersBloc()),
 
         // 🔹 Vaccine
         BlocProvider(create: (_) => VaccineOrderBloc()),

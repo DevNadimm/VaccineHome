@@ -24,6 +24,18 @@ class ApiEndpoints {
   String get myTests => 'medication-test-reminders';
   String deleteTest(int id) => 'medication-test-reminder/$id/delete';
   String updateTest(int id) => 'medication-test-reminder/$id/update';
+  String get addWaterReminder => 'water-reminder/store';
+  String get myWaterReminders => 'water-reminders';
+  String deleteWaterReminder(int id) => 'water-reminder/$id/delete';
+  String updateWaterReminder(int id) => 'water-reminder/$id/update';
+  String get addMealReminder => 'meal-reminder/store';
+  String get myMealReminders => 'meal-reminders';
+  String deleteMealReminder(int id) => 'meal-reminder/$id/delete';
+  String updateMealReminder(int id) => 'meal-reminder/$id/update';
+  final String addSleepReminder = "sleep-reminder/store";
+  final String mySleepReminders = "sleep-reminders";
+  String updateSleepReminder(int id) => "sleep-reminder/$id/update";
+  String deleteSleepReminder(int id) => "sleep-reminder/$id/delete";
 
   // 📦 Profile
   String get getAdvertisements => 'advertisements';
