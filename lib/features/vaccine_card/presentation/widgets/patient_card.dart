@@ -5,6 +5,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.dart';
 import 'package:vaccine_home/features/vaccine_card/data/models/patients_model.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/pages/vaccine_records_page.dart';
 
 class PatientCard extends StatelessWidget {
   final Patient patient;
@@ -32,7 +33,7 @@ class PatientCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           onTap: () {
-            // TODO: Navigate to patient details page
+            Navigator.push(context, VaccineRecordsPage.route(patient: patient));
           },
           borderRadius: BorderRadius.circular(16),
           splashColor: AppColors.primaryColor.withOpacity(0.15),
