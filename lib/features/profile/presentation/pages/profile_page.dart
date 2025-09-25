@@ -14,6 +14,7 @@ import 'package:vaccine_home/features/profile/presentation/pages/terms_and_condi
 import 'package:vaccine_home/features/profile/presentation/pages/vaccine_order_history_page.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_header.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_section.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/pages/patients_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -100,7 +101,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedCalendar02,
                   title: "Vaccine Schedule / Record",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, PatientsPage.route());
+                  },
                 ),
               ],
             ),
@@ -132,11 +135,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ProfileSection(
               title: "Settings",
               items: [
-                ProfileMenuItem(
-                  icon: HugeIcons.strokeRoundedNotification03,
-                  title: "Notifications",
-                  onTap: () {},
-                ),
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedSecurity,
                   title: "Privacy Policy",

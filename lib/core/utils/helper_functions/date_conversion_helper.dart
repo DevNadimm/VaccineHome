@@ -36,4 +36,15 @@ class DateConversionHelper {
       return dateString;
     }
   }
+
+  /// Converts "yyyy-MM-dd" → "dd/MM/yyyy"
+  static String toDDMMYYYY(String dateString) {
+    try {
+      final date = DateTime.parse(dateString);
+      final formatter = DateFormat('dd/MM/yyyy');
+      return formatter.format(date);
+    } catch (_) {
+      return dateString;
+    }
+  }
 }

@@ -23,7 +23,7 @@ class VaccineRecordsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Patient Records'),
+        title: const Text('Immunization Record'),
         leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
@@ -244,7 +244,7 @@ class VaccineRecordsPage extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
                 color: color,
-                height: 1.2
+                height: 1.2,
               ),
             ),
             textAlign: TextAlign.center,
@@ -263,7 +263,7 @@ class VaccineRecordsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: Text(
-              'Vaccination History',
+              'Immunization Records',
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 20,
@@ -372,7 +372,7 @@ class VaccineRecordsPage extends StatelessWidget {
                       fontSize: 12,
                       color: AppColors.secondaryFontColor,
                     ),
-                  )
+                  ),
                 ),
               ],
             ),
@@ -404,7 +404,7 @@ class VaccineRecordsPage extends StatelessWidget {
                 columns: [
                   DataColumn(
                     label: SizedBox(
-                      width: 130,
+                      width: 140,
                       child: Text(
                         'Vaccine',
                         style: GoogleFonts.poppins(
@@ -435,7 +435,7 @@ class VaccineRecordsPage extends StatelessWidget {
                   ),
                   DataColumn(
                     label: SizedBox(
-                      width: 120,
+                      width: 150,
                       child: Text(
                         'Due Date',
                         style: GoogleFonts.poppins(
@@ -451,13 +451,13 @@ class VaccineRecordsPage extends StatelessWidget {
                   ),
                   DataColumn(
                     label: SizedBox(
-                      width: 120,
+                      width: 150,
                       child: Text(
-                        'Date Given',
+                        'Vaccination Date',
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
                             color: AppColors.white,
                           ),
                         ),
@@ -483,7 +483,7 @@ class VaccineRecordsPage extends StatelessWidget {
       cells: [
         DataCell(
           SizedBox(
-            width: 130,
+            width: 140,
             child: Text(
               card.vaccineName ?? "Unknown",
               style: GoogleFonts.poppins(
@@ -518,10 +518,10 @@ class VaccineRecordsPage extends StatelessWidget {
         ),
         DataCell(
           SizedBox(
-            width: 120,
+            width: 150,
             child: Center(
               child: Text(
-                card.dueDate ?? "",
+                DateConversionHelper.toDDMMYYYY(card.dueDate ?? ""),
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                     fontSize: 14,
@@ -536,10 +536,10 @@ class VaccineRecordsPage extends StatelessWidget {
         ),
         DataCell(
           SizedBox(
-            width: 120,
+            width: 150,
             child: Center(
               child: Text(
-                card.vaccinationDate ?? "",
+                DateConversionHelper.toDDMMYYYY(card.vaccinationDate ?? ""),
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 14,

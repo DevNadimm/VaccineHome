@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
-import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/features/reminder/data/models/water_reminder_model.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_water_reminders/my_water_reminders_bloc.dart';
-import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/water_reminder_form/water_reminder_form_bloc.dart';
-import 'package:vaccine_home/features/reminder/presentation/widgets/time_picker_list_widget.dart';
 
 class WaterReminderFormPage extends StatefulWidget {
   static Route route({WaterData? water}) => MaterialPageRoute(builder: (_) => WaterReminderFormPage(water: water));
@@ -28,16 +24,15 @@ class WaterReminderFormPage extends StatefulWidget {
 
 class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
   final GlobalKey<FormState> globalKey = GlobalKey();
-  final TextEditingController quantity = TextEditingController();
+  final TextEditingController quantityController = TextEditingController();
+  final TextEditingController timeController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     if (widget.water != null) {
-      quantity.text = widget.water!.totalWater ?? '';
-      context.read<TimeListCubit>().setTimes(
-        widget.water!.waterTimes?.map((t) => TimeConversionHelper.to12Hour(t)).toList() ?? [],
-      );
+      quantityController.text = widget.water!.totalWater ?? '';
+      timeController.text = widget.water!.waterTimes?[0] ?? '';
     }
   }
 
@@ -82,12 +77,7 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.water == null ? 'Add Water Reminder' : 'Edit Water Reminder'),
-        leading: AppBarBackBtn(
-          onBack: () {
-            context.read<TimeListCubit>().clearControllers();
-            Navigator.pop(context);
-          },
-        ),
+        leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -98,37 +88,30 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
             children: [
               CustomTextField(
                 label: 'Water Quantity (ml)',
-                controller: quantity,
+                controller: quantityController,
                 isRequired: true,
                 keyboardType: TextInputType.number,
                 hintText: 'Enter water quantity',
                 validationLabel: 'Water quantity',
               ),
               const SizedBox(height: 16),
-              Row(
-                children: [
-                  Text(
-                    'Reminder Time(s)',
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primaryFontColor,
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    ' *',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              CustomTextField(
+                label: 'Reminder Time',
+                hintText: 'Select time',
+                controller: timeController,
+                isRequired: true,
+                readOnly: true,
+                validationLabel: 'Reminder Time',
+                onTap: () async {
+                  final TimeOfDay? time = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+                  if (time != null) {
+                    timeController.text = time.format(context);
+                  }
+                },
               ),
-              const SizedBox(height: 10),
-              const TimePickerListWidget(),
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
@@ -150,8 +133,8 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
       context.read<WaterReminderFormBloc>().add(
         SaveWaterReminderEvent(
           id: widget.water?.id,
-          totalWater: int.tryParse(quantity.text) ?? 0,
-          waterTimes: context.read<TimeListCubit>().state.map((e) => e.text).toList(),
+          totalWater: int.tryParse(quantityController.text) ?? 0,
+          waterTimes: [timeController.text],
         ),
       );
     }
@@ -159,12 +142,13 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
 
   @override
   void dispose() {
-    quantity.dispose();
+    quantityController.dispose();
+    timeController.dispose();
     super.dispose();
   }
 
   void clearFields() {
-    quantity.clear();
-    context.read<TimeListCubit>().clearControllers();
+    quantityController.clear();
+    timeController.clear();
   }
 }
