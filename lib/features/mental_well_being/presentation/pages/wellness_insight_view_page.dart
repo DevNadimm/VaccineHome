@@ -31,7 +31,7 @@ class WellnessInsightViewPage extends StatelessWidget {
                 child: CustomCachedImage(
                   imageUrl: insight.image ?? '',
                   width: double.infinity,
-                  height: 200,
+                  height: 260,
                   fit: BoxFit.cover,
                 ),
               ),
