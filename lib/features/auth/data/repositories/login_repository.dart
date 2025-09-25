@@ -2,6 +2,7 @@ import 'package:vaccine_home/core/constants/api_endpoints.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
+import 'package:vaccine_home/core/services/notification_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
 import 'package:vaccine_home/features/auth/data/models/login_model.dart';
 
@@ -39,6 +40,8 @@ class LoginRepository {
       if (model.data?.dateOfBirth != null) await AppPreferences.setUserDOB(model.data!.dateOfBirth!);
       if (model.data?.gender != null) await AppPreferences.setUserGender(model.data!.gender!);
       if (model.data?.address != null) await AppPreferences.setUserAddress(model.data!.address!);
+
+      await NotificationService.instance.initialize();
 
       return model;
     } else {

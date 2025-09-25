@@ -47,9 +47,6 @@ class NotificationService {
     final token = await _messaging.getToken();
     final userId = await AppPreferences.getUserId();
 
-    print("User ID type: ${userId.runtimeType}, value: $userId");
-    print("Token type: ${token.runtimeType}, value: $token");
-
     await storeFcmToken(userId, token);
   }
 
