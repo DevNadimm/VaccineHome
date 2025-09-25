@@ -8,6 +8,7 @@ import 'package:vaccine_home/features/auth/presentation/blocs/register/register_
 import 'package:vaccine_home/features/auth/presentation/blocs/set_new_password/set_new_password_bloc.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/splash_page.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/notification/notification_bloc.dart';
+import 'package:vaccine_home/features/home/presentation/blocs/popup_banner/popup_banner_bloc.dart';
 import 'package:vaccine_home/features/mental_well_being/presentation/blocs/mental_well_being/mental_well_being_bloc.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget {
         // 🔹 Home
         BlocProvider(create: (_) => AdvertisementBloc()),
         BlocProvider(create: (_) => NotificationBloc()),
+        BlocProvider(create: (_) => PopupBannerBloc()),
 
         // 🔹 Mental Well Being
         BlocProvider(create: (_) => MentalWellBeingBloc()),

@@ -9,6 +9,10 @@ class Messages {
   static const String logoutSuccess = "You have logged out successfully!";
   static const String tokenExpired = "Your session has expired. Please login again.";
 
+  // ------------------- Popup Banner -------------------
+  static const String popupBannerFetchFailed = "Failed to fetch popup banner. Please try again.";
+  static const String popupBannerMarkAsReadFailed = "Failed to mark popup banner as read. Please try again.";
+
   // ------------------- Profile -------------------
   static const String fetchProfileFailed = "Failed to fetch user profile. Please try again.";
   static const String editProfileFailed = "Failed to edit profile. Please try again.";
