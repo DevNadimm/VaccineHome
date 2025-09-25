@@ -9,6 +9,7 @@ import 'package:vaccine_home/core/utils/widgets/advertisement_carousel_slider.da
 import 'package:vaccine_home/features/home/data/models/service.dart';
 import 'package:vaccine_home/features/home/data/repositories/service_repository.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
+import 'package:vaccine_home/features/home/presentation/blocs/popup_banner/popup_banner_bloc.dart';
 import 'package:vaccine_home/features/home/presentation/pages/notification_page.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/service_card.dart';
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _checkPopupBanner();
     _getPreferences();
   }
 
@@ -40,6 +42,8 @@ class _HomePageState extends State<HomePage> {
       userAvatar = avatar ?? '';
     });
   }
+
+  _checkPopupBanner() => context.read<PopupBannerBloc>().add(CheckPopupBannerEvent());
 
   @override
   Widget build(BuildContext context) {
