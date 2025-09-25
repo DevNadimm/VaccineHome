@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/pages/patients_page.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/pages/vaccine_card_request_page.dart';
 
 class VaccineCardPage extends StatelessWidget {
@@ -25,7 +26,9 @@ class VaccineCardPage extends StatelessWidget {
         icon: HugeIcons.strokeRoundedId,
         title: "Vaccine Card View",
         subtitle: "View and download your vaccine card.",
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, PatientsPage.route());
+        },
       ),
     ];
 

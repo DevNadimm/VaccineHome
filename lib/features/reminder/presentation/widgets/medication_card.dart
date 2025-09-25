@@ -83,6 +83,7 @@ class MedicationCard extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
     );
   }
+
   Widget _buildInfoRow({required IconData icon, required String text}) {
     return Row(
       children: [
@@ -101,6 +102,7 @@ class MedicationCard extends StatelessWidget {
       ],
     );
   }
+
   Widget _buildActions() {
     return Row(
       children: [

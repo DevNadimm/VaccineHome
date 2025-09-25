@@ -55,6 +55,7 @@ class ApiEndpoints {
   String get faqs => 'faqs';
   String get checkBanner => 'banner/check';
   String get readBanner => 'banner/mark-seen';
+  String get patients => 'patients';
 
   // 📦 Feedback
   String get feedbacks => 'feedbacks';

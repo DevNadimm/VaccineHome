@@ -13,6 +13,9 @@ class Messages {
   static const String popupBannerFetchFailed = "Failed to fetch popup banner. Please try again.";
   static const String popupBannerMarkAsReadFailed = "Failed to mark popup banner as read. Please try again.";
 
+  // ------------------- Patients -------------------
+  static const String patientsFetchFailed = "Failed to fetch patients. Please try again.";
+
   // ------------------- Profile -------------------
   static const String fetchProfileFailed = "Failed to fetch user profile. Please try again.";
   static const String editProfileFailed = "Failed to edit profile. Please try again.";
