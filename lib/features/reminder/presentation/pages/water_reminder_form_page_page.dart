@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
@@ -32,7 +33,7 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
     super.initState();
     if (widget.water != null) {
       quantityController.text = widget.water!.totalWater ?? '';
-      timeController.text = widget.water!.waterTimes?[0] ?? '';
+      timeController.text = TimeConversionHelper.to12Hour(widget.water!.waterTimes?[0] ?? '');
     }
   }
 
