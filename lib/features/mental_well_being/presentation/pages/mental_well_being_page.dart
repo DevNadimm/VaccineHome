@@ -1,30 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
-import 'package:vaccine_home/features/mental_well_being/presentation/blocs/mental_well_being/mental_well_being_bloc.dart';
 import 'package:vaccine_home/features/mental_well_being/presentation/pages/wellness_insights_page.dart';
 import 'package:vaccine_home/features/mental_well_being/presentation/pages/wellness_visuals_page.dart';
 
-class MentalWellBeingPage extends StatefulWidget {
+class MentalWellBeingPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const MentalWellBeingPage());
 
   const MentalWellBeingPage({super.key});
-
-  @override
-  State<MentalWellBeingPage> createState() => _MentalWellBeingPageState();
-}
-
-class _MentalWellBeingPageState extends State<MentalWellBeingPage> {
-  @override
-  void initState() {
-    _fetchContents();
-    super.initState();
-  }
-
-  _fetchContents() => context.read<MentalWellBeingBloc>().add(FetchMentalWellBeingEvent());
 
   @override
   Widget build(BuildContext context) {
