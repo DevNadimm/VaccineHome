@@ -1,31 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
-import 'package:vaccine_home/features/vaccine_card/presentation/blocs/patients/patients_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/pages/patients_page.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/pages/vaccine_card_request_page.dart';
 
-class VaccineCardPage extends StatefulWidget {
+class VaccineCardPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const VaccineCardPage());
 
   const VaccineCardPage({super.key});
-
-  @override
-  State<VaccineCardPage> createState() => _VaccineCardPageState();
-}
-
-class _VaccineCardPageState extends State<VaccineCardPage> {
-
-  @override
-  void initState() {
-    _fetchPatients();
-    super.initState();
-  }
-
-  _fetchPatients() => context.read<PatientsBloc>().add(FetchPatientsEvent());
 
   @override
   Widget build(BuildContext context) {

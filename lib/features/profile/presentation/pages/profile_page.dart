@@ -17,6 +17,7 @@ import 'package:vaccine_home/features/profile/presentation/pages/terms_and_condi
 import 'package:vaccine_home/features/profile/presentation/pages/vaccine_order_history_page.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_header.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/profile_section.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/blocs/patients/patients_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/pages/patients_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -38,12 +39,14 @@ class _ProfilePageState extends State<ProfilePage> {
     _fetchOrderHistory();
     _fetchFeedbacks();
     _fetchFAQs();
+    _fetchPatients();
     super.initState();
   }
 
   _fetchOrderHistory() => context.read<VaccineOrderHistoryBloc>().add(FetchVaccineOrderHistoryEvent());
   _fetchFeedbacks() => context.read<FeedbackBloc>().add(FetchFeedbacksEvent());
   _fetchFAQs() => context.read<FAQBloc>().add(FetchFAQEvent());
+  _fetchPatients() => context.read<PatientsBloc>().add(FetchPatientsEvent());
 
   Future<void> getPreference() async {
     final name = await AppPreferences.getUserName();
