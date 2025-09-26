@@ -132,8 +132,10 @@ class DioService {
     try {
       final formData = FormData.fromMap({
         ...?data,
-        fileFieldName: await MultipartFile.fromFile(file.path,
-            filename: file.path.split('/').last),
+        fileFieldName: await MultipartFile.fromFile(
+          file.path,
+          filename: file.path.split('/').last,
+        ),
       });
 
       return await _dio.post(endpoint, data: formData);

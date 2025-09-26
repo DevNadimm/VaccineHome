@@ -22,7 +22,7 @@ class _VaccineRecommendationsPageState extends State<VaccineRecommendationsPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vaccine Recommendations'),
+        title: const Text('Recommendations'),
         leading: const AppBarBackBtn(),
       ),
       body: BlocBuilder<VaccineRecommendationBloc, VaccineRecommendationState>(

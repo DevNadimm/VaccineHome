@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_cached_image.dart';
 import 'package:vaccine_home/features/vaccine/data/models/vaccine_recommendations_model.dart';
+import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_recommentdation/vaccine_recommendation_details_page.dart';
 
 class RecommendationCard extends StatelessWidget {
   final VaccineRecommendation recommendation;
@@ -34,7 +35,7 @@ class RecommendationCard extends StatelessWidget {
           splashColor: AppColors.primaryColor.withOpacity(0.15),
           highlightColor: Colors.transparent,
           onTap: () {
-            // Optional: Navigate to vaccine details page
+            Navigator.push(context, VaccineRecommendationDetailsPage.route(recommendation: recommendation));
           },
           child: Row(
             children: [
