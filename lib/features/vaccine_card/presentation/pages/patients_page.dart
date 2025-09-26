@@ -9,7 +9,7 @@ import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/patients/patients_bloc.dart';
-import 'package:vaccine_home/features/vaccine_card/presentation/pages/vaccine_records_page.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/pages/immunization_records.dart';
 
 class PatientsPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const PatientsPage());
@@ -21,13 +21,8 @@ class PatientsPage extends StatefulWidget {
 }
 
 class _PatientsPageState extends State<PatientsPage> {
-  @override
-  void initState() {
-    _fetchPatients();
-    super.initState();
-  }
 
-  void _fetchPatients() => context.read<PatientsBloc>().add(FetchPatientsEvent());
+  // _fetchPatients() => context.read<PatientsBloc>().add(FetchPatientsEvent());
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +45,7 @@ class _PatientsPageState extends State<PatientsPage> {
                     title: "${patient.firstNameEnglish} ${patient.lastNameEnglish}" ,
                     subtitle: 'Tap here to view the card',
                     onTap: () {
-                      Navigator.push(context, VaccineRecordsPage.route(patient: patient));
+                      Navigator.push(context, ImmunizationRecordsPage.route(patient: patient));
                     },
                   ),
                 );

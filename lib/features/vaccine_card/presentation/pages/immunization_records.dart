@@ -6,14 +6,14 @@ import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/features/vaccine_card/data/models/patients_model.dart';
 
-class VaccineRecordsPage extends StatelessWidget {
+class ImmunizationRecordsPage extends StatelessWidget {
   static Route route({required Patient patient}) => MaterialPageRoute(
-    builder: (_) => VaccineRecordsPage(patient: patient),
+    builder: (_) => ImmunizationRecordsPage(patient: patient),
   );
 
   final Patient patient;
 
-  const VaccineRecordsPage({super.key, required this.patient});
+  const ImmunizationRecordsPage({super.key, required this.patient});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class VaccineRecordsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Immunization Record'),
+        title: const Text('Immunization Records'),
         leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
@@ -118,7 +118,7 @@ class VaccineRecordsPage extends StatelessWidget {
                 const SizedBox(width: 12),
               ],
               if (patient.birthDate != null)
-                _buildPatientInfoChip(HugeIcons.strokeRoundedBirthdayCake, patient.birthDate!),
+                _buildPatientInfoChip(HugeIcons.strokeRoundedBirthdayCake, DateConversionHelper.toDDMMYYYY(patient.birthDate ?? '')),
             ],
           ),
           const SizedBox(height: 12),
@@ -263,7 +263,7 @@ class VaccineRecordsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: Text(
-              'Immunization Records',
+              'Records',
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 20,
@@ -313,7 +313,7 @@ class VaccineRecordsPage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'No Vaccination Records',
+            'No Immunization Records',
             style: GoogleFonts.poppins(
               textStyle: const TextStyle(
                 fontSize: 16,
@@ -324,7 +324,7 @@ class VaccineRecordsPage extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'This patient has no vaccination history yet.',
+            'This patient has no immunization record yet.',
             style: GoogleFonts.poppins(
               textStyle: const TextStyle(
                 fontSize: 14,
@@ -366,7 +366,7 @@ class VaccineRecordsPage extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Swipe left to view more details',
+                  'Swipe right to view more details',
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 12,
