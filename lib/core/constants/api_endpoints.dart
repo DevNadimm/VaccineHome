@@ -46,6 +46,7 @@ class ApiEndpoints {
   String get products => 'vaccine/products';
   String get vaccineCardRequest => 'patients/store';
   String get bookVaccineAppointment => 'vaccine-appointment/store';
+  String get vaccineRecommendations => 'vaccine-recommendations';
 
   // 📦 Misc
   String get notifications => 'notifications';

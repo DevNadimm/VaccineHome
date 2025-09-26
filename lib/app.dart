@@ -35,6 +35,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/water_reminder
 import 'package:vaccine_home/features/vaccine/presentation/blocs/online_vaccine_appointment/online_vaccine_appointment_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_order/vaccine_order_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
+import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_recommentdation/vaccine_recommendation_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/patients/patients_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_card_request/vaccine_card_request_bloc.dart';
 import 'package:vaccine_home/main.dart';
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => VaccineCardRequestBloc()),
         BlocProvider(create: (_) => VaccineProductBloc()),
         BlocProvider(create: (_) => OnlineVaccineAppointmentBloc()),
+        BlocProvider(create: (_) => VaccineRecommendationBloc()),
 
         // 🔹 Home
         BlocProvider(create: (_) => AdvertisementBloc()),

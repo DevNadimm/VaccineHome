@@ -125,6 +125,9 @@ class Messages {
   // ------------------- FAQs -------------------
   static const String faqFetchFailed = "Failed to fetch FAQs. Please try again.";
 
+  // ------------------- Vaccine Recommendations -------------------
+  static const String vaccineRecommendationsFetchFailed = "Failed to fetch vaccine recommendations. Please try again.";
+
   // ------------------- General -------------------
   static const String networkError = "Network error. Please check your connection.";
   static const String unknownError = "Something went wrong. Please try again.";
