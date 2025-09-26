@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/pages/online_vaccine_appoinment_page.dart';
 import 'package:vaccine_home/features/vaccine/presentation/pages/vaccine_list_page.dart';
 
-class VaccinePage extends StatelessWidget {
+class VaccinePage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const VaccinePage());
 
   const VaccinePage({super.key});
+
+  @override
+  State<VaccinePage> createState() => _VaccinePageState();
+}
+
+class _VaccinePageState extends State<VaccinePage> {
+
+  @override
+  void initState() {
+    _fetchVaccines();
+    super.initState();
+  }
+
+  _fetchVaccines() => context.read<VaccineProductBloc>().add(FetchVaccineProducts());
 
   @override
   Widget build(BuildContext context) {

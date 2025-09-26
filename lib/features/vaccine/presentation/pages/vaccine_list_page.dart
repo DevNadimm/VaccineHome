@@ -18,13 +18,8 @@ class VaccineListPage extends StatefulWidget {
 }
 
 class _VaccineListPageState extends State<VaccineListPage> {
-  @override
-  void initState() {
-    _fetchVaccines();
-    super.initState();
-  }
 
-  _fetchVaccines() => context.read<VaccineProductBloc>().add(FetchVaccineProducts());
+  // _fetchVaccines() => context.read<VaccineProductBloc>().add(FetchVaccineProducts());
 
   @override
   Widget build(BuildContext context) {
