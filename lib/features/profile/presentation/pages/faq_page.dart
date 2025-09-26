@@ -18,13 +18,8 @@ class FAQPage extends StatefulWidget {
 }
 
 class _FAQPageState extends State<FAQPage> {
-  @override
-  void initState() {
-    _fetchFAQs();
-    super.initState();
-  }
 
-  _fetchFAQs() => context.read<FAQBloc>().add(FetchFAQEvent());
+  // _fetchFAQs() => context.read<FAQBloc>().add(FetchFAQEvent());
 
   @override
   Widget build(BuildContext context) {

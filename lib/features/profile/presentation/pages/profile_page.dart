@@ -5,6 +5,9 @@ import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/profile/data/models/profile_menu_item.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/faq/faq_bloc.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/feedback/feedback_bloc.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/vaccine_order_history/vaccine_order_history_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/change_password_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/faq_page.dart';
@@ -32,8 +35,15 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     getPreference();
+    _fetchOrderHistory();
+    _fetchFeedbacks();
+    _fetchFAQs();
     super.initState();
   }
+
+  _fetchOrderHistory() => context.read<VaccineOrderHistoryBloc>().add(FetchVaccineOrderHistoryEvent());
+  _fetchFeedbacks() => context.read<FeedbackBloc>().add(FetchFeedbacksEvent());
+  _fetchFAQs() => context.read<FAQBloc>().add(FetchFAQEvent());
 
   Future<void> getPreference() async {
     final name = await AppPreferences.getUserName();

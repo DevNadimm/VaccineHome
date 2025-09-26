@@ -21,13 +21,8 @@ class VaccineOrderHistoryPage extends StatefulWidget {
 }
 
 class _VaccineOrderHistoryPageState extends State<VaccineOrderHistoryPage> {
-  @override
-  void initState() {
-    _fetchOrderHistory();
-    super.initState();
-  }
 
-  _fetchOrderHistory() => context.read<VaccineOrderHistoryBloc>().add(FetchVaccineOrderHistoryEvent());
+  // _fetchOrderHistory() => context.read<VaccineOrderHistoryBloc>().add(FetchVaccineOrderHistoryEvent());
 
   @override
   Widget build(BuildContext context) {

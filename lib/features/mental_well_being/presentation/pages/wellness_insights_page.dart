@@ -19,13 +19,7 @@ class WellnessInsightsPage extends StatefulWidget {
 
 class _WellnessInsightsPageState extends State<WellnessInsightsPage> {
 
-  @override
-  void initState() {
-    _fetchInsights();
-    super.initState();
-  }
-
-  _fetchInsights() => context.read<MentalWellBeingBloc>().add(FetchMentalWellBeingEvent());
+  // _fetchInsights() => context.read<MentalWellBeingBloc>().add(FetchMentalWellBeingEvent());
 
   @override
   Widget build(BuildContext context) {

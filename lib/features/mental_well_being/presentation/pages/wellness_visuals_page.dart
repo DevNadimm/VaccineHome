@@ -18,13 +18,8 @@ class WellnessVisualsPage extends StatefulWidget {
 }
 
 class _WellnessVisualsPageState extends State<WellnessVisualsPage> {
-  @override
-  void initState() {
-    _fetchVisuals();
-    super.initState();
-  }
 
-  _fetchVisuals() => context.read<MentalWellBeingBloc>().add(FetchMentalWellBeingEvent());
+  // _fetchVisuals() => context.read<MentalWellBeingBloc>().add(FetchMentalWellBeingEvent());
 
   @override
   Widget build(BuildContext context) {

@@ -19,13 +19,8 @@ class FeedbacksPage extends StatefulWidget {
 }
 
 class _FeedbacksPageState extends State<FeedbacksPage> {
-  @override
-  void initState() {
-    _fetchFeedbacks();
-    super.initState();
-  }
 
-  _fetchFeedbacks() => context.read<FeedbackBloc>().add(FetchFeedbacksEvent());
+  // _fetchFeedbacks() => context.read<FeedbackBloc>().add(FetchFeedbacksEvent());
 
   @override
   Widget build(BuildContext context) {
