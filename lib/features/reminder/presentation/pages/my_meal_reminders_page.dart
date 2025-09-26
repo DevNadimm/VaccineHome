@@ -22,13 +22,8 @@ class MyMealRemindersPage extends StatefulWidget {
 }
 
 class _MyMealRemindersPageState extends State<MyMealRemindersPage> {
-  @override
-  void initState() {
-    _fetchMyMealReminders();
-    super.initState();
-  }
 
-  _fetchMyMealReminders() => context.read<MyMealRemindersBloc>().add(FetchMyMealRemindersEvent());
+  // _fetchMyMealReminders() => context.read<MyMealRemindersBloc>().add(FetchMyMealRemindersEvent());
 
   @override
   Widget build(BuildContext context) {

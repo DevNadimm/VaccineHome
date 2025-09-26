@@ -22,13 +22,8 @@ class MyWaterRemindersPage extends StatefulWidget {
 }
 
 class _MyWaterRemindersPageState extends State<MyWaterRemindersPage> {
-  @override
-  void initState() {
-    _fetchMyWaterReminders();
-    super.initState();
-  }
 
-  _fetchMyWaterReminders() => context.read<MyWaterRemindersBloc>().add(FetchMyWaterRemindersEvent());
+  // _fetchMyWaterReminders() => context.read<MyWaterRemindersBloc>().add(FetchMyWaterRemindersEvent());
 
   @override
   Widget build(BuildContext context) {

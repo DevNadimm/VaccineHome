@@ -13,7 +13,10 @@ class NavigationPage extends StatelessWidget {
     return BlocBuilder<NavigationCubit, int>(
       builder: (context, index) {
         return Scaffold(
-          body: bottomNavScreens[index],
+          body: IndexedStack(
+            index: index,
+            children: bottomNavScreens,
+          ),
           bottomNavigationBar: const CustomBottomNavBar(),
         );
       },

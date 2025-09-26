@@ -22,13 +22,8 @@ class MyConsultationsPage extends StatefulWidget {
 }
 
 class _MyConsultationsPageState extends State<MyConsultationsPage> {
-  @override
-  void initState() {
-    _fetchMyConsultations();
-    super.initState();
-  }
 
-  _fetchMyConsultations() => context.read<MyConsultationsBloc>().add(FetchMyConsultationsEvent());
+  // _fetchMyConsultations() => context.read<MyConsultationsBloc>().add(FetchMyConsultationsEvent());
 
   @override
   Widget build(BuildContext context) {

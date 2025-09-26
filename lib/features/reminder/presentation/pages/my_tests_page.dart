@@ -22,13 +22,8 @@ class MyTestsPage extends StatefulWidget {
 }
 
 class _MyTestsPageState extends State<MyTestsPage> {
-  @override
-  void initState() {
-    _fetchMyTests();
-    super.initState();
-  }
 
-  _fetchMyTests() => context.read<MyTestsBloc>().add(FetchMyTestsEvent());
+  // _fetchMyTests() => context.read<MyTestsBloc>().add(FetchMyTestsEvent());
 
   @override
   Widget build(BuildContext context) {

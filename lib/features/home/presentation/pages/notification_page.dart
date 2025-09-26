@@ -24,13 +24,7 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
 
-  @override
-  void initState() {
-    _fetchNotifications();
-    super.initState();
-  }
-
-  _fetchNotifications() => context.read<NotificationBloc>().add(FetchNotificationsEvent());
+  // _fetchNotifications() => context.read<NotificationBloc>().add(FetchNotificationsEvent());
 
   @override
   Widget build(BuildContext context) {

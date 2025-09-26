@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_consultations/my_consultations_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_meal_reminders/my_meal_reminders_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_sleep_reminders/my_sleep_reminders_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_tests/my_tests_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_water_reminders/my_water_reminders_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/dr_consultation_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/meal_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/medication_reminder_page.dart';
@@ -10,10 +17,34 @@ import 'package:vaccine_home/features/reminder/presentation/pages/pathology_remi
 import 'package:vaccine_home/features/reminder/presentation/pages/sleep_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/water_reminder_page.dart';
 
-class ReminderPage extends StatelessWidget {
+class ReminderPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const ReminderPage());
 
   const ReminderPage({super.key});
+
+  @override
+  State<ReminderPage> createState() => _ReminderPageState();
+}
+
+class _ReminderPageState extends State<ReminderPage> {
+
+  @override
+  void initState() {
+    _fetchMyMedications();
+    _fetchMyConsultations();
+    _fetchMyTests();
+    _fetchMySleepReminders();
+    _fetchMyMealReminders();
+    _fetchMyWaterReminders();
+    super.initState();
+  }
+
+  _fetchMyMedications() => context.read<MyMedicationsBloc>().add(FetchMyMedicationsEvent());
+  _fetchMyConsultations() => context.read<MyConsultationsBloc>().add(FetchMyConsultationsEvent());
+  _fetchMyTests() => context.read<MyTestsBloc>().add(FetchMyTestsEvent());
+  _fetchMySleepReminders() => context.read<MySleepRemindersBloc>().add(FetchMySleepRemindersEvent());
+  _fetchMyMealReminders() => context.read<MyMealRemindersBloc>().add(FetchMyMealRemindersEvent());
+  _fetchMyWaterReminders() => context.read<MyWaterRemindersBloc>().add(FetchMyWaterRemindersEvent());
 
   @override
   Widget build(BuildContext context) {

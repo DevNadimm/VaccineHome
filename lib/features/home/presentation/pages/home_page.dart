@@ -10,6 +10,7 @@ import 'package:vaccine_home/features/home/data/models/popup_banner_model.dart';
 import 'package:vaccine_home/features/home/data/models/service.dart';
 import 'package:vaccine_home/features/home/data/repositories/service_repository.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
+import 'package:vaccine_home/features/home/presentation/blocs/notification/notification_bloc.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/popup_banner/popup_banner_bloc.dart';
 import 'package:vaccine_home/features/home/presentation/pages/notification_page.dart';
 import 'package:vaccine_home/features/home/presentation/widgets/home_app_bar.dart';
@@ -26,13 +27,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? userName;
-  String? userAvatar;
+  String? _userName;
+  String? _userAvatar;
 
   @override
   void initState() {
     super.initState();
     _checkPopupBanner();
+    _fetchNotifications();
     _getPreferences();
   }
 
@@ -40,12 +42,13 @@ class _HomePageState extends State<HomePage> {
     final name = await AppPreferences.getUserName();
     final avatar = await AppPreferences.getUserAvatar();
     setState(() {
-      userName = name ?? 'No Name';
-      userAvatar = avatar ?? '';
+      _userName = name ?? 'No Name';
+      _userAvatar = avatar ?? '';
     });
   }
 
   _checkPopupBanner() => context.read<PopupBannerBloc>().add(CheckPopupBannerEvent());
+  _fetchNotifications() => context.read<NotificationBloc>().add(FetchNotificationsEvent());
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +61,8 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: HomeAppBar(
           greetingText: getGreetingMessage(),
-          userName: userName ?? 'No Name',
-          userAvatar: userAvatar ?? '',
+          userName: _userName ?? 'No Name',
+          userAvatar: _userAvatar ?? '',
           onNotificationTap: () {
             Navigator.push(context, NotificationPage.route());
           },

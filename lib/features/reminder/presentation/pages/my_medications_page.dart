@@ -22,13 +22,8 @@ class MyMedicationsPage extends StatefulWidget {
 }
 
 class _MyMedicationsPageState extends State<MyMedicationsPage> {
-  @override
-  void initState() {
-    _fetchMyMedications();
-    super.initState();
-  }
 
-  _fetchMyMedications() => context.read<MyMedicationsBloc>().add(FetchMyMedicationsEvent());
+  // _fetchMyMedications() => context.read<MyMedicationsBloc>().add(FetchMyMedicationsEvent());
 
   @override
   Widget build(BuildContext context) {

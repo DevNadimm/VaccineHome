@@ -22,13 +22,8 @@ class MySleepRemindersPage extends StatefulWidget {
 }
 
 class _MySleepRemindersPageState extends State<MySleepRemindersPage> {
-  @override
-  void initState() {
-    _fetchMySleepReminders();
-    super.initState();
-  }
 
-  _fetchMySleepReminders() => context.read<MySleepRemindersBloc>().add(FetchMySleepRemindersEvent());
+  // _fetchMySleepReminders() => context.read<MySleepRemindersBloc>().add(FetchMySleepRemindersEvent());
 
   @override
   Widget build(BuildContext context) {
