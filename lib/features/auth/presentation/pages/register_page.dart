@@ -152,7 +152,7 @@ class _SignUpScreenState extends State<RegisterPage> {
                   label: "Already have an account? ",
                   actionText: "Sign In",
                   onTap: () {
-                    Navigator.pushAndRemoveUntil(context, LoginPage.route(), (route) => false);
+                    Navigator.pushReplacement(context, LoginPage.route());
                   },
                 ),
               ],

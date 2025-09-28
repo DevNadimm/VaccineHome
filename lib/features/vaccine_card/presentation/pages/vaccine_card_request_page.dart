@@ -112,7 +112,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                 lastField: CustomTextField(
                   label: 'Last Name',
                   controller: lastName,
-                  isRequired: true,
+                  isRequired: false,
                   keyboardType: TextInputType.name,
                   hintText: 'Enter last name',
                   validationLabel: 'Last Name',
@@ -177,7 +177,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               CustomTextField(
                 label: 'Birth Certificate No',
                 controller: birthCertificateNo,
-                isRequired: true,
+                isRequired: false,
                 keyboardType: TextInputType.number,
                 hintText: 'Enter birth certificate number',
                 validationLabel: 'Birth Certificate No',
@@ -186,7 +186,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               CustomTextField(
                 label: 'Passport No',
                 controller: passportNo,
-                isRequired: true,
+                isRequired: false,
                 keyboardType: TextInputType.text,
                 hintText: 'Enter passport number',
                 validationLabel: 'Passport No',

@@ -42,7 +42,7 @@ class _PatientsPageState extends State<PatientsPage> {
                 return SubModuleCard(
                   subModule: SubModule(
                     icon: HugeIcons.strokeRoundedUser,
-                    title: "${patient.firstNameEnglish} ${patient.lastNameEnglish}" ,
+                    title: "${patient.firstNameEnglish} ${patient.lastNameEnglish ?? ''}" ,
                     subtitle: 'Tap here to view the card',
                     onTap: () {
                       Navigator.push(context, ImmunizationRecordsPage.route(patient: patient));

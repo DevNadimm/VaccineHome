@@ -6,7 +6,7 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
-import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/welcome_page.dart';
 import 'package:vaccine_home/features/home/presentation/blocs/advertisement/advertisement_bloc.dart';
 import 'package:vaccine_home/features/navigation/pages/navigation_page.dart';
 
@@ -59,7 +59,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
       await dioService.initAuthToken();
       Navigator.pushReplacement(context, NavigationPage.route());
     } else {
-      Navigator.pushReplacement(context, LoginPage.route());
+      Navigator.pushReplacement(context, WelcomePage.route());
     }
   }
 

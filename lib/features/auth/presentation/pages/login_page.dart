@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
@@ -60,6 +61,7 @@ class _SignUpScreenState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login to Your Account'),
+        leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -132,10 +134,7 @@ class _SignUpScreenState extends State<LoginPage> {
                   label: "Don't have an account? ",
                   actionText: "Register",
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      RegisterPage.route(),
-                    );
+                    Navigator.pushReplacement(context, RegisterPage.route());
                   },
                 ),
               ],

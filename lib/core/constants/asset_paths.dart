@@ -21,4 +21,5 @@ class AssetPaths {
 
   /// Illustrations
   static const String notification = '$_illustrationPath/notification.svg';
+  static const String vaccine = '$_illustrationPath/vaccine.svg';
 }
