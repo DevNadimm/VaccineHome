@@ -195,7 +195,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               CustomTextField(
                 label: 'Email',
                 controller: email,
-                isRequired: true,
+                isRequired: false,
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'Enter email address',
                 validationLabel: 'Email',
@@ -213,7 +213,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               CustomTextField(
                 label: 'WhatsApp / Imo',
                 controller: whatsAppImo,
-                isRequired: true,
+                isRequired: false,
                 keyboardType: TextInputType.phone,
                 hintText: 'Enter WhatsApp or Imo number',
                 validationLabel: 'WhatsApp/Imo',
@@ -222,7 +222,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               CustomTextField(
                 label: 'Address',
                 controller: address,
-                isRequired: true,
+                isRequired: false,
                 keyboardType: TextInputType.streetAddress,
                 hintText: 'Enter address',
                 validationLabel: 'Address',
