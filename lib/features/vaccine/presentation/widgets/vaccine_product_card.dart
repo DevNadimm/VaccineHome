@@ -40,7 +40,7 @@ class VaccineProductCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: CustomCachedImage(
-                  imageUrl: vaccineProduct.image ?? '',
+                  imageUrl: vaccineProduct.images?[0] ?? '',
                   height: 110,
                   width: 110,
                   fit: BoxFit.cover,

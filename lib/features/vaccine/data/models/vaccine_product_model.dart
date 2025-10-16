@@ -10,12 +10,6 @@ class VaccineProductModel {
           : null,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'data': data?.toJson(),
-    };
-  }
 }
 
 class VaccineProductData {
@@ -33,13 +27,6 @@ class VaccineProductData {
           : null,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'status': status,
-      'vaccine': vaccineProducts?.map((x) => x.toJson()).toList(),
-    };
-  }
 }
 
 class VaccineProduct {
@@ -52,7 +39,7 @@ class VaccineProduct {
   final String? from;
   final String? to;
   final String? status;
-  final String? image;
+  final List<String>? images;
   final String? createdAt;
   final String? updatedAt;
 
@@ -66,7 +53,7 @@ class VaccineProduct {
     this.from,
     this.to,
     this.status,
-    this.image,
+    this.images,
     this.createdAt,
     this.updatedAt,
   });
@@ -81,27 +68,10 @@ class VaccineProduct {
       gender: json['gender'] as String?,
       from: json['from'] as String?,
       to: json['to'] as String?,
-      status: json['status'] as String?, // nullable
-      image: json['image'] as String?,
+      status: json['status'] as String?,
+      images: json['images'] != null ? List<String>.from(json['images']) : null,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'price': price,
-      'product_type': productType,
-      'description': description,
-      'gender': gender,
-      'from': from,
-      'to': to,
-      'status': status,
-      'image': image,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-    };
   }
 }

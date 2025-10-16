@@ -29,11 +29,11 @@ class VaccineDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (vaccine.image != null)
+            if (vaccine.images?[0] != null)
               ClipRRect(
                 borderRadius: BorderRadius.circular(18),
                 child: CustomCachedImage(
-                  imageUrl: vaccine.image ?? '',
+                  imageUrl: vaccine.images?[0] ?? '',
                   height: 260,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -83,12 +83,12 @@ class VaccineDetailsPage extends StatelessWidget {
             ),
             VaccineInfoTile(
               title: 'Cost',
-              value: '৳ ${vaccine.price}',
+              value: '${vaccine.price}',
               icon: HugeIcons.strokeRoundedWallet01,
             ),
             VaccineInfoTile(
               title: 'Recommended Age',
-              value: '${vaccine.from} – ${vaccine.to} years',
+              value: '${vaccine.from} – ${vaccine.to}',
               icon: HugeIcons.strokeRoundedCalendar01,
             ),
           ],
