@@ -44,7 +44,6 @@ class EditProfileRepository {
       res = await dioService.putRequest(
         apiEndpoints.editProfile,
         data: data,
-        errorMessage: Messages.editProfileFailed,
       );
     }
 
@@ -62,7 +61,7 @@ class EditProfileRepository {
 
       return model;
     } else {
-      throw Exception(Messages.editProfileFailed);
+      throw Exception(res.data['message']);
     }
   }
 }

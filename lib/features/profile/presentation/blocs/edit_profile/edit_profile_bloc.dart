@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/profile/data/models/edit_profile_model.dart';
 import 'package:vaccine_home/features/profile/data/repositories/edit_profile_repository.dart';
 
@@ -28,7 +29,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       );
       emit(EditProfileSuccess(model));
     } catch (e) {
-      emit(EditProfileFailure(e.toString()));
+      emit(EditProfileFailure(ExceptionFormatter.format(e)));
     }
   }
 }

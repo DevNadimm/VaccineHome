@@ -48,7 +48,7 @@ class VaccineCardRequestRepository {
     if (res.statusCode == 200 || res.statusCode == 201) {
       return true;
     } else {
-      throw Exception(Messages.vaccineCardRequestFailed);
+      throw Exception(res.data['message']);
     }
   }
 }

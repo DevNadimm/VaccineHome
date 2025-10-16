@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/vaccine_card/data/repositories/vaccine_card_request_repository.dart';
 
 part 'vaccine_card_request_event.dart';
@@ -36,7 +37,7 @@ class VaccineCardRequestBloc extends Bloc<VaccineCardRequestEvent, VaccineCardRe
         emit(VaccineCardRequestFailure("Unknown error occurred"));
       }
     } catch (e) {
-      emit(VaccineCardRequestFailure(e.toString()));
+      emit(VaccineCardRequestFailure(ExceptionFormatter.format(e)));
     }
   }
 }

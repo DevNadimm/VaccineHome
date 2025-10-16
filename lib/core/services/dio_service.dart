@@ -115,7 +115,9 @@ class DioService {
     try {
       return await _dio.put(endpoint, data: data);
     } on DioException catch (e) {
-      throw Exception(errorMessage ?? "⚠️ Network error: ${e.message}");
+      final backendMessage = e.response?.data?['message'];
+      final msg = backendMessage ?? errorMessage ?? "⚠️ Network error: ${e.message ?? 'Something went wrong.'}";
+      throw Exception(msg);
     }
   }
 

@@ -61,7 +61,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
       listener: (context, state) {
         if (state is VaccineCardRequestFailure) {
           AppNotifier.showToast(
-            Messages.vaccineCardRequestFailed,
+            state.message,
             type: MessageType.error,
           );
         } else if (state is VaccineCardRequestSuccess) {
