@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class VaccineOrderModel {
   final int? status;
   final List<VaccineOrderData>? orders;
@@ -8,8 +10,7 @@ class VaccineOrderModel {
       VaccineOrderModel(
         status: json['status'] as int?,
         orders: json['orders'] != null
-            ? List<VaccineOrderData>.from((json['orders'] as List)
-                .map((x) => VaccineOrderData.fromJson(x)))
+            ? List<VaccineOrderData>.from((json['orders'] as List).map((x) => VaccineOrderData.fromJson(x)))
             : null,
       );
 }
@@ -60,6 +61,7 @@ class Product {
   final int? id;
   final String? name;
   final String? image;
+  final List<String>? images;
   final String? price;
   final String? productType;
   final String? description;
@@ -73,6 +75,7 @@ class Product {
     this.id,
     this.name,
     this.image,
+    this.images,
     this.price,
     this.productType,
     this.description,
@@ -83,23 +86,38 @@ class Product {
     this.updatedAt,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
-        id: json['id'] as int?,
-        name: json['name'] as String?,
-        image: json['image'] as String?,
-        price: json['price'] as String?,
-        productType: json['product_type'] as String?,
-        description: json['description'] as String?,
-        gender: json['gender'] as String?,
-        from: json['from'] as String?,
-        to: json['to'] as String?,
-        createdAt: json['created_at'] != null
-            ? DateTime.tryParse(json['created_at'])
-            : null,
-        updatedAt: json['updated_at'] != null
-            ? DateTime.tryParse(json['updated_at'])
-            : null,
-      );
+  factory Product.fromJson(Map<String, dynamic> json) {
+    List<String>? parsedImages;
+    if (json['images'] != null) {
+      try {
+        final decoded = jsonDecode(json['images']);
+        parsedImages = (decoded is List)
+            ? decoded.map((e) => e.toString()).toList()
+            : null;
+      } catch (e) {
+        parsedImages = null;
+      }
+    }
+
+    return Product(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      image: json['image'] as String?,
+      images: parsedImages,
+      price: json['price'] as String?,
+      productType: json['product_type'] as String?,
+      description: json['description'] as String?,
+      gender: json['gender'] as String?,
+      from: json['from'] as String?,
+      to: json['to'] as String?,
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.tryParse(json['updated_at'])
+          : null,
+    );
+  }
 }
 
 class User {

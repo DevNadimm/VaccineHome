@@ -12,7 +12,7 @@ class VaccineOrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = order.product;
-    final productImage = product?.image ?? '';
+    final productImage = "https://vcard.vaccinehomebd.com/public/admin/product/upload/${product?.images?[0] ?? ''}";
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -67,7 +67,7 @@ class VaccineOrderCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 4),
                           child: Text(
-                            "৳ ${product!.price}",
+                            "${product!.price}",
                             style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
                                 fontSize: 14,
