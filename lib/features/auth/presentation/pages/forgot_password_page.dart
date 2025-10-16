@@ -29,7 +29,7 @@ class _SignUpScreenState extends State<ForgotPasswordPage> {
     return BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
       listener: (context, state) {
         if (state is ForgotPasswordFailure) {
-          AppNotifier.showToast(Messages.sendPinFailed, type: MessageType.error);
+          AppNotifier.showToast(state.message, type: MessageType.error);
         }
         if (state is ForgotPasswordSuccess) {
           Navigator.push(context, PinVerificationPage.route(_emailController.text.trim()));

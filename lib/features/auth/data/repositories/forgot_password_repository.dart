@@ -21,7 +21,7 @@ class ForgotPasswordRepository {
     if (res.statusCode == 200 || res.statusCode == 201) {
       return true;
     } else {
-      throw Exception(Messages.sendPinFailed);
+      throw Exception(res.data['message']);
     }
   }
 

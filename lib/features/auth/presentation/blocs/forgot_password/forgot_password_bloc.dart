@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/auth/data/repositories/forgot_password_repository.dart';
 
 part 'forgot_password_event.dart';
@@ -19,7 +20,7 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
       final res = await ForgotPasswordRepository.sendPin(email: event.email);
       if (res) emit(ForgotPasswordSuccess());
     } catch (e) {
-      emit(ForgotPasswordFailure(e.toString()));
+      emit(ForgotPasswordFailure(ExceptionFormatter.format(e)));
     }
   }
 }
