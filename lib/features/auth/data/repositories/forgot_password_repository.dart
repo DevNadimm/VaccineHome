@@ -46,7 +46,7 @@ class ForgotPasswordRepository {
     if (res.statusCode == 200 || res.statusCode == 201) {
       return true;
     } else {
-      throw Exception(Messages.verifyPinFailed);
+      throw Exception(res.data['message']);
     }
   }
 
@@ -75,7 +75,7 @@ class ForgotPasswordRepository {
     if (res.statusCode == 200 || res.statusCode == 201) {
       return true;
     } else {
-      throw Exception(Messages.setPasswordFailed);
+      throw Exception(res.data['message']);
     }
   }
 }

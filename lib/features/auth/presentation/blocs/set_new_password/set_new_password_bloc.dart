@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/auth/data/repositories/forgot_password_repository.dart';
 
 part 'set_new_password_event.dart';
@@ -25,7 +26,7 @@ class SetNewPasswordBloc extends Bloc<SetNewPasswordEvent, SetNewPasswordState> 
 
       if (res) emit(SetNewPasswordSuccess());
     } catch (e) {
-      emit(SetNewPasswordFailure(e.toString()));
+      emit(SetNewPasswordFailure(ExceptionFormatter.format(e)));
     }
   }
 }

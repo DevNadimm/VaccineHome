@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SetNewPasswordPage> {
     return BlocConsumer<SetNewPasswordBloc, SetNewPasswordState>(
       listener: (context, state) {
         if (state is SetNewPasswordFailure) {
-          AppNotifier.showToast(Messages.setPasswordFailed, type: MessageType.error);
+          AppNotifier.showToast(state.message, type: MessageType.error);
         }
         if (state is SetNewPasswordSuccess) {
           AppNotifier.showToast(Messages.passwordSet, type: MessageType.success);

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/auth/data/repositories/forgot_password_repository.dart';
 
 part 'pin_verification_event.dart';
@@ -22,7 +23,7 @@ class PinVerificationBloc extends Bloc<PinVerificationEvent, PinVerificationStat
       );
       if (res) emit(PinVerificationSuccess());
     } catch (e) {
-      emit(PinVerificationFailure(e.toString()));
+      emit(PinVerificationFailure(ExceptionFormatter.format(e)));
     }
   }
 }
