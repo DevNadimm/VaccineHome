@@ -36,7 +36,7 @@ class _VaccineOrderPageState extends State<VaccineOrderPage> {
       listener: (context, state) {
         if (state is VaccineOrderFailure) {
           AppNotifier.showToast(
-            Messages.vaccineOrderFailed,
+            state.message,
             type: MessageType.error,
           );
         } else if (state is VaccineOrderSuccess) {

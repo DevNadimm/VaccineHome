@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/vaccine/data/repositories/vaccine_order_repository.dart';
 
 part 'vaccine_order_event.dart';
@@ -26,7 +27,7 @@ class VaccineOrderBloc extends Bloc<VaccineOrderEvent, VaccineOrderState> {
         emit(VaccineOrderFailure("Unknown error occurred"));
       }
     } catch (e) {
-      emit(VaccineOrderFailure(e.toString()));
+      emit(VaccineOrderFailure(ExceptionFormatter.format(e)));
     }
   }
 }
