@@ -45,7 +45,7 @@ class LoginRepository {
 
       return model;
     } else {
-      throw Exception(Messages.loginFailed);
+      throw Exception(res.data['message']);
     }
   }
 }

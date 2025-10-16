@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/auth/data/models/login_model.dart';
 import 'package:vaccine_home/features/auth/data/repositories/login_repository.dart';
 
@@ -22,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       emit(LoginSuccess(model));
     } catch (e) {
-      emit(LoginFailure(e.toString()));
+      emit(LoginFailure(ExceptionFormatter.format(e)));
     }
   }
 }

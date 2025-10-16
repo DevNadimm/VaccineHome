@@ -37,18 +37,27 @@ class DioService {
         onError: (DioException e, handler) async {
           print("❌ Dio Error: ${e.message}");
 
-          if (e.response?.statusCode == 401) {
+          final statusCode = e.response?.statusCode;
+          final path = e.requestOptions.path;
+
+          if (statusCode == 401 && !_isAuthPath(path)) {
             await AppPreferences.clearAll();
-            navigatorKey.currentState?.pushAndRemoveUntil(
-              MaterialPageRoute(builder: (_) => const WelcomePage()),
-              (route) => false,
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              navigatorKey.currentState?.pushAndRemoveUntil(
+                MaterialPageRoute(builder: (_) => const WelcomePage()), (route) => false,
+              );
+            });
           }
 
           return handler.next(e);
         },
       ),
     );
+  }
+
+  /// Detects if the API path is related to authentication (login, register, etc.)
+  bool _isAuthPath(String path) {
+    return path.contains('login') || path.contains('register') || path.contains('forgot-password') || path.contains('verify-reset-pin') || path.contains('reset-password');
   }
 
   /// Call this after creating instance to load token from SharedPreferences
