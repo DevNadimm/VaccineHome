@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
-import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/welcome_page.dart';
 import 'package:vaccine_home/main.dart';
 
 class DioService {
@@ -40,7 +40,7 @@ class DioService {
           if (e.response?.statusCode == 401) {
             await AppPreferences.clearAll();
             navigatorKey.currentState?.pushAndRemoveUntil(
-              MaterialPageRoute(builder: (_) => const LoginPage()),
+              MaterialPageRoute(builder: (_) => const WelcomePage()),
               (route) => false,
             );
           }

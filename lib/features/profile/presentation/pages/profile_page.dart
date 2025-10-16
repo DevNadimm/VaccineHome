@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
-import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
+import 'package:vaccine_home/features/auth/presentation/pages/welcome_page.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
 import 'package:vaccine_home/features/profile/data/models/profile_menu_item.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/faq/faq_bloc.dart';
@@ -168,7 +168,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   onTap: () async {
                     await AppPreferences.clearAll();
                     context.read<NavigationCubit>().resetIndex();
-                    Navigator.pushReplacement(context, LoginPage.route());
+                    Navigator.pushReplacement(context, WelcomePage.route());
                   },
                 ),
               ],
