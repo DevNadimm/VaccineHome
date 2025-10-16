@@ -116,7 +116,7 @@ class VaccineProductCard extends StatelessWidget {
                       const SizedBox(height: 8),
                       if (vaccineProduct.price != null)
                         Text(
-                          "৳ ${vaccineProduct.price}",
+                          "${vaccineProduct.price}",
                           style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                               fontSize: 15,

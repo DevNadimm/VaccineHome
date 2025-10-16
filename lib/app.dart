@@ -32,6 +32,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/sleep_reminder
 import 'package:vaccine_home/features/reminder/presentation/blocs/test_form/test_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/time_list_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/water_reminder_form/water_reminder_form_bloc.dart';
+import 'package:vaccine_home/features/vaccine/presentation/blocs/image_selection_cubit.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/online_vaccine_appointment/online_vaccine_appointment_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_order/vaccine_order_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => VaccineProductBloc()),
         BlocProvider(create: (_) => OnlineVaccineAppointmentBloc()),
         BlocProvider(create: (_) => VaccineRecommendationBloc()),
+        BlocProvider(create: (_) => ImageSelectionCubit()),
 
         // 🔹 Home
         BlocProvider(create: (_) => AdvertisementBloc()),
