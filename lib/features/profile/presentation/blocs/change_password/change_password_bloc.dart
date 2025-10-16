@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/profile/data/repositories/change_password_repository.dart';
 
 part 'change_password_event.dart';
@@ -22,7 +23,7 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
       );
       if (res) emit(ChangePasswordSuccess());
     } catch (e) {
-      emit(ChangePasswordFailure(e.toString()));
+      emit(ChangePasswordFailure(ExceptionFormatter.format(e)));
     }
   }
 }

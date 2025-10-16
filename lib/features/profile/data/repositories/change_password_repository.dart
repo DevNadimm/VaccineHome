@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:vaccine_home/core/constants/api_endpoints.dart';
-import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
 
@@ -22,13 +21,12 @@ class ChangePasswordRepository {
     final Response res = await dioService.postRequest(
       apiEndpoints.changePassword,
       data: data,
-      errorMessage: Messages.changePasswordFailed,
     );
 
     if (res.statusCode == 200 || res.statusCode == 201) {
       return true;
     } else {
-      throw Exception(Messages.changePasswordFailed);
+      throw Exception(res.data?['message'] ?? 'Something went wrong');
     }
   }
 }
