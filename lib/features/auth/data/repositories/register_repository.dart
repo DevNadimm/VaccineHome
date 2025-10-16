@@ -38,7 +38,7 @@ class RegisterRepository {
 
       return model;
     } else {
-      throw Exception(Messages.registrationFailed);
+      throw Exception("${res.data["message"]}");
     }
   }
 }

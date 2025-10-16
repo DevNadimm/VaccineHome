@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vaccine_home/core/utils/helper_functions/exception_formatter.dart';
 import 'package:vaccine_home/features/auth/data/models/register_model.dart';
 import 'package:vaccine_home/features/auth/data/repositories/register_repository.dart';
 
@@ -25,7 +26,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       );
       emit(RegisterSuccess(model));
     } catch (e) {
-      emit(RegisterFailure(e.toString()));
+      emit(RegisterFailure(ExceptionFormatter.format(e)));
     }
   }
 }
