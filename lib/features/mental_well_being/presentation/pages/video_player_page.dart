@@ -217,8 +217,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 8),
             Text(
