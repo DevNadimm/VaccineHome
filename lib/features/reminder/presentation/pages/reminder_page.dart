@@ -101,7 +101,7 @@ class _ReminderPageState extends State<ReminderPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reminder'),
+        title: const Text('Self-Care Alert'),
         leading: const AppBarBackBtn()
       ),
       body: ListView.builder(

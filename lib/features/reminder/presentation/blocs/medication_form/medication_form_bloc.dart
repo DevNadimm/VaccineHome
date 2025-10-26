@@ -17,12 +17,16 @@ class MedicationFormBloc extends Bloc<MedicationFormEvent, MedicationFormState> 
 
     try {
       bool res;
+
       if (event.id == null) {
         res = await MedicationRepository.addMedication(
           name: event.name,
           type: event.type,
           times: event.times,
           whenToTake: event.whenToTake,
+          duration: event.duration,
+          startDate: event.startDate,
+          endDate: event.endDate,
         );
       } else {
         res = await MedicationRepository.updateMedication(
@@ -31,10 +35,17 @@ class MedicationFormBloc extends Bloc<MedicationFormEvent, MedicationFormState> 
           type: event.type,
           times: event.times,
           whenToTake: event.whenToTake,
+          duration: event.duration,
+          startDate: event.startDate,
+          endDate: event.endDate,
         );
       }
 
-      if (res) emit(MedicationFormSuccess());
+      if (res) {
+        emit(MedicationFormSuccess());
+      } else {
+        emit(MedicationFormFailure("Failed to save medication."));
+      }
     } catch (e) {
       emit(MedicationFormFailure(e.toString()));
     }

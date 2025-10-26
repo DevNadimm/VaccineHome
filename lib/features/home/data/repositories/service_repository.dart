@@ -12,7 +12,7 @@ class ServiceRepository {
   static List<Service> services(BuildContext context) {
     return [
       Service(
-        name: 'Reminder',
+        name: 'Self-Care Alert',
         icon: HugeIcons.strokeRoundedNotification03,
         onTap: () {
           Navigator.push(context, ReminderPage.route());

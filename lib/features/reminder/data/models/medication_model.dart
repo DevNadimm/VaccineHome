@@ -15,13 +15,6 @@ class MedicationModel {
           .toList(),
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'status': status,
-      'data': data?.map((e) => e.toJson()).toList(),
-    };
-  }
 }
 
 class Medication {
@@ -31,6 +24,9 @@ class Medication {
   String? medicationType;
   List<String>? times;
   String? whenToTake;
+  String? duration;
+  String? startDate;
+  String? endDate;
   String? createdAt;
   String? updatedAt;
 
@@ -41,6 +37,9 @@ class Medication {
     this.medicationType,
     this.times,
     this.whenToTake,
+    this.duration,
+    this.startDate,
+    this.endDate,
     this.createdAt,
     this.updatedAt,
   });
@@ -52,23 +51,13 @@ class Medication {
       medicationName: json['medication_name'] as String?,
       medicationType: json['medication_type'] as String?,
       times:
-          (json['times'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      (json['times'] as List<dynamic>?)?.map((e) => e as String).toList(),
       whenToTake: json['when_to_take'] as String?,
+      duration: json['duration'] as String?,
+      startDate: json['start_date'] as String?,
+      endDate: json['end_date'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'user_id': userId,
-      'medication_name': medicationName,
-      'medication_type': medicationType,
-      'times': times,
-      'when_to_take': whenToTake,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-    };
   }
 }

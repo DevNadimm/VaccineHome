@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
@@ -10,7 +11,9 @@ import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/core/utils/widgets/row_fields.dart';
 import 'package:vaccine_home/features/reminder/data/models/medication_model.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/duration_type_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/intake_toggle_cubit.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/medication_form/medication_form_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
@@ -32,15 +35,23 @@ class _MedicationFormPageState extends State<MedicationFormPage> {
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController medicationName = TextEditingController();
   final TextEditingController medicationType = TextEditingController();
+  final TextEditingController durationType = TextEditingController();
+  final TextEditingController startDate = TextEditingController();
+  final TextEditingController endDate = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    durationType.text = widget.medication?.duration ?? 'Regular';
     if (widget.medication != null) {
       medicationName.text = widget.medication!.medicationName ?? '';
       medicationType.text = widget.medication!.medicationType ?? '';
+      startDate.text = widget.medication!.startDate ?? '';
+      endDate.text = widget.medication!.endDate ?? '';
+      durationType.text = widget.medication!.duration ?? 'Regular';
       context.read<TimeListCubit>().setTimes(widget.medication!.times?.map((t) => TimeConversionHelper.to12Hour(t)).toList() ?? []);
       context.read<IntakeToggleCubit>().changeIntake(widget.medication!.whenToTake ?? 'Before Meals');
+      context.read<DurationTypeCubit>().setDurationType(widget.medication?.duration ?? 'Regular');
     }
   }
 
@@ -62,6 +73,9 @@ class _MedicationFormPageState extends State<MedicationFormPage> {
           clearFields();
           if (widget.medication != null) {
             context.read<MyMedicationsBloc>().add(FetchMyMedicationsEvent());
+            context.read<IntakeToggleCubit>().reset();
+            context.read<DurationTypeCubit>().reset();
+            context.read<TimeListCubit>().clearControllers();
             Navigator.pop(context);
           }
         }
@@ -88,6 +102,7 @@ class _MedicationFormPageState extends State<MedicationFormPage> {
         leading: AppBarBackBtn(
           onBack: () {
             context.read<IntakeToggleCubit>().reset();
+            context.read<DurationTypeCubit>().reset();
             context.read<TimeListCubit>().clearControllers();
             Navigator.pop(context);
           },
@@ -149,6 +164,58 @@ class _MedicationFormPageState extends State<MedicationFormPage> {
               ),
               const SizedBox(height: 10),
               const TimePickerListWidget(),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'Duration Type',
+                hintText: 'Select type',
+                controller: durationType,
+                isRequired: true,
+                readOnly: true,
+                validationLabel: 'Duration type',
+                onTap: () async {
+                  await showCustomBottomSheet(
+                    context: context,
+                    items: ["Regular", "Specific Date"],
+                    controller: durationType,
+                    title: 'Select Duration',
+                  );
+                  context.read<DurationTypeCubit>().setDurationType(durationType.text);
+                },
+
+              ),
+              BlocBuilder<DurationTypeCubit, String>(
+                builder: (context, state) {
+                  if (state == "Specific Date") {
+                    return Column(
+                      children: [
+                        const SizedBox(height: 16),
+                        RowFields(
+                          firstField: CustomTextField(
+                            label: 'Start Date',
+                            hintText: 'Select date',
+                            controller: startDate,
+                            isRequired: true,
+                            readOnly: true,
+                            validationLabel: 'Date',
+                            onTap: () => _selectOnlyDate(startDate),
+                          ),
+                          lastField: CustomTextField(
+                            label: 'End Date',
+                            hintText: 'Select date',
+                            controller: endDate,
+                            isRequired: true,
+                            readOnly: true,
+                            validationLabel: 'Date',
+                            onTap: () => _selectOnlyDate(endDate),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
               const SizedBox(height: 16),
               Text(
                 'When to take?',
@@ -231,16 +298,35 @@ class _MedicationFormPageState extends State<MedicationFormPage> {
           name: medicationName.text,
           type: medicationType.text,
           times: context.read<TimeListCubit>().state.map((e) => e.text).toList(),
+          duration: durationType.text,
+          startDate: startDate.text,
+          endDate: endDate.text,
           whenToTake: context.read<IntakeToggleCubit>().state,
         ),
       );
     }
   }
 
+  Future<void> _selectOnlyDate(TextEditingController controller) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null) {
+      controller.text = DateFormat('yyyy-MM-dd').format(picked);
+    }
+  }
+
+
   @override
   void dispose() {
     medicationName.dispose();
     medicationType.dispose();
+    durationType.dispose();
+    startDate.dispose();
+    endDate.dispose();
     super.dispose();
   }
 

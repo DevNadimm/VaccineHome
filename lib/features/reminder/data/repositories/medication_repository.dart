@@ -7,27 +7,35 @@ import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.
 import 'package:vaccine_home/features/reminder/data/models/medication_model.dart';
 
 class MedicationRepository {
+  static final _dioService = serviceLocator<DioService>();
+  static final _apiEndpoints = serviceLocator<ApiEndpoints>();
+
   static Future<bool> addMedication({
     required String name,
     required String type,
     required List<String> times,
     required String whenToTake,
+    required String duration,
+    String? startDate,
+    String? endDate,
   }) async {
-    final dioService = serviceLocator<DioService>();
-    final apiEndpoints = serviceLocator<ApiEndpoints>();
-
-    // Convert all times to 24-hour format
     final List<String> convertedTimes = times.map((t) => TimeConversionHelper.to24Hour(t)).toList();
 
     final Map<String, dynamic> data = {
       'medication_name': name,
       'medication_type': type,
+      'duration': duration,
       'times': convertedTimes,
       'when_to_take': whenToTake,
     };
 
-    final Response res = await dioService.postRequest(
-      apiEndpoints.addMedication,
+    if (duration == "Specific Date") {
+      data['start_date'] = startDate;
+      data['end_date'] = endDate;
+    }
+
+    final Response res = await _dioService.postRequest(
+      _apiEndpoints.addMedication,
       data: data,
       errorMessage: Messages.addMedicationFailed,
     );
@@ -40,11 +48,8 @@ class MedicationRepository {
   }
 
   static Future<List<Medication>> fetchMyMedications() async {
-    final dioService = serviceLocator<DioService>();
-    final apiEndpoints = serviceLocator<ApiEndpoints>();
-
-    final Response res = await dioService.getRequest(
-      apiEndpoints.myMedications,
+    final Response res = await _dioService.getRequest(
+      _apiEndpoints.myMedications,
       errorMessage: Messages.myMedicationsFailed,
     );
 
@@ -57,11 +62,8 @@ class MedicationRepository {
   }
 
   static Future<bool> deleteMedication(int id) async {
-    final dioService = serviceLocator<DioService>();
-    final apiEndpoints = serviceLocator<ApiEndpoints>();
-
-    final Response res = await dioService.deleteRequest(
-      apiEndpoints.deleteMedication(id),
+    final Response res = await _dioService.deleteRequest(
+      _apiEndpoints.deleteMedication(id),
       errorMessage: Messages.deleteMedicationFailed,
     );
 
@@ -78,22 +80,27 @@ class MedicationRepository {
     required String type,
     required List<String> times,
     required String whenToTake,
+    required String duration,
+    String? startDate,
+    String? endDate,
   }) async {
-    final dioService = serviceLocator<DioService>();
-    final apiEndpoints = serviceLocator<ApiEndpoints>();
-
-    // Convert all times to 24-hour format
     final List<String> convertedTimes = times.map((t) => TimeConversionHelper.to24Hour(t)).toList();
 
     final Map<String, dynamic> data = {
       'medication_name': name,
       'medication_type': type,
+      'duration': duration,
       'times': convertedTimes,
       'when_to_take': whenToTake,
     };
 
-    final Response res = await dioService.putRequest(
-      apiEndpoints.updateMedication(id),
+    if (duration == "Specific Date") {
+      data['start_date'] = startDate;
+      data['end_date'] = endDate;
+    }
+
+    final Response res = await _dioService.putRequest(
+      _apiEndpoints.updateMedication(id),
       data: data,
       errorMessage: Messages.editMedicationFailed,
     );
