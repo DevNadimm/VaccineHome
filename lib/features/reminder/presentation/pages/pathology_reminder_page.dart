@@ -17,7 +17,7 @@ class PathologyReminderPage extends StatelessWidget {
       SubModule(
         icon: HugeIcons.strokeRoundedAddToList,
         title: "Add Test",
-        subtitle: "Create a reminder for your pathology/lab tests.",
+        subtitle: "Create a alert for your pathology/lab tests.",
         onTap: () {
           Navigator.push(context, TestFormPage.route());
         },
@@ -25,7 +25,7 @@ class PathologyReminderPage extends StatelessWidget {
       SubModule(
         icon: HugeIcons.strokeRoundedListView,
         title: "My Tests",
-        subtitle: "View and manage your pathology test reminders.",
+        subtitle: "View and manage your pathology test alerts.",
         onTap: () {
           Navigator.push(context, MyTestsPage.route());
         },
@@ -34,7 +34,7 @@ class PathologyReminderPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pathology Reminder'),
+        title: const Text('Pathology Alert'),
         leading: const AppBarBackBtn(),
       ),
       body: ListView.builder(

@@ -51,7 +51,7 @@ class _ReminderPageState extends State<ReminderPage> {
     final reminderServices = [
       SubModule(
         icon: HugeIcons.strokeRoundedMedicine02,
-        title: "Medication Reminder",
+        title: "Medication Alert",
         subtitle: "Never miss your medicines on time.",
         onTap: () {
           Navigator.push(context, MedicationReminderPage.route());
@@ -59,7 +59,7 @@ class _ReminderPageState extends State<ReminderPage> {
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedStethoscope,
-        title: "Dr Consultation Reminder",
+        title: "Dr Consultation Alert",
         subtitle: "Get notified for your appointments.",
         onTap: () {
           Navigator.push(context, DrConsultationReminderPage.route());
@@ -67,7 +67,7 @@ class _ReminderPageState extends State<ReminderPage> {
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedTestTube,
-        title: "Pathology Reminder",
+        title: "Health Check Alert",
         subtitle: "Lab tests and reports made easy.",
         onTap: () {
           Navigator.push(context, PathologyReminderPage.route());
@@ -75,7 +75,7 @@ class _ReminderPageState extends State<ReminderPage> {
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedSleeping,
-        title: "Sleep Reminder",
+        title: "Sleep Alert",
         subtitle: "Maintain a healthy sleep schedule.",
         onTap: () {
           Navigator.push(context, SleepReminderPage.route());
@@ -83,7 +83,7 @@ class _ReminderPageState extends State<ReminderPage> {
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedOrganicFood,
-        title: "Meal Reminder",
+        title: "Meal Alert",
         subtitle: "Don’t skip your meals on time.",
         onTap: () {
           Navigator.push(context, MealReminderPage.route());
@@ -91,7 +91,7 @@ class _ReminderPageState extends State<ReminderPage> {
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedRainDrop,
-        title: "Water Reminder",
+        title: "Water Alert",
         subtitle: "Stay hydrated throughout the day.",
         onTap: () {
           Navigator.push(context, WaterReminderPage.route());

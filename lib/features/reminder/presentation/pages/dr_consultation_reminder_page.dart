@@ -17,7 +17,7 @@ class DrConsultationReminderPage extends StatelessWidget {
       SubModule(
         icon: HugeIcons.strokeRoundedAddToList,
         title: "Add Consultation",
-        subtitle: "Create a new reminder for doctor visits.",
+        subtitle: "Create a new alert for doctor visits.",
         onTap: () {
           Navigator.push(context, ConsultationFormPage.route());
         },
@@ -25,7 +25,7 @@ class DrConsultationReminderPage extends StatelessWidget {
       SubModule(
         icon: HugeIcons.strokeRoundedListView,
         title: "My Consultations",
-        subtitle: "View and manage your doctor visit reminders.",
+        subtitle: "View and manage your doctor visit alerts.",
         onTap: () {
           Navigator.push(context, MyConsultationsPage.route());
         },
@@ -34,7 +34,7 @@ class DrConsultationReminderPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dr Consultancy Reminder'),
+        title: const Text('Dr Consultancy Alert'),
         leading: const AppBarBackBtn(),
       ),
       body: ListView.builder(

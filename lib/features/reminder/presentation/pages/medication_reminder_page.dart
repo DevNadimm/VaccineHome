@@ -17,7 +17,7 @@ class MedicationReminderPage extends StatelessWidget {
       SubModule(
         icon: HugeIcons.strokeRoundedAddToList,
         title: "Add Medication",
-        subtitle: "Create a new reminder for your medicines.",
+        subtitle: "Create a new alert for your medicines.",
         onTap: () {
           Navigator.push(context, MedicationFormPage.route());
         },
@@ -25,7 +25,7 @@ class MedicationReminderPage extends StatelessWidget {
       SubModule(
         icon: HugeIcons.strokeRoundedListView,
         title: "My Medications",
-        subtitle: "View and manage your saved reminders.",
+        subtitle: "View and manage your saved alerts.",
         onTap: () {
           Navigator.push(context, MyMedicationsPage.route());
         },
@@ -34,7 +34,7 @@ class MedicationReminderPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Medication Reminder'),
+        title: const Text('Medication Alert'),
         leading: const AppBarBackBtn(),
       ),
       body: ListView.builder(
