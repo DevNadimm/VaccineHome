@@ -16,16 +16,16 @@ class SleepReminderPage extends StatelessWidget {
     final reminderModules = [
       SubModule(
         icon: HugeIcons.strokeRoundedAddToList,
-        title: "Add Sleep Reminder",
-        subtitle: "Create a new reminder for your sleep schedule.",
+        title: "Add Sleep Alert",
+        subtitle: "Create a new alert for your sleep schedule.",
         onTap: () {
           Navigator.push(context, SleepReminderFormPage.route());
         },
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedListView,
-        title: "My Sleep Reminders",
-        subtitle: "View and manage your sleep reminders.",
+        title: "My Sleep Alerts",
+        subtitle: "View and manage your sleep alerts.",
         onTap: () {
           Navigator.push(context, MySleepRemindersPage.route());
         },
@@ -34,7 +34,7 @@ class SleepReminderPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sleep Reminder'),
+        title: const Text('Sleep Alert'),
         leading: const AppBarBackBtn(),
       ),
       body: ListView.builder(

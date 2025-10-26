@@ -75,7 +75,7 @@ class _SleepReminderFormPageState extends State<SleepReminderFormPage> {
   Widget content() {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.sleep == null ? 'Add Sleep Reminder' : 'Edit Sleep Reminder'),
+        title: Text(widget.sleep == null ? 'Add Sleep Alert' : 'Edit Sleep Alert'),
         leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
@@ -108,7 +108,7 @@ class _SleepReminderFormPageState extends State<SleepReminderFormPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _saveSleep,
-                  child: const Text('Save Sleep Reminder'),
+                  child: const Text('Save Sleep Alert'),
                 ),
               ),
             ],

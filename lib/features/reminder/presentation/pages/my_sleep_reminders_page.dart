@@ -29,7 +29,7 @@ class _MySleepRemindersPageState extends State<MySleepRemindersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Sleep Reminders'),
+        title: const Text('My Sleep Alerts'),
         leading: const AppBarBackBtn(),
       ),
       body: BlocConsumer<MySleepRemindersBloc, MySleepRemindersState>(
@@ -60,13 +60,13 @@ class _MySleepRemindersPageState extends State<MySleepRemindersPage> {
             return const Loader(color: AppColors.black);
           } else if (state is MySleepRemindersFailure) {
             return const ErrorStateWidget(
-              title: 'Failed to Load Sleep Reminders',
-              message: 'We were unable to fetch your sleep reminders due to a network issue or server error.',
+              title: 'Failed to Load Sleep Alerts',
+              message: 'We were unable to fetch your sleep alerts due to a network issue or server error.',
             );
           } else {
             return const EmptyStateWidget(
-              title: 'No Sleep Reminders Available',
-              message: 'You don’t have any sleep reminders added yet. Please check back later.',
+              title: 'No Sleep Alerts Available',
+              message: 'You don’t have any sleep alerts added yet. Please check back later.',
             );
           }
         },

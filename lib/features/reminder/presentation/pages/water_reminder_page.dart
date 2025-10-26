@@ -16,16 +16,16 @@ class WaterReminderPage extends StatelessWidget {
     final reminderModules = [
       SubModule(
         icon: HugeIcons.strokeRoundedAddToList,
-        title: "Add Water Reminder",
-        subtitle: "Create a new reminder to stay hydrated.",
+        title: "Add Water Alert",
+        subtitle: "Create a new alert to stay hydrated.",
         onTap: () {
           Navigator.push(context, WaterReminderFormPage.route());
         },
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedListView,
-        title: "My Water Reminders",
-        subtitle: "View and manage your water intake reminders.",
+        title: "My Water Alerts",
+        subtitle: "View and manage your water intake alerts.",
         onTap: () {
           Navigator.push(context, MyWaterRemindersPage.route());
         },
@@ -34,7 +34,7 @@ class WaterReminderPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Water Reminder'),
+        title: const Text('Water Alert'),
         leading: const AppBarBackBtn(),
       ),
       body: ListView.builder(

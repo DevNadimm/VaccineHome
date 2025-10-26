@@ -77,7 +77,7 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
   Widget content() {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.water == null ? 'Add Water Reminder' : 'Edit Water Reminder'),
+        title: Text(widget.water == null ? 'Add Water Alert' : 'Edit Water Alert'),
         leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
@@ -97,12 +97,12 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Reminder Time',
+                label: 'Alert Time',
                 hintText: 'Select time',
                 controller: timeController,
                 isRequired: true,
                 readOnly: true,
-                validationLabel: 'Reminder Time',
+                validationLabel: 'Alert Time',
                 onTap: () async {
                   final TimeOfDay? time = await showTimePicker(
                     context: context,
@@ -119,7 +119,7 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _saveWater,
-                  child: const Text('Save Water Reminder'),
+                  child: const Text('Save Water Alert'),
                 ),
               ),
             ],

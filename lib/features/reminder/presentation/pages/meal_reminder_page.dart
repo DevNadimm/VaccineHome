@@ -16,16 +16,16 @@ class MealReminderPage extends StatelessWidget {
     final reminderModules = [
       SubModule(
         icon: HugeIcons.strokeRoundedAddToList,
-        title: "Add Meal Reminder",
-        subtitle: "Create a new reminder for your meals.",
+        title: "Add Meal Alert",
+        subtitle: "Create a new alert for your meals.",
         onTap: () {
           Navigator.push(context, MealReminderFormPage.route());
         },
       ),
       SubModule(
         icon: HugeIcons.strokeRoundedListView,
-        title: "My Meal Reminders",
-        subtitle: "View and manage your meal reminders.",
+        title: "My Meal Alerts",
+        subtitle: "View and manage your meal alerts.",
         onTap: () {
           Navigator.push(context, MyMealRemindersPage.route());
         },
@@ -34,7 +34,7 @@ class MealReminderPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meal Reminder'),
+        title: const Text('Meal Alert'),
         leading: const AppBarBackBtn(),
       ),
       body: ListView.builder(

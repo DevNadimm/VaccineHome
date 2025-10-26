@@ -29,7 +29,7 @@ class _MyWaterRemindersPageState extends State<MyWaterRemindersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Water Reminders'),
+        title: const Text('My Water Alerts'),
         leading: const AppBarBackBtn(),
       ),
       body: BlocConsumer<MyWaterRemindersBloc, MyWaterRemindersState>(
@@ -60,13 +60,13 @@ class _MyWaterRemindersPageState extends State<MyWaterRemindersPage> {
             return const Loader(color: AppColors.black);
           } else if (state is MyWaterRemindersFailure) {
             return const ErrorStateWidget(
-              title: 'Failed to Load Water Reminders',
-              message: 'We were unable to fetch your water reminders due to a network issue or server error.',
+              title: 'Failed to Load Water Alerts',
+              message: 'We were unable to fetch your water alerts due to a network issue or server error.',
             );
           } else {
             return const EmptyStateWidget(
-              title: 'No Water Reminders Available',
-              message: 'You don’t have any water reminders added yet. Please check back later.',
+              title: 'No Water Alerts Available',
+              message: 'You don’t have any water alerts added yet. Please check back later.',
             );
           }
         },

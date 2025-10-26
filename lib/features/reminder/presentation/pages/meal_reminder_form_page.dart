@@ -81,7 +81,7 @@ class _MealReminderFormPageState extends State<MealReminderFormPage> {
   Widget content() {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.meal == null ? 'Add Meal Reminder' : 'Edit Meal Reminder'),
+        title: Text(widget.meal == null ? 'Add Meal Alert' : 'Edit Meal Alert'),
         leading: AppBarBackBtn(
           onBack: () {
             context.read<TimeListCubit>().clearControllers();
@@ -107,7 +107,7 @@ class _MealReminderFormPageState extends State<MealReminderFormPage> {
               Row(
                 children: [
                   Text(
-                    'Reminder Time(s)',
+                    'Alert Time(s)',
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 16,
@@ -134,7 +134,7 @@ class _MealReminderFormPageState extends State<MealReminderFormPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _saveMeal,
-                  child: const Text('Save Meal Reminder'),
+                  child: const Text('Save Meal Alert'),
                 ),
               ),
             ],

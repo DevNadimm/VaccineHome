@@ -29,7 +29,7 @@ class _MyMealRemindersPageState extends State<MyMealRemindersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Meal Reminders'),
+        title: const Text('My Meal Alerts'),
         leading: const AppBarBackBtn(),
       ),
       body: BlocConsumer<MyMealRemindersBloc, MyMealRemindersState>(
@@ -60,13 +60,13 @@ class _MyMealRemindersPageState extends State<MyMealRemindersPage> {
             return const Loader(color: AppColors.black);
           } else if (state is MyMealRemindersFailure) {
             return const ErrorStateWidget(
-              title: 'Failed to Load Meal Reminders',
-              message: 'We were unable to fetch your meal reminders due to a network issue or server error.',
+              title: 'Failed to Load Meal Alerts',
+              message: 'We were unable to fetch your meal alerts due to a network issue or server error.',
             );
           } else {
             return const EmptyStateWidget(
-              title: 'No Meal Reminders Available',
-              message: 'You don’t have any meal reminders added yet. Please check back later.',
+              title: 'No Meal Alerts Available',
+              message: 'You don’t have any meal alerts added yet. Please check back later.',
             );
           }
         },
