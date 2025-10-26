@@ -13,11 +13,8 @@ class VaccineCardRequestRepository {
     required String father,
     required String mother,
     required String address,
-    required String email,
     required String phoneNumber,
     required String whatsappImo,
-    required String passportNo,
-    required String birthCertificateNumber,
     required String presentNationality,
   }) async {
     final dioService = serviceLocator<DioService>();
@@ -31,11 +28,8 @@ class VaccineCardRequestRepository {
       "father": father,
       "mother": mother,
       "address": address,
-      "email": email,
       "phone_number": phoneNumber,
       "whatsapp_imo": whatsappImo,
-      "passport_no": passportNo,
-      "birth_certificate_number": birthCertificateNumber,
       "present_nationality": presentNationality,
     };
 

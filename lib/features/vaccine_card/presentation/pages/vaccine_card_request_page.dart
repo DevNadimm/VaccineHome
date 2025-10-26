@@ -33,12 +33,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
   final TextEditingController gender = TextEditingController();
   final TextEditingController nationality = TextEditingController();
 
-  // Identity Docs
-  final TextEditingController birthCertificateNo = TextEditingController();
-  final TextEditingController passportNo = TextEditingController();
-
   // Contact Info
-  final TextEditingController email = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController whatsAppImo = TextEditingController();
   final TextEditingController address = TextEditingController();
@@ -173,33 +168,6 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                 hintText: 'Enter nationality',
                 validationLabel: 'Nationality',
               ),
-              const SizedBox(height: 24),
-              CustomTextField(
-                label: 'Birth Certificate No',
-                controller: birthCertificateNo,
-                isRequired: false,
-                keyboardType: TextInputType.number,
-                hintText: 'Enter birth certificate number',
-                validationLabel: 'Birth Certificate No',
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(
-                label: 'Passport No',
-                controller: passportNo,
-                isRequired: false,
-                keyboardType: TextInputType.text,
-                hintText: 'Enter passport number',
-                validationLabel: 'Passport No',
-              ),
-              const SizedBox(height: 24),
-              CustomTextField(
-                label: 'Email',
-                controller: email,
-                isRequired: false,
-                keyboardType: TextInputType.emailAddress,
-                hintText: 'Enter email address',
-                validationLabel: 'Email',
-              ),
               const SizedBox(height: 16),
               CustomTextField(
                 label: 'Phone Number',
@@ -211,12 +179,12 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'WhatsApp / Imo',
+                label: 'WhatsApp',
                 controller: whatsAppImo,
                 isRequired: false,
                 keyboardType: TextInputType.phone,
-                hintText: 'Enter WhatsApp or Imo number',
-                validationLabel: 'WhatsApp/Imo',
+                hintText: 'Enter whatsapp number',
+                validationLabel: 'WhatsApp',
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -254,11 +222,8 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
           father: fatherName.text.trim(),
           mother: matherName.text.trim(),
           address: address.text.trim(),
-          email: email.text.trim(),
           phoneNumber: phoneNumber.text.trim(),
           whatsappImo: whatsAppImo.text.trim(),
-          passportNo: passportNo.text.trim(),
-          birthCertificateNumber: birthCertificateNo.text.trim(),
           presentNationality: nationality.text.trim(),
         ),
       );
@@ -274,9 +239,6 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
     dateOfBirth.dispose();
     gender.dispose();
     nationality.dispose();
-    birthCertificateNo.dispose();
-    passportNo.dispose();
-    email.dispose();
     phoneNumber.dispose();
     whatsAppImo.dispose();
     address.dispose();
@@ -291,9 +253,6 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
     dateOfBirth.clear();
     gender.clear();
     nationality.clear();
-    birthCertificateNo.clear();
-    passportNo.clear();
-    email.clear();
     phoneNumber.clear();
     whatsAppImo.clear();
     address.clear();

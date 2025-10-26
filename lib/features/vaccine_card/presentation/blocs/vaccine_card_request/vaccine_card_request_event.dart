@@ -10,11 +10,8 @@ class SubmitVaccineCardRequestEvent extends VaccineCardRequestEvent {
   final String father;
   final String mother;
   final String address;
-  final String email;
   final String phoneNumber;
   final String whatsappImo;
-  final String passportNo;
-  final String birthCertificateNumber;
   final String presentNationality;
 
   SubmitVaccineCardRequestEvent({
@@ -25,11 +22,8 @@ class SubmitVaccineCardRequestEvent extends VaccineCardRequestEvent {
     required this.father,
     required this.mother,
     required this.address,
-    required this.email,
     required this.phoneNumber,
     required this.whatsappImo,
-    required this.passportNo,
-    required this.birthCertificateNumber,
     required this.presentNationality,
   });
 }
