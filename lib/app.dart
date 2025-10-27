@@ -27,6 +27,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/menstrual_cycl
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_consultations/my_consultations_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_meal_reminders/my_meal_reminders_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_menstrual_cycle_alerts/my_menstrual_cycle_alerts_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_sleep_reminders/my_sleep_reminders_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_tests/my_tests_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_water_reminders/my_water_reminders_bloc.dart';
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => MyWaterRemindersBloc()),
         BlocProvider(create: (_) => MySleepRemindersBloc()),
         BlocProvider(create: (_) => MenstrualCycleAlertFormBloc()),
+        BlocProvider(create: (_) => MyMenstrualCycleAlertsBloc()),
         BlocProvider(create: (_) => DurationTypeCubit()),
 
         // 🔹 Vaccine

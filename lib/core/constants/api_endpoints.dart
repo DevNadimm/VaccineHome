@@ -38,8 +38,8 @@ class ApiEndpoints {
   String deleteSleepReminder(int id) => "sleep-reminder/$id/delete";
   final String addMenstrualCycleAlert = "menstrual-cycle-alert/store";
   final String myMenstrualCycleAlerts = "menstrual-cycle-alerts";
-  String updateMenstrualCycleAlert(int id) => "menstrual-cycle-alerts/$id/update";
-  String deleteMenstrualCycleAlert(int id) => "menstrual-cycle-alerts/$id/delete";
+  String updateMenstrualCycleAlert(int id) => "menstrual-cycle-alert/$id/update";
+  String deleteMenstrualCycleAlert(int id) => "menstrual-cycle-alert/$id/delete";
 
   // 📦 Profile
   String get getAdvertisements => 'advertisements';

@@ -4,6 +4,7 @@ import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/menstrual_cycle_alert_form_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/my_menstrual_cycle_alerts_page.dart';
 
 class MenstrualCycleAlertPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const MenstrualCycleAlertPage());
@@ -26,7 +27,7 @@ class MenstrualCycleAlertPage extends StatelessWidget {
         title: "My Cycle Alerts",
         subtitle: "View and manage your menstrual cycle alerts.",
         onTap: () {
-          // Navigator.push(context, MyMenstrualCycleAlertsPage.route());
+          Navigator.push(context, MyMenstrualCycleAlertsPage.route());
         },
       ),
     ];
