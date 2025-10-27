@@ -56,9 +56,9 @@ class _MealReminderFormPageState extends State<MealReminderFormPage> {
             widget.meal == null ? Messages.addMealReminderSuccess : Messages.editMealReminderSuccess,
             type: MessageType.success,
           );
+          context.read<MyMealRemindersBloc>().add(FetchMyMealRemindersEvent());
           clearFields();
           if (widget.meal != null) {
-            context.read<MyMealRemindersBloc>().add(FetchMyMealRemindersEvent());
             Navigator.pop(context);
           }
         }

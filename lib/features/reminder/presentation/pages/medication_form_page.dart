@@ -70,9 +70,9 @@ class _MedicationFormPageState extends State<MedicationFormPage> {
             widget.medication == null ? Messages.addMedicationSuccess : Messages.editMedicationSuccess,
             type: MessageType.success,
           );
+          context.read<MyMedicationsBloc>().add(FetchMyMedicationsEvent());
           clearFields();
           if (widget.medication != null) {
-            context.read<MyMedicationsBloc>().add(FetchMyMedicationsEvent());
             context.read<IntakeToggleCubit>().reset();
             context.read<DurationTypeCubit>().reset();
             context.read<TimeListCubit>().clearControllers();

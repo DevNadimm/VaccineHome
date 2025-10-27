@@ -69,9 +69,9 @@ class _ConsultationFormPageState extends State<ConsultationFormPage> {
             widget.consultation == null ? Messages.addConsultationSuccess : Messages.editConsultationSuccess,
             type: MessageType.success,
           );
+          context.read<MyConsultationsBloc>().add(FetchMyConsultationsEvent());
           clearFields();
           if (widget.consultation != null) {
-            context.read<MyConsultationsBloc>().add(FetchMyConsultationsEvent());
             Navigator.pop(context);
           }
         }

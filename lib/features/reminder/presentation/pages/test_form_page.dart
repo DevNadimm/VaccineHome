@@ -69,9 +69,9 @@ class _TestFormPageState extends State<TestFormPage> {
             widget.test == null ? Messages.addTestSuccess : Messages.editTestSuccess,
             type: MessageType.success,
           );
+          context.read<MyTestsBloc>().add(FetchMyTestsEvent());
           clearFields();
           if (widget.test != null) {
-            context.read<MyTestsBloc>().add(FetchMyTestsEvent());
             Navigator.pop(context);
           }
         }

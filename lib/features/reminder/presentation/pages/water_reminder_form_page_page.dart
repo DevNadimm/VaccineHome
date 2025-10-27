@@ -52,9 +52,9 @@ class _WaterReminderFormPageState extends State<WaterReminderFormPage> {
             widget.water == null ? Messages.addWaterReminderSuccess : Messages.editWaterReminderSuccess,
             type: MessageType.success,
           );
+          context.read<MyWaterRemindersBloc>().add(FetchMyWaterRemindersEvent());
           clearFields();
           if (widget.water != null) {
-            context.read<MyWaterRemindersBloc>().add(FetchMyWaterRemindersEvent());
             Navigator.pop(context);
           }
         }

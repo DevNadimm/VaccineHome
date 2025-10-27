@@ -51,9 +51,9 @@ class _MenstrualCycleAlertFormPageState extends State<MenstrualCycleAlertFormPag
             widget.menstrualCycle == null ? Messages.addMenstrualCycleAlertSuccess : Messages.editMenstrualCycleAlertSuccess,
             type: MessageType.success,
           );
+          context.read<MyMenstrualCycleAlertsBloc>().add(FetchMyMenstrualCycleAlertsEvent());
           clearFields();
           if (widget.menstrualCycle != null) {
-            // context.read<MyMenstrualCycleAlertsBloc>().add(FetchMyMenstrualCycleAlertsEvent());
             Navigator.pop(context);
           }
         }

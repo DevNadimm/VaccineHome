@@ -50,9 +50,9 @@ class _SleepReminderFormPageState extends State<SleepReminderFormPage> {
             widget.sleep == null ? Messages.addSleepReminderSuccess : Messages.editSleepReminderSuccess,
             type: MessageType.success,
           );
+          context.read<MySleepRemindersBloc>().add(FetchMySleepRemindersEvent());
           clearFields();
           if (widget.sleep != null) {
-            context.read<MySleepRemindersBloc>().add(FetchMySleepRemindersEvent());
             Navigator.pop(context);
           }
         }
