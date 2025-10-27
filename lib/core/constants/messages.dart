@@ -92,6 +92,15 @@ class Messages {
   static const String deleteSleepReminderSuccess = "Sleep reminder deleted successfully!";
   static const String mySleepRemindersFailed = "Failed to fetch sleep reminders. Please try again.";
 
+  // ------------------- Menstrual Cycle Alert -------------------
+  static const String addMenstrualCycleAlertFailed = "Failed to add menstrual cycle alert. Please try again.";
+  static const String addMenstrualCycleAlertSuccess = "Menstrual cycle alert added successfully!";
+  static const String editMenstrualCycleAlertFailed = "Failed to update menstrual cycle alert. Please try again.";
+  static const String editMenstrualCycleAlertSuccess = "Menstrual cycle alert updated successfully!";
+  static const String deleteMenstrualCycleAlertFailed = "Failed to delete menstrual cycle alert. Please try again.";
+  static const String deleteMenstrualCycleAlertSuccess = "Menstrual cycle alert deleted successfully!";
+  static const String myMenstrualCycleAlertsFailed = "Failed to fetch menstrual cycle alerts. Please try again.";
+
   // ------------------- Vaccine Orders -------------------
   static const String vaccineOrderFailed = "Failed to send vaccine order. Please try again.";
   static const String vaccineOrderSuccess = "Vaccine order submitted successfully!";

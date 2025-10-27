@@ -13,6 +13,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/my_water_remin
 import 'package:vaccine_home/features/reminder/presentation/pages/dr_consultation_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/meal_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/medication_reminder_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/menstrual_cycle_alert_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/pathology_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/sleep_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/water_reminder_page.dart';
@@ -95,6 +96,14 @@ class _ReminderPageState extends State<ReminderPage> {
         subtitle: "Stay hydrated throughout the day.",
         onTap: () {
           Navigator.push(context, WaterReminderPage.route());
+        },
+      ),
+      SubModule(
+        icon: HugeIcons.strokeRoundedCalendar01,
+        title: "Menstrual Cycle Alert",
+        subtitle: "Track and manage your menstrual cycle easily.",
+        onTap: () {
+          Navigator.push(context, MenstrualCycleAlertPage.route());
         },
       ),
     ];
