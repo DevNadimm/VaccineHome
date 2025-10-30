@@ -3,6 +3,7 @@ import 'package:vaccine_home/core/constants/api_endpoints.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
+import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
 import 'package:vaccine_home/features/reminder/data/models/physical_exercise_alert_model.dart';
 
 class PhysicalExerciseAlertRepository {
@@ -17,10 +18,12 @@ class PhysicalExerciseAlertRepository {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
+    final formattedTime = TimeConversionHelper.to24Hour(time);
+
     final Map<String, dynamic> data = {
       'exercise_name': exerciseName,
       'duration': duration,
-      'time': time,
+      'time': formattedTime,
       'start_date': startDate,
       'end_date': endDate,
     };
@@ -68,10 +71,12 @@ class PhysicalExerciseAlertRepository {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
+    final formattedTime = TimeConversionHelper.to24Hour(time);
+
     final Map<String, dynamic> data = {
       'exercise_name': exerciseName,
       'duration': duration,
-      'time': time,
+      'time': formattedTime,
       'start_date': startDate,
       'end_date': endDate,
     };

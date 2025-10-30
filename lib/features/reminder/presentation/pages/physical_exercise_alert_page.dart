@@ -3,6 +3,8 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/my_physical_exercise_alerts_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/physical_exercise_alert_form_page.dart';
 
 class PhysicalExerciseAlertPage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const PhysicalExerciseAlertPage());
@@ -17,7 +19,7 @@ class PhysicalExerciseAlertPage extends StatelessWidget {
         title: "Add Exercise Alert",
         subtitle: "Set reminders for your daily workouts or activities.",
         onTap: () {
-          // Navigator.push(context, PhysicalExerciseAlertFormPage.route());
+          Navigator.push(context, PhysicalExerciseAlertFormPage.route());
         },
       ),
       SubModule(
@@ -25,7 +27,7 @@ class PhysicalExerciseAlertPage extends StatelessWidget {
         title: "My Exercise Alerts",
         subtitle: "View and manage your physical exercise alerts.",
         onTap: () {
-          // Navigator.push(context, MyPhysicalExerciseAlertsPage.route());
+          Navigator.push(context, MyPhysicalExerciseAlertsPage.route());
         },
       ),
     ];

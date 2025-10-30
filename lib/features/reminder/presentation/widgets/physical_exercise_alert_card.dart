@@ -3,16 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.dart';
-import 'package:vaccine_home/features/reminder/data/models/menstrual_cycle_alert_model.dart';
+import 'package:vaccine_home/core/utils/helper_functions/time_conversion_helper.dart';
+import 'package:vaccine_home/features/reminder/data/models/physical_exercise_alert_model.dart';
 
-class MenstrualCycleAlertCard extends StatelessWidget {
-  final MenstrualCycleData menstrualCycle;
+class PhysicalExerciseAlertCard extends StatelessWidget {
+  final ExerciseData exercise;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
 
-  const MenstrualCycleAlertCard({
+  const PhysicalExerciseAlertCard({
     super.key,
-    required this.menstrualCycle,
+    required this.exercise,
     this.onEdit,
     this.onDelete,
   });
@@ -48,15 +49,33 @@ class MenstrualCycleAlertCard extends StatelessWidget {
               _buildHeader(),
               const SizedBox(height: 12),
               _buildInfoRow(
+                icon: HugeIcons.strokeRoundedRunningShoes,
+                label: 'Exercise Name',
+                text: exercise.exerciseName ?? "No exercise name set",
+              ),
+              const SizedBox(height: 8),
+              _buildInfoRow(
+                icon: HugeIcons.strokeRoundedClock01,
+                label: 'Duration',
+                text: exercise.duration ?? "No duration set",
+              ),
+              const SizedBox(height: 8),
+              _buildInfoRow(
+                icon: HugeIcons.strokeRoundedAlarmClock,
+                label: 'Time',
+                text: TimeConversionHelper.to12Hour(exercise.time ?? ''),
+              ),
+              const SizedBox(height: 8),
+              _buildInfoRow(
                 icon: HugeIcons.strokeRoundedCalendar03,
                 label: 'Start Date',
-                text: DateConversionHelper.toDDMMYYYY(menstrualCycle.lastCycleStartDate ?? ''),
+                text: DateConversionHelper.toDDMMYYYY(exercise.startDate ?? ''),
               ),
               const SizedBox(height: 8),
               _buildInfoRow(
                 icon: HugeIcons.strokeRoundedCalendar03,
                 label: 'End Date',
-                text: DateConversionHelper.toDDMMYYYY(menstrualCycle.lastCycleEndDate ?? ''),
+                text: DateConversionHelper.toDDMMYYYY(exercise.endDate ?? ''),
               ),
               const SizedBox(height: 12),
               _buildActions(),
@@ -69,7 +88,7 @@ class MenstrualCycleAlertCard extends StatelessWidget {
 
   Widget _buildHeader() {
     return Text(
-      "Menstrual Cycle Alert",
+      "Physical Exercise Alert",
       style: GoogleFonts.poppins(
         fontSize: 18,
         fontWeight: FontWeight.w700,

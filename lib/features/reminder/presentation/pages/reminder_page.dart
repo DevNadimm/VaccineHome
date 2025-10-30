@@ -8,6 +8,7 @@ import 'package:vaccine_home/features/reminder/presentation/blocs/my_consultatio
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_meal_reminders/my_meal_reminders_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_medications/my_medications_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_menstrual_cycle_alerts/my_menstrual_cycle_alerts_bloc.dart';
+import 'package:vaccine_home/features/reminder/presentation/blocs/my_physical_exercise_alerts/my_physical_exercise_alerts_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_sleep_reminders/my_sleep_reminders_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_tests/my_tests_bloc.dart';
 import 'package:vaccine_home/features/reminder/presentation/blocs/my_water_reminders/my_water_reminders_bloc.dart';
@@ -40,6 +41,7 @@ class _ReminderPageState extends State<ReminderPage> {
     _fetchMyMealReminders();
     _fetchMyWaterReminders();
     _fetchMyMenstrualCycleAlerts();
+    _fetchMyPhysicalExerciseAlerts();
     super.initState();
   }
 
@@ -50,6 +52,7 @@ class _ReminderPageState extends State<ReminderPage> {
   _fetchMyMealReminders() => context.read<MyMealRemindersBloc>().add(FetchMyMealRemindersEvent());
   _fetchMyWaterReminders() => context.read<MyWaterRemindersBloc>().add(FetchMyWaterRemindersEvent());
   _fetchMyMenstrualCycleAlerts() => context.read<MyMenstrualCycleAlertsBloc>().add(FetchMyMenstrualCycleAlertsEvent());
+  _fetchMyPhysicalExerciseAlerts() => context.read<MyPhysicalExerciseAlertsBloc>().add(FetchMyPhysicalExerciseAlertsEvent());
 
   @override
   Widget build(BuildContext context) {
