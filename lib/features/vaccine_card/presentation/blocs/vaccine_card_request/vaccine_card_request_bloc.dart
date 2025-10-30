@@ -20,6 +20,7 @@ class VaccineCardRequestBloc extends Bloc<VaccineCardRequestEvent, VaccineCardRe
         firstNameEnglish: event.firstNameEnglish,
         lastNameEnglish: event.lastNameEnglish,
         gender: event.gender,
+        vaccinationCentre: event.vaccinationCentre,
         birthDate: event.birthDate,
         father: event.father,
         mother: event.mother,

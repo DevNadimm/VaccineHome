@@ -6,6 +6,7 @@ class SubmitVaccineCardRequestEvent extends VaccineCardRequestEvent {
   final String firstNameEnglish;
   final String lastNameEnglish;
   final String gender;
+  final String vaccinationCentre;
   final String birthDate;
   final String father;
   final String mother;
@@ -18,6 +19,7 @@ class SubmitVaccineCardRequestEvent extends VaccineCardRequestEvent {
     required this.firstNameEnglish,
     required this.lastNameEnglish,
     required this.gender,
+    required this.vaccinationCentre,
     required this.birthDate,
     required this.father,
     required this.mother,

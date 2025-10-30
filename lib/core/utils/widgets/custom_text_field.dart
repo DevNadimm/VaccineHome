@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 
-enum FieldType { text, email, number, password }
-
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
@@ -22,7 +20,6 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.validator,
     this.obscureText = false,
-    this.fieldType = FieldType.text,
   });
 
   final String label;
@@ -38,41 +35,8 @@ class CustomTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  final FormFieldValidator<String>? validator;
+  final FormFieldValidator? validator;
   final bool obscureText;
-  final FieldType fieldType;
-
-  String? _autoValidator(String? value) {
-    if (isRequired && (value == null || value.trim().isEmpty)) {
-      return '${validationLabel[0].toUpperCase()}${validationLabel.substring(1).toLowerCase()} is required';
-    }
-
-    if (value != null && value.trim().isNotEmpty) {
-      switch (fieldType) {
-        case FieldType.email:
-          final emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-          if (!emailRegex.hasMatch(value.trim())) {
-            return 'Please enter a valid email';
-          }
-          break;
-        case FieldType.number:
-          if (double.tryParse(value.trim()) == null) {
-            return 'Please enter a valid number';
-          }
-          break;
-        case FieldType.password:
-          if (value.trim().length < 6) {
-            return 'Password must be at least 6 characters';
-          }
-          break;
-        case FieldType.text:
-        default:
-          break;
-      }
-    }
-
-    return null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +81,18 @@ class CustomTextField extends StatelessWidget {
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
           ),
-          obscureText: obscureText || fieldType == FieldType.password,
+          obscureText: obscureText,
           maxLines: maxLines,
           onChanged: onChanged,
-          validator: validator ?? _autoValidator,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: isRequired
+              ? validator ??
+                  (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return '${validationLabel[0].toUpperCase()}${validationLabel.substring(1).toLowerCase()} is required';
+                    }
+                    return null;
+                  }
+              : null,
         ),
       ],
     );

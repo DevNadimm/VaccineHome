@@ -31,6 +31,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
   final TextEditingController matherName = TextEditingController();
   final TextEditingController dateOfBirth = TextEditingController();
   final TextEditingController gender = TextEditingController();
+  final TextEditingController vaccinationCentre = TextEditingController();
   final TextEditingController nationality = TextEditingController();
 
   // Contact Info
@@ -162,6 +163,23 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
               ),
               const SizedBox(height: 16),
               CustomTextField(
+                label: 'Vaccination Centre',
+                controller: vaccinationCentre,
+                isRequired: true,
+                hintText: 'Select vaccination centre',
+                validationLabel: 'Vaccination Centre',
+                readOnly: true,
+                onTap: () {
+                  showCustomBottomSheet(
+                    context: context,
+                    items: ['Vaccine Home', 'Vaccine Valley'],
+                    controller: vaccinationCentre,
+                    title: 'Select Vaccination Centre',
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
                 label: 'Nationality',
                 controller: nationality,
                 isRequired: true,
@@ -218,6 +236,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
           firstNameEnglish: firstName.text.trim(),
           lastNameEnglish: lastName.text.trim(),
           gender: gender.text.trim(),
+          vaccinationCentre: vaccinationCentre.text.trim(),
           birthDate: dateOfBirth.text.trim(),
           father: fatherName.text.trim(),
           mother: matherName.text.trim(),
