@@ -101,6 +101,15 @@ class Messages {
   static const String deleteMenstrualCycleAlertSuccess = "Menstrual cycle alert deleted successfully!";
   static const String myMenstrualCycleAlertsFailed = "Failed to fetch menstrual cycle alerts. Please try again.";
 
+  // ------------------- Physical Exercise Alert -------------------
+  static const String addPhysicalExerciseAlertFailed = "Failed to add physical exercise alert. Please try again.";
+  static const String addPhysicalExerciseAlertSuccess = "Physical exercise alert added successfully!";
+  static const String editPhysicalExerciseAlertFailed = "Failed to update physical exercise alert. Please try again.";
+  static const String editPhysicalExerciseAlertSuccess = "Physical exercise alert updated successfully!";
+  static const String deletePhysicalExerciseAlertFailed = "Failed to delete physical exercise alert. Please try again.";
+  static const String deletePhysicalExerciseAlertSuccess = "Physical exercise alert deleted successfully!";
+  static const String myPhysicalExerciseAlertsFailed = "Failed to fetch physical exercise alerts. Please try again.";
+
   // ------------------- Vaccine Orders -------------------
   static const String vaccineOrderFailed = "Failed to send vaccine order. Please try again.";
   static const String vaccineOrderSuccess = "Vaccine order submitted successfully!";

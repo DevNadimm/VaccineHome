@@ -40,6 +40,11 @@ class ApiEndpoints {
   final String myMenstrualCycleAlerts = "menstrual-cycle-alerts";
   String updateMenstrualCycleAlert(int id) => "menstrual-cycle-alert/$id/update";
   String deleteMenstrualCycleAlert(int id) => "menstrual-cycle-alert/$id/delete";
+  final String addPhysicalExerciseAlert = "physical-exercise-alert/store";
+  final String myPhysicalExerciseAlerts = "physical-exercise-alerts";
+  String updatePhysicalExerciseAlert(int id) => "physical-exercise-alert/$id/update";
+  String deletePhysicalExerciseAlert(int id) => "physical-exercise-alert/$id/delete";
+
 
   // 📦 Profile
   String get getAdvertisements => 'advertisements';
