@@ -13,7 +13,7 @@ class RecommendationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = recommendation.product;
-    final productImage = product?.image ?? '';
+    final productImage = product?.images?[0] ?? '';
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),

@@ -54,7 +54,7 @@ class VaccineRecommendation {
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       product:
-          json['product'] != null ? Product.fromJson(json['product']) : null,
+      json['product'] != null ? Product.fromJson(json['product']) : null,
     );
   }
 }
@@ -63,6 +63,7 @@ class Product {
   final int? id;
   final String? name;
   final String? image;
+  final List<String>? images;
   final String? price;
   final String? productType;
   final String? description;
@@ -76,6 +77,7 @@ class Product {
     this.id,
     this.name,
     this.image,
+    this.images,
     this.price,
     this.productType,
     this.description,
@@ -91,6 +93,7 @@ class Product {
       id: json['id'] as int?,
       name: json['name'] as String?,
       image: json['image'] as String?,
+      images: (json['images'] as List?)?.map((e) => e.toString()).toList(),
       price: json['price'] as String?,
       productType: json['product_type'] as String?,
       description: json['description'] as String?,
