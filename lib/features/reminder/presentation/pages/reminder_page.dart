@@ -16,6 +16,7 @@ import 'package:vaccine_home/features/reminder/presentation/pages/meal_reminder_
 import 'package:vaccine_home/features/reminder/presentation/pages/medication_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/menstrual_cycle_alert_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/pathology_reminder_page.dart';
+import 'package:vaccine_home/features/reminder/presentation/pages/physical_exercise_alert_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/sleep_reminder_page.dart';
 import 'package:vaccine_home/features/reminder/presentation/pages/water_reminder_page.dart';
 
@@ -107,6 +108,14 @@ class _ReminderPageState extends State<ReminderPage> {
         subtitle: "Track and manage your menstrual cycle easily.",
         onTap: () {
           Navigator.push(context, MenstrualCycleAlertPage.route());
+        },
+      ),
+      SubModule(
+        icon: HugeIcons.strokeRoundedYogaMat,
+        title: "Physical Exercise Alert",
+        subtitle: "Stay active with daily workout reminders.",
+        onTap: () {
+          Navigator.push(context, PhysicalExerciseAlertPage.route());
         },
       ),
     ];
