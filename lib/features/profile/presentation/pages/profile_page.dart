@@ -10,7 +10,7 @@ import 'package:vaccine_home/features/profile/presentation/blocs/feedback/feedba
 import 'package:vaccine_home/features/profile/presentation/blocs/vaccine_order_history/vaccine_order_history_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/change_password_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/edit_profile_page.dart';
-import 'package:vaccine_home/features/profile/presentation/pages/faq_page.dart';
+import 'package:vaccine_home/features/profile/presentation/pages/faq_category_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/feedbacks_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/privacy_policy_page.dart';
 import 'package:vaccine_home/features/profile/presentation/pages/terms_and_conditions_page.dart';
@@ -135,16 +135,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedHelpCircle,
-                  title: "FAQ",
+                  title: "FAQs",
                   onTap: () {
-                    Navigator.push(context, FAQPage.route());
+                    Navigator.push(context, FAQCategoryPage.route());
                   },
                 ),
               ],
             ),
             const SizedBox(height: 24),
 
-            /// Settings Section
+            /// Settings Sectionfvm flutter run
             ProfileSection(
               title: "Settings",
               items: [

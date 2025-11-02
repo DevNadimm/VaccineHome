@@ -7,9 +7,9 @@ class FAQInitial extends FAQState {}
 class FAQLoading extends FAQState {}
 
 class FAQLoaded extends FAQState {
-  final List<FAQ> faqs;
+  final List<Category> categories;
 
-  FAQLoaded(this.faqs);
+  FAQLoaded(this.categories);
 }
 
 class FAQFailure extends FAQState {

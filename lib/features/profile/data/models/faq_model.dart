@@ -8,73 +8,64 @@ class FAQModel {
       data: json['data'] != null ? FAQData.fromJson(json['data']) : null,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'data': data?.toJson(),
-    };
-  }
 }
 
 class FAQData {
   final int? status;
-  final List<FAQ>? faqs;
+  final List<Category>? categories;
 
-  FAQData({this.status, this.faqs});
+  FAQData({this.status, this.categories});
 
   factory FAQData.fromJson(Map<String, dynamic> json) {
     return FAQData(
       status: json['status'] as int?,
+      categories: (json['categories'] as List<dynamic>?)
+          ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+}
+
+class Category {
+  final int? id;
+  final String? name;
+  final List<FAQ>? faqs;
+
+  Category({this.id, this.name, this.faqs});
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
       faqs: (json['faqs'] as List<dynamic>?)
           ?.map((e) => FAQ.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'status': status,
-      'faqs': faqs?.map((e) => e.toJson()).toList(),
-    };
-  }
 }
 
 class FAQ {
   final int? id;
+  final String? faqCategoryId;
   final String? question;
   final String? answer;
   final String? isActive;
-  final String? createdAt;
-  final String? updatedAt;
 
   FAQ({
     this.id,
+    this.faqCategoryId,
     this.question,
     this.answer,
     this.isActive,
-    this.createdAt,
-    this.updatedAt,
   });
 
   factory FAQ.fromJson(Map<String, dynamic> json) {
     return FAQ(
       id: json['id'] as int?,
+      faqCategoryId: json['faq_category_id'] as String?,
       question: json['question'] as String?,
       answer: json['answer'] as String?,
       isActive: json['is_active'] as String?,
-      createdAt: json['created_at'] as String?,
-      updatedAt: json['updated_at'] as String?,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'question': question,
-      'answer': answer,
-      'is_active': isActive,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-    };
   }
 }

@@ -6,7 +6,7 @@ import 'package:vaccine_home/core/services/service_locator.dart';
 import 'package:vaccine_home/features/profile/data/models/faq_model.dart';
 
 class FAQRepository {
-  static Future<List<FAQ>> getFaqs() async {
+  static Future<List<Category>> getFaqs() async {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
@@ -17,7 +17,7 @@ class FAQRepository {
 
     if (res.statusCode == 200) {
       final model = FAQModel.fromJson(res.data);
-      return model.data?.faqs ?? [];
+      return model.data?.categories ?? [];
     } else {
       throw Exception(Messages.faqFetchFailed);
     }

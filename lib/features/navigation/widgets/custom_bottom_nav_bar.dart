@@ -12,7 +12,7 @@ class CustomBottomNavBar extends StatelessWidget {
     return BlocBuilder<NavigationCubit, int>(
       builder: (context, state) {
         return SizedBox(
-          height: 70,
+          height: 80,
           child: BottomNavigationBar(
             currentIndex: state,
             type: BottomNavigationBarType.fixed,

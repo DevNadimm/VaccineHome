@@ -5,21 +5,22 @@ import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/empty_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/error_state_widget.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/profile/data/models/faq_model.dart';
 import 'package:vaccine_home/features/profile/presentation/blocs/faq/faq_bloc.dart';
 import 'package:vaccine_home/features/profile/presentation/widgets/faq_card.dart';
 
 class FAQPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const FAQPage());
+  static Route route({required List<FAQ> faqs}) => MaterialPageRoute(builder: (_) => FAQPage(faqs: faqs));
 
-  const FAQPage({super.key});
+  final List<FAQ> faqs;
+
+  const FAQPage({super.key, required this.faqs});
 
   @override
   State<FAQPage> createState() => _FAQPageState();
 }
 
 class _FAQPageState extends State<FAQPage> {
-
-  // _fetchFAQs() => context.read<FAQBloc>().add(FetchFAQEvent());
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +31,12 @@ class _FAQPageState extends State<FAQPage> {
       ),
       body: BlocBuilder<FAQBloc, FAQState>(
         builder: (context, state) {
-          if (state is FAQLoaded && (state.faqs.isNotEmpty)) {
-            final faqs = state.faqs;
+          if (state is FAQLoaded && (state.categories.isNotEmpty)) {
             return ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              itemCount: faqs.length,
+              itemCount: widget.faqs.length,
               itemBuilder: (context, index) {
-                final faq = faqs[index];
+                final faq = widget.faqs[index];
                 return FAQCard(faq: faq);
               },
             );

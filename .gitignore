@@ -44,3 +44,6 @@ app.*.map.json
 
 # Ignore service account key
 lib/core/constants/service_account_key.dart
+
+# FVM Version Cache
+.fvm/
