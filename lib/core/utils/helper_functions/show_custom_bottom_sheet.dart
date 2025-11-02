@@ -13,14 +13,16 @@ Future<void> showCustomBottomSheet({
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
     builder: (context) {
-      return CustomBottomSheetContent(
-        items: items,
-        controller: controller,
-        title: title,
-        onItemSelected: (item) {
-          controller.text = item;
-          Navigator.pop(context);
-        },
+      return SafeArea(
+        child: CustomBottomSheetContent(
+          items: items,
+          controller: controller,
+          title: title,
+          onItemSelected: (item) {
+            controller.text = item;
+            Navigator.pop(context);
+          },
+        ),
       );
     },
   );
