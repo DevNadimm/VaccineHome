@@ -9,6 +9,7 @@ import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/core/utils/widgets/row_fields.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/faq/faq_bloc.dart' show FAQBloc, FetchFAQEvent;
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_card_request/vaccine_card_request_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/widgets/vaccine_request_popup.dart' show VaccineRequestPopup;
 
@@ -62,8 +63,10 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
           );
         } else if (state is VaccineCardRequestSuccess) {
           clearFields();
+          context.read<FAQBloc>().add(FetchFAQEvent());
           showDialog(
             context: context,
+            barrierDismissible: false,
             builder: (context) => const VaccineRequestPopup(),
           );
         }
