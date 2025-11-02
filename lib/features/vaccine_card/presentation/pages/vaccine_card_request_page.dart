@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
-import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
@@ -11,6 +10,7 @@ import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
 import 'package:vaccine_home/core/utils/widgets/row_fields.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_card_request/vaccine_card_request_bloc.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/widgets/vaccine_request_popup.dart' show VaccineRequestPopup;
 
 class VaccineCardRequestPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const VaccineCardRequestPage());
@@ -62,9 +62,9 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
           );
         } else if (state is VaccineCardRequestSuccess) {
           clearFields();
-          AppNotifier.showToast(
-            Messages.vaccineCardRequestSuccess,
-            type: MessageType.success,
+          showDialog(
+            context: context,
+            builder: (context) => const VaccineRequestPopup(),
           );
         }
       },
@@ -222,6 +222,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                   child: const Text('Submit Request'),
                 ),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -257,6 +258,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
     matherName.dispose();
     dateOfBirth.dispose();
     gender.dispose();
+    vaccinationCentre.dispose();
     nationality.dispose();
     phoneNumber.dispose();
     whatsAppImo.dispose();
@@ -271,6 +273,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
     matherName.clear();
     dateOfBirth.clear();
     gender.clear();
+    vaccinationCentre.clear();
     nationality.clear();
     phoneNumber.clear();
     whatsAppImo.clear();
