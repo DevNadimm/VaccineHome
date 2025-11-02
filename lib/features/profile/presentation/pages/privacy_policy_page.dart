@@ -9,9 +9,9 @@ class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
 
   final String privacyPolicyText = """
-**Privacy Policy for Vaccine Home**
+**Privacy Policy for Vaccine Sheba**
 
-Your privacy is important to us. Vaccine Home collects minimal personal information to provide you with a safe and personalized healthcare experience.
+Your privacy is important to us. Vaccine Sheba collects minimal personal information to provide you with a safe and personalized healthcare experience.
 
 **Information We Collect:**
 - Personal information such as name, email, phone number, and date of birth.
@@ -26,7 +26,7 @@ Your privacy is important to us. Vaccine Home collects minimal personal informat
 - To communicate important updates and announcements.
 
 **Cookies and Tracking:**
-- Vaccine Home does not use cookies in the app, but we may use analytics tools to understand app usage. 
+- Vaccine Sheba does not use cookies in the app, but we may use analytics tools to understand app usage. 
 - All analytics are anonymized and do not include personal information.
 
 **Data Security:**

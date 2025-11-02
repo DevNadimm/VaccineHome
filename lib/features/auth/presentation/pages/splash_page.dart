@@ -90,7 +90,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Vaccine Home',
+                  'Vaccine Sheba',
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 24,

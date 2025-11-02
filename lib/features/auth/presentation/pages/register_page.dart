@@ -73,7 +73,7 @@ class _SignUpScreenState extends State<RegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Join Vaccine Home and take a step toward a healthier, safer tomorrow.",
+                  "Join Vaccine Sheba and take a step toward a healthier, safer tomorrow.",
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 14,

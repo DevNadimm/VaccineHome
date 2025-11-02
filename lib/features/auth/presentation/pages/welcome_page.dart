@@ -22,7 +22,7 @@ class WelcomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Welcome to Vaccine Home',
+                  'Welcome to Vaccine Sheba',
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 22,
