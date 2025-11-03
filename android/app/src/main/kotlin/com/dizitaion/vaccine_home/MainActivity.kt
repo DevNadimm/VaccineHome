@@ -1,4 +1,4 @@
-package com.dizitaion.vaccine_sheba
+package com.dizitaion.vaccine_home
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dizitaion.vaccine_sheba"
+    namespace = "com.dizitaion.vaccine_home"
     compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.dizitaion.vaccine_sheba"
+        applicationId "com.dizitaion.vaccine_home"
         minSdkVersion = flutter.minSdkVersion
         targetSdkVersion = flutter.targetSdkVersion
         versionCode = flutter.versionCode
