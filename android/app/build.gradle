@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.vaccine_home"
+    namespace = "com.dizitaion.vaccine_sheba"
     compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.dizitaion.vaccine_home"
+        applicationId "com.dizitaion.vaccine_sheba"
         minSdkVersion = flutter.minSdkVersion
         targetSdkVersion = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -30,7 +30,6 @@ android {
 
     buildTypes {
         release {
-            // You should use a real release key here later
             signingConfig = signingConfigs.debug
             shrinkResources false
         }

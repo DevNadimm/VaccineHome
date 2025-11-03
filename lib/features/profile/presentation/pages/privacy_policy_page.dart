@@ -14,42 +14,41 @@ class PrivacyPolicyPage extends StatelessWidget {
 Your privacy is important to us. Vaccine Sheba collects minimal personal information to provide you with a safe and personalized healthcare experience.
 
 **Information We Collect:**
-- Personal information such as name, email, phone number, and date of birth.
-- Health-related information such as vaccination records.
-- Usage data to improve app functionality.
-- Device information and app usage analytics.
+- Personal info: name, email, phone number, date of birth.
+- Health info: vaccination records and health status.
+- Order info: vaccine orders (cash payment only) and card requests.
+- Usage data: app functionality and wellness content analytics.
+- Device info and app usage analytics.
 
 **How We Use Your Information:**
-- To provide notifications and reminders for vaccinations.
-- To store and secure your health information.
-- To improve the app experience and deliver personalized content.
-- To communicate important updates and announcements.
+- Provide notifications and reminders for self-care and vaccinations.
+- Process vaccine orders and manage Vaccine Card requests.
+- Improve app experience and deliver personalized content.
+- Communicate important updates and announcements.
 
 **Cookies and Tracking:**
-- Vaccine Sheba does not use cookies in the app, but we may use analytics tools to understand app usage. 
-- All analytics are anonymized and do not include personal information.
+- We do not use cookies but may use anonymized analytics tools to understand app usage.
 
 **Data Security:**
-We implement strict security measures to protect your information. Your data is encrypted and stored securely. Only authorized personnel have access to your health information.
+Your data is encrypted and securely stored. Only authorized personnel can access your health information.
 
 **Sharing Information:**
-- We do not sell your data. 
-- Information may be shared with trusted healthcare partners only to provide services you requested.
+- We do not sell your data.
+- Info may be shared with trusted healthcare partners to provide requested services.
 - We may disclose data if required by law or to protect public health.
 
 **User Rights:**
-- You can request access to your personal data stored in the app.
-- You can request correction or deletion of your data by contacting support.
-- You can opt out of notifications or certain app features at any time.
+- Access, correct, or request deletion of your personal and health data.
+- Opt-out of notifications or certain app features at any time.
 
 **Data Retention:**
-We retain your personal and health data only as long as necessary to provide services or comply with legal obligations. Old or inactive data is securely deleted.
+Data is retained only as long as necessary to provide services or comply with legal obligations. Old/inactive data is securely deleted.
 
 **Changes to Privacy Policy:**
-Any changes will be posted on this page. Please review periodically.
+Any changes will be posted here. Review periodically.
 
 **Contact Us:**
-For questions regarding privacy, data requests, or complaints, contact us at support@vaccinehome.com.
+For privacy questions or data requests, contact support@vaccinehome.com.
 """;
 
   @override
