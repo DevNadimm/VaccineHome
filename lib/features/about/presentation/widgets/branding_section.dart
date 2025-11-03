@@ -34,7 +34,7 @@ class BrandingSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Vaccine Home',
+                'Vaccine Sheba',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 24,
