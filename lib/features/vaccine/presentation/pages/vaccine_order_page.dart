@@ -7,6 +7,7 @@ import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
 import 'package:vaccine_home/core/utils/widgets/loader.dart';
+import 'package:vaccine_home/features/profile/presentation/blocs/vaccine_order_history/vaccine_order_history_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_order/vaccine_order_bloc.dart';
 
 class VaccineOrderPage extends StatefulWidget {
@@ -41,6 +42,7 @@ class _VaccineOrderPageState extends State<VaccineOrderPage> {
           );
         } else if (state is VaccineOrderSuccess) {
           clearFields();
+          context.read<VaccineOrderHistoryBloc>().add(FetchVaccineOrderHistoryEvent());
           AppNotifier.showToast(
             Messages.vaccineOrderSuccess,
             type: MessageType.success,
