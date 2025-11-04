@@ -230,7 +230,7 @@ class _MedicationFormPageState extends State<MedicationFormPage> {
               Row(
                 children: [
                   _buildIntakeToggle('Before Meals'),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 8),
                   _buildIntakeToggle('After Meals'),
                 ],
               ),

@@ -12,6 +12,7 @@ class TimePickerListWidget extends StatelessWidget {
       builder: (context, pickTimes) {
         return ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
           shrinkWrap: true,
           itemCount: pickTimes.length,
           separatorBuilder: (context, index) => const SizedBox(height: 8),
