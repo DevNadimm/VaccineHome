@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/asset_paths.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
+import 'package:vaccine_home/core/services/app_update_service.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/welcome_page.dart';
@@ -43,6 +44,11 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
     );
 
     _controller.forward();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppUpdateService.checkForUpdate(context);
+    });
+
     _navigateNext();
   }
 
