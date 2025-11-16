@@ -13,6 +13,7 @@ class AssetPaths {
 
   /// Local
   static const String banner = '$_localPath/vaccine_home_banner.jpg';
+  static const String poweredByBanner = '$_localPath/powered_by_banner.jpg';
   static const String nadimCorporate = '$_localPath/nadim_corporate.png';
 
   /// Logos

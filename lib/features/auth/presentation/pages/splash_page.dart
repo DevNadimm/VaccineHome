@@ -79,36 +79,72 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      body: Center(
-        child: FadeTransition(
-          opacity: _fadeAnimation,
-          child: ScaleTransition(
-            scale: _scaleAnimation,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(24),
-                  child: Image.asset(
-                    AssetPaths.appLogo,
-                    height: 100,
+      body: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: Image.asset(
+                          AssetPaths.appLogo,
+                          height: 100,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Vaccine Sheba',
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 24,
+                            color: AppColors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      // Powered By Section
+                      FadeTransition(
+                        opacity: _fadeAnimation,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Powered by',
+                                style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(
+                                  AssetPaths.poweredByBanner,
+                                  height: 50,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  'Vaccine Sheba',
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                      fontSize: 24,
-                      color: AppColors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

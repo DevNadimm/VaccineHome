@@ -48,7 +48,7 @@ Data is retained only as long as necessary to provide services or comply with le
 Any changes will be posted here. Review periodically.
 
 **Contact Us:**
-For privacy questions or data requests, contact support@vaccinehome.com.
+For privacy questions or data requests, contact support@vaccinehomebd.com.
 """;
 
   @override
@@ -59,7 +59,7 @@ For privacy questions or data requests, contact support@vaccinehome.com.
         leading: const AppBarBackBtn(),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(0),
+        padding: const EdgeInsets.only(bottom: 16),
         child: Markdown(
           data: privacyPolicyText,
           styleSheet: MarkdownStyleSheet(

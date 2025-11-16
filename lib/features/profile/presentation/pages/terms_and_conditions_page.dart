@@ -42,7 +42,7 @@ Welcome to Vaccine Sheba! By using our app, you agree to the following terms and
 - Continued use of the app after updates constitutes acceptance of new terms.
 
 **8. Contact Us:**
-- For questions or concerns regarding Terms & Conditions, contact us at support@vaccinehome.com.
+- For questions or concerns regarding Terms & Conditions, contact us at support@vaccinehomebd.com.
 
 By using Vaccine Sheba, you acknowledge that you have read, understood, and agreed to these Terms and Conditions.
 """;
@@ -55,7 +55,7 @@ By using Vaccine Sheba, you acknowledge that you have read, understood, and agre
         leading: const AppBarBackBtn(),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(0),
+        padding: const EdgeInsets.only(bottom: 16),
         child: Markdown(
           data: termsText,
           styleSheet: MarkdownStyleSheet(
