@@ -14,5 +14,8 @@ ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
         height: 1.2,
       ),
     ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
   ),
 );

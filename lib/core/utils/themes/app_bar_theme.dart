@@ -10,7 +10,7 @@ AppBarTheme appBarTheme = AppBarTheme(
   centerTitle: false,
   titleTextStyle: GoogleFonts.poppins(
     textStyle: const TextStyle(
-      fontSize: 24,
+      fontSize: 22,
       color: AppColors.primaryFontColor,
       fontWeight: FontWeight.bold,
     ),

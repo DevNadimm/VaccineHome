@@ -20,7 +20,7 @@ class FAQData {
     return FAQData(
       status: json['status'] as int?,
       categories: (json['categories'] as List<dynamic>?)
-          ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Category.fromJson(e))
           .toList(),
     );
   }
@@ -38,7 +38,7 @@ class Category {
       id: json['id'] as int?,
       name: json['name'] as String?,
       faqs: (json['faqs'] as List<dynamic>?)
-          ?.map((e) => FAQ.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => FAQ.fromJson(e))
           .toList(),
     );
   }
@@ -62,10 +62,10 @@ class FAQ {
   factory FAQ.fromJson(Map<String, dynamic> json) {
     return FAQ(
       id: json['id'] as int?,
-      faqCategoryId: json['faq_category_id'] as String?,
+      faqCategoryId: json['faq_category_id']?.toString(),  // <-- Updated
       question: json['question'] as String?,
       answer: json['answer'] as String?,
-      isActive: json['is_active'] as String?,
+      isActive: json['is_active']?.toString(),
     );
   }
 }

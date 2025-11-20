@@ -26,7 +26,7 @@ const List<BottomNavigationBarItem> bottomNavItems = [
     label: 'Contact Us',
   ),
   BottomNavigationBarItem(
-    icon: Icon(HugeIcons.strokeRoundedUser),
+    icon: Icon(HugeIcons.strokeRoundedUserSquare),
     label: 'Profile',
   ),
 ];

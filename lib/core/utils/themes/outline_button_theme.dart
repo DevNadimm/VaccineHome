@@ -14,5 +14,8 @@ OutlinedButtonThemeData outlinedButtonTheme = OutlinedButtonThemeData(
         height: 1.2,
       ),
     ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
   ),
 );

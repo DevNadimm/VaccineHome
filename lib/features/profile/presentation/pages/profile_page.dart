@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/features/auth/presentation/pages/welcome_page.dart';
 import 'package:vaccine_home/features/navigation/cubits/navigation_cubit.dart';
@@ -65,7 +66,10 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
+      appBar: AppBar(
+        title: const Text('Profile', style: TextStyle(color: AppColors.white)),
+        backgroundColor: AppColors.primaryColor,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

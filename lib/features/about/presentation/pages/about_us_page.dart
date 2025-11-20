@@ -14,7 +14,8 @@ class AboutUsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About Us'),
+        title: const Text('About Us', style: TextStyle(color: AppColors.white)),
+        backgroundColor: AppColors.primaryColor,
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -21,7 +21,8 @@ class ContactUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contact Us'),
+        title: const Text('Contact Us', style: TextStyle(color: AppColors.white)),
+        backgroundColor: AppColors.primaryColor,
       ),
       body: SingleChildScrollView(
         child: Padding(

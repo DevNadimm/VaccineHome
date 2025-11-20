@@ -16,23 +16,23 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     color: Colors.black.withOpacity(0.8),
   ),
   border: const OutlineInputBorder().copyWith(
-    borderRadius: BorderRadius.circular(14),
+    borderRadius: BorderRadius.circular(12),
     borderSide: const BorderSide(width: 1.4, color: AppColors.inputBorderColor),
   ),
   enabledBorder: const OutlineInputBorder().copyWith(
-    borderRadius: BorderRadius.circular(14),
+    borderRadius: BorderRadius.circular(12),
     borderSide: const BorderSide(width: 1.4, color: AppColors.inputBorderColor),
   ),
   focusedBorder: const OutlineInputBorder().copyWith(
-    borderRadius: BorderRadius.circular(14),
+    borderRadius: BorderRadius.circular(12),
     borderSide: const BorderSide(width: 1.7, color: AppColors.inputBorderFocusedColor),
   ),
   errorBorder: const OutlineInputBorder().copyWith(
-    borderRadius: BorderRadius.circular(14),
+    borderRadius: BorderRadius.circular(12),
     borderSide: const BorderSide(width: 1.4, color: AppColors.error),
   ),
   focusedErrorBorder: const OutlineInputBorder().copyWith(
-    borderRadius: BorderRadius.circular(14),
+    borderRadius: BorderRadius.circular(12),
     borderSide: const BorderSide(width: 1.7, color: AppColors.warning),
   ),
 );

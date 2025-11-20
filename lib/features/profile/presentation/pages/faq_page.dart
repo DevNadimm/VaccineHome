@@ -23,7 +23,7 @@ class _FAQPageState extends State<FAQPage> {
         title: const Text('FAQs'),
         leading: const AppBarBackBtn(),
       ),
-      body: widget.faqs.isEmpty
+      body: widget.faqs.isNotEmpty
           ? ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               itemCount: widget.faqs.length,
