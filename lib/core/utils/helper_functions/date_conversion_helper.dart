@@ -47,4 +47,16 @@ class DateConversionHelper {
       return dateString;
     }
   }
+
+  /// ✅ Converts "dd/MM/yyyy" → "yyyy-MM-dd"
+  static String toYYYYMMDD(String dateString) {
+    try {
+      final inputFormat = DateFormat("dd/MM/yyyy");
+      final date = inputFormat.parse(dateString);
+      final outputFormat = DateFormat("yyyy-MM-dd");
+      return outputFormat.format(date);
+    } catch (_) {
+      return dateString;
+    }
+  }
 }
