@@ -5,6 +5,7 @@ import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
+import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.dart';
 import 'package:vaccine_home/features/profile/data/models/edit_profile_model.dart';
 
 class EditProfileRepository {
@@ -20,13 +21,15 @@ class EditProfileRepository {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
+    final apiDOB = DateConversionHelper.toYYYYMMDD(dateOfBirth ?? '');
+
     final Map<String, dynamic> data = {
       '_method': 'PUT',
       'name': name,
       'email': email,
       'phone': phone,
       if (gender != null) 'gender': gender.toLowerCase(),
-      if (dateOfBirth != null) 'date_of_birth': dateOfBirth,
+      if (dateOfBirth != null) 'date_of_birth': apiDOB,
       if (address != null) 'address': address,
     };
 

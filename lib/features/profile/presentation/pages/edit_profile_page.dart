@@ -6,6 +6,8 @@ import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.dart';
+import 'package:vaccine_home/core/utils/helper_functions/showDOBPicker.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
@@ -46,26 +48,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
     name.text = await AppPreferences.getUserName() ?? '';
     email.text = await AppPreferences.getUserEmail() ?? '';
     phone.text = await AppPreferences.getUserPhone() ?? '';
-    dateOfBirth.text = await AppPreferences.getUserDOB() ?? '';
-    final genderTxt = await AppPreferences.getUserGender() ?? '';
-    gender.text = '${genderTxt[0].toUpperCase()}${genderTxt.substring(1)}';
     address.text = await AppPreferences.getUserAddress() ?? '';
     userAvatarUrl = await AppPreferences.getUserAvatar() ?? '';
+    dateOfBirth.text = DateConversionHelper.toDDMMYYYY(await AppPreferences.getUserDOB() ?? '');
+    
+    final genderTxt = await AppPreferences.getUserGender() ?? '';
+    gender.text = '${genderTxt[0].toUpperCase()}${genderTxt.substring(1)}';
     setState(() {});
   }
-
-  Future<void> _selectOnlyDate(TextEditingController controller) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime(2000),
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2030),
-    );
-    if (picked != null) {
-      controller.text = DateFormat('yyyy-MM-dd').format(picked);
-    }
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<EditProfileBloc, EditProfileState>(
@@ -143,12 +134,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 firstField: CustomTextField(
                   label: 'Date of Birth',
                   controller: dateOfBirth,
-                  isRequired: false,
-                  keyboardType: TextInputType.datetime,
+                  isRequired: true,
+                  readOnly: true,
                   hintText: 'Select date',
                   validationLabel: 'Date of Birth',
-                  readOnly: true,
-                  onTap: () => _selectOnlyDate(dateOfBirth),
+                  onTap: () {
+                    showDOBPicker(
+                      context: context,
+                      initialDate: DateTime(2000),
+                      onDateSelected: (value) {
+                        dateOfBirth.text = "${value.day}/${value.month}/${value.year}";
+                      },
+                    );
+                  },
                 ),
                 lastField: CustomTextField(
                   label: 'Gender',
