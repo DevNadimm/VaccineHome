@@ -12,12 +12,12 @@ import 'package:vaccine_home/features/auth/presentation/blocs/set_new_password/s
 import 'package:vaccine_home/features/auth/presentation/pages/login_page.dart';
 
 class SetNewPasswordPage extends StatefulWidget {
-  static Route route(String email, String pin) => MaterialPageRoute(builder: (_) => SetNewPasswordPage(email: email, pin: pin));
+  static Route route(String phone, String pin) => MaterialPageRoute(builder: (_) => SetNewPasswordPage(phone: phone, pin: pin));
 
-  final String email;
+  final String phone;
   final String pin;
 
-  const SetNewPasswordPage({super.key, required this.email, required this.pin});
+  const SetNewPasswordPage({super.key, required this.phone, required this.pin});
 
   @override
   State<SetNewPasswordPage> createState() => _SignUpScreenState();
@@ -118,7 +118,7 @@ class _SignUpScreenState extends State<SetNewPasswordPage> {
     if (_globalKey.currentState?.validate() ?? false) {
       context.read<SetNewPasswordBloc>().add(
         SetPasswordEvent(
-          email: widget.email,
+          phone: widget.phone,
           pin: widget.pin,
           newPassword: _passwordController.text.trim(),
           confirmNewPassword: _confirmPasswordController.text.trim(),

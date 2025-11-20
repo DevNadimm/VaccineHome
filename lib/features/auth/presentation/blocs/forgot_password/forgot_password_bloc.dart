@@ -17,7 +17,7 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
     emit(ForgotPasswordLoading());
 
     try {
-      final res = await ForgotPasswordRepository.sendPin(email: event.email);
+      final res = await ForgotPasswordRepository.sendPin(phone: event.phone);
       if (res) emit(ForgotPasswordSuccess());
     } catch (e) {
       emit(ForgotPasswordFailure(ExceptionFormatter.format(e)));

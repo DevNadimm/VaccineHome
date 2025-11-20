@@ -18,7 +18,7 @@ class SetNewPasswordBloc extends Bloc<SetNewPasswordEvent, SetNewPasswordState> 
 
     try {
       final res = await ForgotPasswordRepository.setNewPassword(
-        email: event.email,
+        phone: event.phone,
         pin: event.pin,
         password: event.newPassword,
         confirmPassword: event.confirmNewPassword,

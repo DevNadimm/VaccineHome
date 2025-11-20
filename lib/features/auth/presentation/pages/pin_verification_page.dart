@@ -13,11 +13,11 @@ import 'package:vaccine_home/features/auth/presentation/blocs/pin_verification/p
 import 'package:vaccine_home/features/auth/presentation/pages/set_new_password_page.dart';
 
 class PinVerificationPage extends StatefulWidget {
-  static Route route(String email) => MaterialPageRoute(builder: (_) => PinVerificationPage(email: email));
+  static Route route(String phone) => MaterialPageRoute(builder: (_) => PinVerificationPage(phone: phone));
 
-  final String email;
+  final String phone;
 
-  const PinVerificationPage({super.key, required this.email});
+  const PinVerificationPage({super.key, required this.phone});
 
   @override
   State<PinVerificationPage> createState() => _PinVerificationPageState();
@@ -35,7 +35,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
           AppNotifier.showToast(state.message, type: MessageType.error);
         }
         if (state is PinVerificationSuccess) {
-          Navigator.push(context, SetNewPasswordPage.route(widget.email, _pinController.text));
+          Navigator.push(context, SetNewPasswordPage.route(widget.phone, _pinController.text));
         }
       },
       builder: (context, state) {
@@ -77,7 +77,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
                   ),
                   children: [
                     TextSpan(
-                      text: widget.email,
+                      text: widget.phone,
                       style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                           fontSize: 14,
@@ -107,7 +107,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
                       AppNotifier.showToast('PIN must be 4 digits', type: MessageType.error);
                     } else {
                       context.read<PinVerificationBloc>().add(
-                        VerifyPinEvent(email: widget.email, pin: pin),
+                        VerifyPinEvent(phone: widget.phone, pin: pin),
                       );
                     }
                   },
@@ -117,7 +117,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
               const SizedBox(height: 24),
               Text.rich(
                 TextSpan(
-                  text: "Haven’t got the email yet? ",
+                  text: "Haven’t got the phone verification PIN yet? ",
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -125,14 +125,14 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
                   ),
                   children: [
                     TextSpan(
-                      text: "Resend Email",
+                      text: "Resend PIN",
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                         color: AppColors.primaryColor,
                       ),
                       recognizer: TapGestureRecognizer()..onTap = () {
-                        onTapResendEmail();
+                        onTapResendPin();
                       }
                     ),
                   ],
@@ -145,10 +145,10 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
     );
   }
 
-  void onTapResendEmail() {
+  void onTapResendPin() {
     if (_globalKey.currentState?.validate() ?? false) {
       context.read<ForgotPasswordBloc>().add(
-        SendForgotPasswordPinEvent(email: widget.email),
+        SendForgotPasswordPinEvent(phone: widget.phone),
       );
     }
   }

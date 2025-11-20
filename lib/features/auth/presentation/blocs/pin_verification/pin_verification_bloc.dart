@@ -18,7 +18,7 @@ class PinVerificationBloc extends Bloc<PinVerificationEvent, PinVerificationStat
 
     try {
       final res = await ForgotPasswordRepository.verifyPin(
-        email: event.email,
+        phone: event.phone,
         pin: event.pin,
       );
       if (res) emit(PinVerificationSuccess());

@@ -4,12 +4,12 @@ import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
 
 class ForgotPasswordRepository {
-  static Future<bool> sendPin({required String email}) async {
+  static Future<bool> sendPin({required String phone}) async {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
     final data = {
-      "email": email,
+      "phone": phone,
     };
 
     final res = await dioService.postRequest(
@@ -26,14 +26,14 @@ class ForgotPasswordRepository {
   }
 
   static Future<bool> verifyPin({
-    required String email,
+    required String phone,
     required String pin,
   }) async {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
     final data = {
-      "email": email,
+      "phone": phone,
       "pin": pin,
     };
 
@@ -51,7 +51,7 @@ class ForgotPasswordRepository {
   }
 
   static Future<bool> setNewPassword({
-    required String email,
+    required String phone,
     required String pin,
     required String password,
     required String confirmPassword,
@@ -60,7 +60,7 @@ class ForgotPasswordRepository {
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
     final data = {
-      "email": email,
+      "phone": phone,
       "pin": pin,
       "password": password,
       "password_confirmation": confirmPassword,

@@ -21,7 +21,7 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _SignUpScreenState extends State<ForgotPasswordPage> {
   final GlobalKey<FormState> _globalKey = GlobalKey();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _SignUpScreenState extends State<ForgotPasswordPage> {
           AppNotifier.showToast(state.message, type: MessageType.error);
         }
         if (state is ForgotPasswordSuccess) {
-          Navigator.push(context, PinVerificationPage.route(_emailController.text.trim()));
+          Navigator.push(context, PinVerificationPage.route(_phoneController.text.trim()));
         }
       },
       builder: (context, state) {
@@ -64,7 +64,7 @@ class _SignUpScreenState extends State<ForgotPasswordPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "We’ll send a verification PIN to your email to confirm your account and reset your password securely.",
+                  "We’ll send a verification PIN to your phone number to confirm your account and reset your password securely.",
                   style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                       fontSize: 14,
@@ -75,12 +75,12 @@ class _SignUpScreenState extends State<ForgotPasswordPage> {
                 ),
                 const SizedBox(height: 32),
                 CustomTextField(
-                  label: 'Email',
-                  controller: _emailController,
+                  label: 'Phone',
+                  controller: _phoneController,
                   isRequired: true,
-                  keyboardType: TextInputType.emailAddress,
-                  hintText: 'Enter email',
-                  validationLabel: 'Email',
+                  keyboardType: TextInputType.phone,
+                  hintText: 'Enter phone',
+                  validationLabel: 'Phone',
                 ),
                 const SizedBox(height: 24),
                 SizedBox(
@@ -102,14 +102,14 @@ class _SignUpScreenState extends State<ForgotPasswordPage> {
   void onTapSendPin() {
     if (_globalKey.currentState?.validate() ?? false) {
       context.read<ForgotPasswordBloc>().add(
-        SendForgotPasswordPinEvent(email: _emailController.text.trim()),
+        SendForgotPasswordPinEvent(phone: _phoneController.text.trim()),
       );
     }
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 }
