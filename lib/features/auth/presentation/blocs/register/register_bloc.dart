@@ -19,8 +19,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     try {
       final model = await RegisterRepository.registerUser(
         name: event.name,
-        email: event.email,
         phone: event.phone,
+        dateOfBirth: event.dateOfBirth,
         password: event.password,
         confirmPassword: event.confirmPassword,
       );

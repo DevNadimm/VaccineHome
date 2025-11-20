@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/helper_functions/showDOBPicker.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
 import 'package:vaccine_home/core/utils/widgets/custom_text_field.dart';
@@ -23,8 +25,8 @@ class RegisterPage extends StatefulWidget {
 class _SignUpScreenState extends State<RegisterPage> {
   final GlobalKey<FormState> _globalKey = GlobalKey();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
 
@@ -92,21 +94,42 @@ class _SignUpScreenState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Email',
-                  controller: _emailController,
-                  isRequired: true,
-                  keyboardType: TextInputType.emailAddress,
-                  hintText: 'Enter email',
-                  validationLabel: 'Email',
-                ),
-                const SizedBox(height: 16),
-                CustomTextField(
                   label: 'Phone',
                   controller: _phoneController,
                   isRequired: true,
                   keyboardType: TextInputType.phone,
                   hintText: 'Enter phone',
                   validationLabel: 'Phone',
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Use a valid Bangladeshi phone number (e.g., 017XXXXXXXX)',
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 12,
+                      color: AppColors.secondaryFontColor,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                CustomTextField(
+                  label: 'Date of Birth',
+                  controller: _dobController,
+                  isRequired: true,
+                  readOnly: true,
+                  hintText: 'Select date',
+                  validationLabel: 'Date of Birth',
+                  onTap: () {
+                    showDOBPicker(
+                      context: context,
+                      initialDate: DateTime(2000),
+                      onDateSelected: (value) {
+                        _dobController.text =
+                            "${value.day}/${value.month}/${value.year}";
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
@@ -115,7 +138,7 @@ class _SignUpScreenState extends State<RegisterPage> {
                   isRequired: true,
                   keyboardType: TextInputType.visiblePassword,
                   hintText: 'Enter password',
-                  validationLabel: 'Confirm Password',
+                  validationLabel: 'Password',
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
@@ -136,7 +159,7 @@ class _SignUpScreenState extends State<RegisterPage> {
                         context.read<RegisterBloc>().add(
                           RegisterUserEvent(
                             name: _nameController.text.trim(),
-                            email: _emailController.text.trim(),
+                            dateOfBirth: _dobController.text.trim(),
                             phone: _phoneController.text.trim(),
                             password: _passwordController.text.trim(),
                             confirmPassword: _confirmPasswordController.text.trim(),
@@ -166,8 +189,8 @@ class _SignUpScreenState extends State<RegisterPage> {
   @override
   void dispose() {
     _nameController.dispose();
-    _emailController.dispose();
     _phoneController.dispose();
+    _dobController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
