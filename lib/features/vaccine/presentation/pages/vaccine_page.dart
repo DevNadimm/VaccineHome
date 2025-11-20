@@ -18,7 +18,7 @@ class VaccinePage extends StatelessWidget {
       SubModule(
         icon: HugeIcons.strokeRoundedVaccine,
         title: "Vaccine List & Order",
-        subtitle: "Browse vaccine list, details, and order a vaccine.",
+        subtitle: "View available vaccines, check their details, and place an order.",
         onTap: () {
           Navigator.push(context, VaccineListPage.route());
         },
@@ -26,7 +26,7 @@ class VaccinePage extends StatelessWidget {
       SubModule(
         icon: HugeIcons.strokeRoundedCalendar02,
         title: "Online Vaccine Appointment",
-        subtitle: "Book your vaccine appointments online.",
+        subtitle: "Easily book your vaccine appointments online today.",
         onTap: () {
           Navigator.push(context, OnlineVaccineAppointmentPage.route());
         },

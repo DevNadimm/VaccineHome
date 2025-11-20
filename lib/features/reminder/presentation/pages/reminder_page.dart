@@ -60,7 +60,7 @@ class _ReminderPageState extends State<ReminderPage> {
       SubModule(
         icon: HugeIcons.strokeRoundedMedicine02,
         title: "Medication Alert",
-        subtitle: "Never miss your medicines on time.",
+        subtitle: "Always take you medications on time.",
         onTap: () {
           Navigator.push(context, MedicationReminderPage.route());
         },
@@ -68,7 +68,7 @@ class _ReminderPageState extends State<ReminderPage> {
       SubModule(
         icon: HugeIcons.strokeRoundedStethoscope,
         title: "Dr Consultation Alert",
-        subtitle: "Get notified for your appointments.",
+        subtitle: "Receive timely notifications for your appointments.",
         onTap: () {
           Navigator.push(context, DrConsultationReminderPage.route());
         },
@@ -92,7 +92,7 @@ class _ReminderPageState extends State<ReminderPage> {
       SubModule(
         icon: HugeIcons.strokeRoundedOrganicFood,
         title: "Meal Alert",
-        subtitle: "Don’t skip your meals on time.",
+        subtitle: "Make sure to eat your meals on time.",
         onTap: () {
           Navigator.push(context, MealReminderPage.route());
         },

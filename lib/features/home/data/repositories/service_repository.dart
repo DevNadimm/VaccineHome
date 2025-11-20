@@ -26,7 +26,7 @@ class ServiceRepository {
         },
       ),
       Service(
-        name: 'Vaccine Card',
+        name: 'Vaccination',
         icon: HugeIcons.strokeRoundedId,
         onTap: () {
           Navigator.push(context, VaccineCardPage.route());

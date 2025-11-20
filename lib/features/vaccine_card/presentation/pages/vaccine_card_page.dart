@@ -34,7 +34,7 @@ class VaccineCardPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vaccine Card'),
+        title: const Text('Vaccination'),
         leading: const AppBarBackBtn(),
       ),
       body: ListView.builder(
