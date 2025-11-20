@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
