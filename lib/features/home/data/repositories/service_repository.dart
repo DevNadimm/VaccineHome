@@ -12,10 +12,10 @@ class ServiceRepository {
   static List<Service> services(BuildContext context) {
     return [
       Service(
-        name: 'Self-Care Alert',
-        icon: HugeIcons.strokeRoundedNotification03,
+        name: 'Vaccination',
+        icon: HugeIcons.strokeRoundedId,
         onTap: () {
-          Navigator.push(context, ReminderPage.route());
+          Navigator.push(context, VaccineCardPage.route());
         },
       ),
       Service(
@@ -26,10 +26,10 @@ class ServiceRepository {
         },
       ),
       Service(
-        name: 'Vaccination',
-        icon: HugeIcons.strokeRoundedId,
+        name: 'Self-Care Alert',
+        icon: HugeIcons.strokeRoundedNotification03,
         onTap: () {
-          Navigator.push(context, VaccineCardPage.route());
+          Navigator.push(context, ReminderPage.route());
         },
       ),
       Service(
