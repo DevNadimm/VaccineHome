@@ -3,11 +3,11 @@ part of 'login_bloc.dart';
 abstract class LoginEvent {}
 
 class LoginUserEvent extends LoginEvent {
-  final String email;
+  final String phone;
   final String password;
 
   LoginUserEvent({
-    required this.email,
+    required this.phone,
     required this.password,
   });
 }

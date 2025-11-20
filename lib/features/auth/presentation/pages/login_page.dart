@@ -24,7 +24,7 @@ class LoginPage extends StatefulWidget {
 
 class _SignUpScreenState extends State<LoginPage> {
   final GlobalKey<FormState> _globalKey = GlobalKey();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -83,12 +83,12 @@ class _SignUpScreenState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 32),
                 CustomTextField(
-                  label: 'Email',
-                  controller: _emailController,
+                  label: 'Phone',
+                  controller: _phoneController,
                   isRequired: true,
-                  keyboardType: TextInputType.emailAddress,
-                  hintText: 'Enter email',
-                  validationLabel: 'Email',
+                  keyboardType: TextInputType.phone,
+                  hintText: 'Enter phone',
+                  validationLabel: 'Phone',
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
@@ -149,7 +149,7 @@ class _SignUpScreenState extends State<LoginPage> {
     if (_globalKey.currentState?.validate() ?? false) {
       context.read<LoginBloc>().add(
         LoginUserEvent(
-          email: _emailController.text.trim(),
+          phone: _phoneController.text.trim(),
           password: _passwordController.text.trim(),
         ),
       );
@@ -158,7 +158,7 @@ class _SignUpScreenState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
     super.dispose();
   }

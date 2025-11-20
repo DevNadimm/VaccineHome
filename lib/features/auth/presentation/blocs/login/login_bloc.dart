@@ -18,7 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(LoginLoading());
     try {
       final model = await LoginRepository.loginUser(
-        email: event.email,
+        phone: event.phone,
         password: event.password,
       );
       emit(LoginSuccess(model));

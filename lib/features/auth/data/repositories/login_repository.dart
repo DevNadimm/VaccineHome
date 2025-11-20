@@ -8,14 +8,14 @@ import 'package:vaccine_home/features/auth/data/models/login_model.dart';
 
 class LoginRepository {
   static Future<LoginModel> loginUser({
-    required String email,
+    required String phone,
     required String password,
   }) async {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
     final data = {
-      "email": email,
+      "phone": phone,
       "password": password,
     };
 
