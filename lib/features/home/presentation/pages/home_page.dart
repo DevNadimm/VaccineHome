@@ -19,6 +19,7 @@ import 'package:vaccine_home/features/home/presentation/widgets/service_card.dar
 import 'package:vaccine_home/features/mental_well_being/presentation/blocs/mental_well_being/mental_well_being_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product/vaccine_product_bloc.dart';
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_recommentdation/vaccine_recommendation_bloc.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_schedule/vaccine_schedule_bloc.dart';
 
 class HomePage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const HomePage());
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
     _fetchContents();
     _fetchVaccines();
     _fetchRecommendations();
+    _fetchSchedules();
     _getPreferences();
   }
 
@@ -53,11 +55,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  _checkPopupBanner() => context.read<PopupBannerBloc>().add(CheckPopupBannerEvent());
-  _fetchNotifications() => context.read<NotificationBloc>().add(FetchNotificationsEvent());
-  _fetchContents() => context.read<MentalWellBeingBloc>().add(FetchMentalWellBeingEvent());
-  _fetchVaccines() => context.read<VaccineProductBloc>().add(FetchVaccineProducts());
-  _fetchRecommendations() => context.read<VaccineRecommendationBloc>().add(FetchVaccineRecommendationEvent());
+  void _checkPopupBanner() => context.read<PopupBannerBloc>().add(CheckPopupBannerEvent());
+  void _fetchNotifications() => context.read<NotificationBloc>().add(FetchNotificationsEvent());
+  void _fetchContents() => context.read<MentalWellBeingBloc>().add(FetchMentalWellBeingEvent());
+  void _fetchVaccines() => context.read<VaccineProductBloc>().add(FetchVaccineProducts());
+  void _fetchRecommendations() => context.read<VaccineRecommendationBloc>().add(FetchVaccineRecommendationEvent());
+  void _fetchSchedules() => context.read<VaccineScheduleBloc>().add(FetchVaccineSchedulesEvent());
 
   @override
   Widget build(BuildContext context) {

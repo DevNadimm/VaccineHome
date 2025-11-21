@@ -3,7 +3,9 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/models/sub_module.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/sub_module_card.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/pages/epi_vaccine_schedule_page.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/pages/patients_page.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/pages/private_vaccine_schedule_page.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/pages/vaccine_card_request_page.dart';
 
 class VaccineCardPage extends StatelessWidget {
@@ -30,18 +32,12 @@ class VaccineCardPage extends StatelessWidget {
           Navigator.push(context, PatientsPage.route());
         },
       ),
-
-      // ----------------------------
-      // ✅ New Sub-Modules Added
-      // ----------------------------
-
       SubModule(
         icon: HugeIcons.strokeRoundedVaccine,
         title: "Private Vaccine Schedule",
         subtitle: "Detailed schedule for private vaccines.",
         onTap: () {
-          // TODO: Add route once screen is ready
-          // Navigator.push(context, PrivateVaccineSchedulePage.route());
+          Navigator.push(context, PrivateVaccineSchedulePage.route());
         },
       ),
       SubModule(
@@ -49,8 +45,7 @@ class VaccineCardPage extends StatelessWidget {
         title: "EPI Schedule",
         subtitle: "National immunization schedule (EPI).",
         onTap: () {
-          // TODO: Add route once screen is ready
-          // Navigator.push(context, EpiSchedulePage.route());
+          Navigator.push(context, EPIVaccineSchedulePage.route());
         },
       ),
     ];
