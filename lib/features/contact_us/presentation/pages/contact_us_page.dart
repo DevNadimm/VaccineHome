@@ -247,15 +247,12 @@ class ContactUsPage extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: Text(
-            time,
-            style: GoogleFonts.poppins(
-              textStyle: const TextStyle(
-                fontSize: 13,
-                color: AppColors.secondaryFontColor,
-              ),
+        Text(
+          time,
+          style: GoogleFonts.poppins(
+            textStyle: const TextStyle(
+              fontSize: 13,
+              color: AppColors.secondaryFontColor,
             ),
           ),
         ),
