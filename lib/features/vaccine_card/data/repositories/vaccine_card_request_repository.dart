@@ -3,6 +3,7 @@ import 'package:vaccine_home/core/constants/api_endpoints.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
+import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.dart';
 
 class VaccineCardRequestRepository {
   static Future<bool> requestVaccineCard({
@@ -21,12 +22,14 @@ class VaccineCardRequestRepository {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
+    final apiDOB = DateConversionHelper.toYYYYMMDD(birthDate);
+
     final Map<String, dynamic> data = {
       "first_name_english": firstNameEnglish,
       "last_name_english": lastNameEnglish,
       "gender": gender,
       "vaccination_centre": vaccinationCentre,
-      "birth_date": birthDate,
+      "birth_date": apiDOB,
       "father": father,
       "mother": mother,
       "address": address,

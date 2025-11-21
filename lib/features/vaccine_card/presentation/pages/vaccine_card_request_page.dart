@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/utils/enums/message_type.dart';
+import 'package:vaccine_home/core/utils/helper_functions/showDOBPicker.dart';
 import 'package:vaccine_home/core/utils/helper_functions/show_custom_bottom_sheet.dart';
 import 'package:vaccine_home/core/utils/widgets/app_bar_back_btn.dart';
 import 'package:vaccine_home/core/utils/widgets/app_notifier.dart';
@@ -39,18 +39,6 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController whatsAppImo = TextEditingController();
   final TextEditingController address = TextEditingController();
-
-  Future<void> _selectOnlyDate(TextEditingController controller) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime(2000),
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2030),
-    );
-    if (picked != null) {
-      controller.text = DateFormat('dd-MM-yyyy').format(picked);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,11 +129,18 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
                   label: 'Date of Birth',
                   controller: dateOfBirth,
                   isRequired: true,
-                  keyboardType: TextInputType.datetime,
+                  readOnly: true,
                   hintText: 'Select date',
                   validationLabel: 'Date of Birth',
-                  readOnly: true,
-                  onTap: () => _selectOnlyDate(dateOfBirth),
+                  onTap: () {
+                    showDOBPicker(
+                      context: context,
+                      initialDate: DateTime(2000),
+                      onDateSelected: (value) {
+                        dateOfBirth.text = "${value.day}/${value.month}/${value.year}";
+                      },
+                    );
+                  },
                 ),
                 lastField: CustomTextField(
                   label: 'Gender',
