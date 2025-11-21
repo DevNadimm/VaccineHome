@@ -41,7 +41,7 @@ class LoginRepository {
       if (model.data?.gender != null) await AppPreferences.setUserGender(model.data!.gender!);
       if (model.data?.address != null) await AppPreferences.setUserAddress(model.data!.address!);
 
-      await NotificationService.instance.initialize();
+      // await NotificationService.instance.initialize();
 
       return model;
     } else {

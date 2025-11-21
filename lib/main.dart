@@ -11,11 +11,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  await NotificationService.instance.initialize();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+  //
+  // await NotificationService.instance.initialize();
 
   return runApp(const MyApp());
 }

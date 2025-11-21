@@ -44,6 +44,7 @@ import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_product
 import 'package:vaccine_home/features/vaccine/presentation/blocs/vaccine_recommentdation/vaccine_recommendation_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/patients/patients_bloc.dart';
 import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_card_request/vaccine_card_request_bloc.dart';
+import 'package:vaccine_home/features/vaccine_card/presentation/blocs/vaccine_schedule/vaccine_schedule_bloc.dart';
 import 'package:vaccine_home/main.dart';
 
 class MyApp extends StatelessWidget {
@@ -110,6 +111,7 @@ class MyApp extends StatelessWidget {
 
         // 🔹 Vaccine Card
         BlocProvider(create: (_) => PatientsBloc()),
+        BlocProvider(create: (_) => VaccineScheduleBloc()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,
