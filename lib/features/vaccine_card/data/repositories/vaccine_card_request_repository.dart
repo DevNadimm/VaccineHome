@@ -21,7 +21,8 @@ class VaccineCardRequestRepository {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
-    final apiDOB = birthDate.replaceAll('/', '-');
+    final parts = birthDate.split('/');
+    final apiDOB = "${parts[0].padLeft(2, '0')}-${parts[1].padLeft(2, '0')}-${parts[2]}";
 
     final Map<String, dynamic> data = {
       "first_name_english": firstNameEnglish,

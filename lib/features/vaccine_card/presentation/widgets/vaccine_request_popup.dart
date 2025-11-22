@@ -26,7 +26,7 @@ class _VaccineRequestPopupState extends State<VaccineRequestPopup> with SingleTi
 
     _controller.forward();
 
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 4), () {
       if (mounted) Navigator.of(context).pop();
     });
   }
@@ -87,7 +87,7 @@ class _VaccineRequestPopupState extends State<VaccineRequestPopup> with SingleTi
                 width: 100,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
+                  color: Colors.white.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),

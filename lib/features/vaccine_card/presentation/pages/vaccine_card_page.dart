@@ -17,6 +17,22 @@ class VaccineCardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final vaccineCardServices = [
       SubModule(
+        icon: HugeIcons.strokeRoundedCalendarLove02,
+        title: "EPI Schedule",
+        subtitle: "National immunization schedule (EPI).",
+        onTap: () {
+          Navigator.push(context, EPIVaccineSchedulePage.route());
+        },
+      ),
+      SubModule(
+        icon: HugeIcons.strokeRoundedVaccine,
+        title: "Private Vaccine Schedule",
+        subtitle: "Detailed schedule for private vaccines.",
+        onTap: () {
+          Navigator.push(context, PrivateVaccineSchedulePage.route());
+        },
+      ),
+      SubModule(
         icon: HugeIcons.strokeRoundedStudentCard,
         title: "Vaccine Card Request",
         subtitle: "Apply for your digital vaccine card.",
@@ -30,22 +46,6 @@ class VaccineCardPage extends StatelessWidget {
         subtitle: "View and download your vaccine card.",
         onTap: () {
           Navigator.push(context, PatientsPage.route());
-        },
-      ),
-      SubModule(
-        icon: HugeIcons.strokeRoundedVaccine,
-        title: "Private Vaccine Schedule",
-        subtitle: "Detailed schedule for private vaccines.",
-        onTap: () {
-          Navigator.push(context, PrivateVaccineSchedulePage.route());
-        },
-      ),
-      SubModule(
-        icon: HugeIcons.strokeRoundedCalendarLove02,
-        title: "EPI Schedule",
-        subtitle: "National immunization schedule (EPI).",
-        onTap: () {
-          Navigator.push(context, EPIVaccineSchedulePage.route());
         },
       ),
     ];

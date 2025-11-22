@@ -65,7 +65,7 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
             content(),
             if (state is VaccineCardRequestLoading)
               Container(
-                color: AppColors.black.withOpacity(0.6),
+                color: AppColors.black.withValues(alpha: 0.6),
                 child: const Loader(),
               )
           ],
