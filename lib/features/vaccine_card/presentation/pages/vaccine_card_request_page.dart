@@ -239,9 +239,9 @@ class _VaccineCardRequestPageState extends State<VaccineCardRequestPage> {
           birthDate: dateOfBirth.text.trim(),
           father: fatherName.text.trim(),
           mother: matherName.text.trim(),
-          address: address.text.trim(),
           phoneNumber: phoneNumber.text.trim(),
-          whatsappImo: whatsAppImo.text.trim(),
+          whatsapp: whatsAppImo.text.trim(),
+          address: address.text.trim(),
           presentNationality: nationality.text.trim(),
         ),
       );

@@ -4,28 +4,28 @@ abstract class VaccineCardRequestEvent {}
 
 class SubmitVaccineCardRequestEvent extends VaccineCardRequestEvent {
   final String firstNameEnglish;
-  final String lastNameEnglish;
+  final String? lastNameEnglish;
   final String gender;
   final String vaccinationCentre;
   final String birthDate;
   final String father;
   final String mother;
-  final String address;
   final String phoneNumber;
-  final String whatsappImo;
+  final String? whatsapp;
+  final String? address;
   final String presentNationality;
 
   SubmitVaccineCardRequestEvent({
     required this.firstNameEnglish,
-    required this.lastNameEnglish,
+    this.lastNameEnglish,
     required this.gender,
     required this.vaccinationCentre,
     required this.birthDate,
     required this.father,
     required this.mother,
-    required this.address,
     required this.phoneNumber,
-    required this.whatsappImo,
     required this.presentNationality,
+    this.whatsapp,
+    this.address,
   });
 }

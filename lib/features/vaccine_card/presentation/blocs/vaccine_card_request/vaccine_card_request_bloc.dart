@@ -26,7 +26,7 @@ class VaccineCardRequestBloc extends Bloc<VaccineCardRequestEvent, VaccineCardRe
         mother: event.mother,
         address: event.address,
         phoneNumber: event.phoneNumber,
-        whatsappImo: event.whatsappImo,
+        whatsapp: event.whatsapp,
         presentNationality: event.presentNationality,
       );
       if (res) {

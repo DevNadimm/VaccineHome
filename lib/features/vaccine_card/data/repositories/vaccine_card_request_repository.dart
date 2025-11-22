@@ -3,39 +3,38 @@ import 'package:vaccine_home/core/constants/api_endpoints.dart';
 import 'package:vaccine_home/core/constants/messages.dart';
 import 'package:vaccine_home/core/services/dio_service.dart';
 import 'package:vaccine_home/core/services/service_locator.dart';
-import 'package:vaccine_home/core/utils/helper_functions/date_conversion_helper.dart';
 
 class VaccineCardRequestRepository {
   static Future<bool> requestVaccineCard({
     required String firstNameEnglish,
-    required String lastNameEnglish,
+    String? lastNameEnglish,
     required String gender,
     required String vaccinationCentre,
     required String birthDate,
     required String father,
     required String mother,
-    required String address,
     required String phoneNumber,
-    required String whatsappImo,
     required String presentNationality,
+    String? whatsapp,
+    String? address,
   }) async {
     final dioService = serviceLocator<DioService>();
     final apiEndpoints = serviceLocator<ApiEndpoints>();
 
-    final apiDOB = DateConversionHelper.toYYYYMMDD(birthDate);
+    final apiDOB = birthDate.replaceAll('/', '-');
 
     final Map<String, dynamic> data = {
       "first_name_english": firstNameEnglish,
-      "last_name_english": lastNameEnglish,
+      "last_name_english": lastNameEnglish?.isEmpty == true ? null : lastNameEnglish,
       "gender": gender,
       "vaccination_centre": vaccinationCentre,
       "birth_date": apiDOB,
       "father": father,
       "mother": mother,
-      "address": address,
       "phone_number": phoneNumber,
-      "whatsapp_imo": whatsappImo,
       "present_nationality": presentNationality,
+      "whatsapp_imo": whatsapp?.isEmpty == true ? null : whatsapp,
+      "address": address?.isEmpty == true ? null : address,
     };
 
     final Response res = await dioService.postRequest(
