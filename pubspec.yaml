@@ -38,6 +38,7 @@ dependencies:
   in_app_update: ^4.2.5
   url_launcher: ^6.3.2
   flutter_markdown_plus: ^1.0.5
+  flutter_image_compress: ^2.4.0
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,13 +48,15 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
     _controller.forward();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AppUpdateService.checkForUpdate(context);
+      if (Platform.isAndroid && !kDebugMode) {
+        AppUpdateService.checkForUpdate(context);
+      }
     });
 
     _navigateNext();
   }
 
-  _getAdvertisements() => context.read<AdvertisementBloc>().add(FetchAdvertisementsEvent());
+  void _getAdvertisements() => context.read<AdvertisementBloc>().add(FetchAdvertisementsEvent());
 
   Future<void> _navigateNext() async {
     await Future.delayed(const Duration(seconds: 3));

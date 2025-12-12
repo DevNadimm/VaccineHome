@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:vaccine_home/core/constants/colors.dart';
 import 'package:vaccine_home/core/services/app_preferences.dart';
@@ -44,10 +45,10 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
   }
 
-  _fetchOrderHistory() => context.read<VaccineOrderHistoryBloc>().add(FetchVaccineOrderHistoryEvent());
-  _fetchFeedbacks() => context.read<FeedbackBloc>().add(FetchFeedbacksEvent());
-  _fetchFAQs() => context.read<FAQBloc>().add(FetchFAQEvent());
-  _fetchPatients() => context.read<PatientsBloc>().add(FetchPatientsEvent());
+  void _fetchOrderHistory() => context.read<VaccineOrderHistoryBloc>().add(FetchVaccineOrderHistoryEvent());
+  void _fetchFeedbacks() => context.read<FeedbackBloc>().add(FetchFeedbacksEvent());
+  void _fetchFAQs() => context.read<FAQBloc>().add(FetchFAQEvent());
+  void _fetchPatients() => context.read<PatientsBloc>().add(FetchPatientsEvent());
 
   Future<void> getPreference() async {
     final name = await AppPreferences.getUserName();
@@ -169,17 +170,101 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileMenuItem(
                   icon: HugeIcons.strokeRoundedLogout03,
                   title: "Logout",
-                  onTap: () async {
-                    await AppPreferences.clearAll();
-                    context.read<NavigationCubit>().resetIndex();
-                    Navigator.pushReplacement(context, WelcomePage.route());
-                  },
+                  onTap: () => _showLogoutDialog(context),
                 ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+          elevation: 12,
+          backgroundColor: AppColors.cardColor,
+          child: Padding(
+            padding: const EdgeInsets.all(22),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    HugeIcons.strokeRoundedLogout03,
+                    size: 60,
+                    color: AppColors.error,
+                  ),
+                ),
+                const SizedBox(height: 22),
+                Text(
+                  'Confirm Logout',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.primaryFontColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Are you sure you want to log out of your account?',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                      color: AppColors.secondaryFontColor,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 22),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: AppColors.inputBorderColor),
+                          foregroundColor: AppColors.secondaryFontColor,
+                        ),
+                        child: const Text('Cancel'),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          await AppPreferences.clearAll();
+                          context.read<NavigationCubit>().resetIndex();
+                          Navigator.pushReplacement(context, WelcomePage.route());
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.error,
+                          foregroundColor: AppColors.white,
+                        ),
+                        child: const Text('Logout'),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
