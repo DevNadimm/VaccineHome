@@ -12,7 +12,17 @@ class VaccineOrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = order.product;
-    final productImage = "https://demo.vaccinehomebd.com/public/admin/product/upload/${product?.images?[0] ?? ''}";
+    String productImage = '';
+    if (product?.image != null && product!.image!.isNotEmpty) {
+      productImage = product.image!;
+    } else if (product?.images != null && product!.images!.isNotEmpty) {
+      final img = product.images![0];
+      if (img.startsWith('http')) {
+        productImage = img;
+      } else {
+        productImage = "https://demo.vaccinehomebd.com/admin/product/upload/$img";
+      }
+    }
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),

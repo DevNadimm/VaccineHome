@@ -41,8 +41,8 @@ class VaccineOrderData {
   factory VaccineOrderData.fromJson(Map<String, dynamic> json) =>
       VaccineOrderData(
         id: json['id'] as int?,
-        userId: json['user_id'] as String?,
-        vaccineProductId: json['vaccine_product_id'] as String?,
+        userId: json['user_id']?.toString(),
+        vaccineProductId: json['vaccine_product_id']?.toString(),
         phone: json['phone'] as String?,
         address: json['address'] as String?,
         createdAt: json['created_at'] != null
@@ -89,13 +89,17 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) {
     List<String>? parsedImages;
     if (json['images'] != null) {
-      try {
-        final decoded = jsonDecode(json['images']);
-        parsedImages = (decoded is List)
-            ? decoded.map((e) => e.toString()).toList()
-            : null;
-      } catch (e) {
-        parsedImages = null;
+      if (json['images'] is List) {
+        parsedImages = List<String>.from((json['images'] as List).map((e) => e.toString()));
+      } else if (json['images'] is String) {
+        try {
+          final decoded = jsonDecode(json['images']);
+          parsedImages = (decoded is List)
+              ? decoded.map((e) => e.toString()).toList()
+              : null;
+        } catch (e) {
+          parsedImages = null;
+        }
       }
     }
 
