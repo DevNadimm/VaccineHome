@@ -27,7 +27,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             radius: 22,
             backgroundColor: AppColors.cardColorBold,
             backgroundImage: userAvatar.isNotEmpty
-                ? CachedNetworkImageProvider('https://vcard.vaccinehomebd.com/storage/app/public/$userAvatar',)
+                ? CachedNetworkImageProvider('https://demo.vaccinehomebd.com/storage/app/public/$userAvatar',)
                 : null,
             child: userAvatar.isEmpty
                 ? const Icon(Icons.person_rounded, size: 22, color: AppColors.white)

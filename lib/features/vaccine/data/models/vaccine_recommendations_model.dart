@@ -48,7 +48,7 @@ class VaccineRecommendation {
   factory VaccineRecommendation.fromJson(Map<String, dynamic> json) {
     return VaccineRecommendation(
       id: json['id'] as int?,
-      vaccineProductId: json['vaccine_product_id'] as String?,
+      vaccineProductId: json['vaccine_product_id']?.toString(),
       details: json['details'] as String?,
       reason: json['reason'] as String?,
       createdAt: json['created_at'] as String?,
@@ -93,7 +93,9 @@ class Product {
       id: json['id'] as int?,
       name: json['name'] as String?,
       image: json['image'] as String?,
-      images: (json['images'] as List?)?.map((e) => e.toString()).toList(),
+      images: (json['images'] as List?)
+          ?.map((e) => e.toString().replaceAll('vcard.vaccinehomebd.com', 'demo.vaccinehomebd.com'))
+          .toList(),
       price: json['price'] as String?,
       productType: json['product_type'] as String?,
       description: json['description'] as String?,

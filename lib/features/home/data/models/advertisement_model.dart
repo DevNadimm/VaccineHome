@@ -42,7 +42,7 @@ class Advertisement {
   factory Advertisement.fromJson(Map<String, dynamic> json) {
     return Advertisement(
       title: json['title'] as String?,
-      image: json['image'] as String?,
+      image: (json['image'] as String?)?.replaceAll('vcard.vaccinehomebd.com', 'demo.vaccinehomebd.com'),
       isActive: json['is_active'] as bool?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,

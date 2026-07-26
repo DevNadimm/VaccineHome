@@ -12,7 +12,7 @@ class VaccineOrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = order.product;
-    final productImage = "https://vcard.vaccinehomebd.com/public/admin/product/upload/${product?.images?[0] ?? ''}";
+    final productImage = "https://demo.vaccinehomebd.com/public/admin/product/upload/${product?.images?[0] ?? ''}";
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),

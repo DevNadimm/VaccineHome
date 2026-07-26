@@ -32,7 +32,7 @@ class UploadProfileImageSection extends StatelessWidget {
             backgroundImage: imageFile != null
                 ? FileImage(imageFile!)
                 : (userAvatarUrl != null && userAvatarUrl!.isNotEmpty)
-                    ? CachedNetworkImageProvider('https://vcard.vaccinehomebd.com/storage/app/public/$userAvatarUrl')
+                    ? CachedNetworkImageProvider('https://demo.vaccinehomebd.com/storage/app/public/$userAvatarUrl')
                     : null,
             child: (imageFile == null && (userAvatarUrl == null || userAvatarUrl!.isEmpty))
                 ? const Icon(Icons.person_rounded, size: 60, color: AppColors.white)

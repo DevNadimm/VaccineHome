@@ -149,7 +149,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 24),
 
-            /// Settings Sectionfvm flutter run
+            /// Settings Section
             ProfileSection(
               title: "Settings",
               items: [

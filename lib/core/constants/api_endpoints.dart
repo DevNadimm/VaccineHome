@@ -1,6 +1,6 @@
 class ApiEndpoints {
-  String get baseUrl => 'https://vcard.vaccinehomebd.com/';
-  String get apiBaseUrl => 'https://vcard.vaccinehomebd.com/api/';
+  String get baseUrl => 'https://demo.vaccinehomebd.com/';
+  String get apiBaseUrl => 'https://demo.vaccinehomebd.com/api/';
 
   // 📦 Auth
   String get registerUser => 'register';
@@ -45,7 +45,6 @@ class ApiEndpoints {
   String updatePhysicalExerciseAlert(int id) => "physical-exercise-alert/$id/update";
   String deletePhysicalExerciseAlert(int id) => "physical-exercise-alert/$id/delete";
 
-
   // 📦 Profile
   String get getAdvertisements => 'advertisements';
   String get getVaccineOrderHistory => 'vaccine/products/orders';
@@ -72,5 +71,5 @@ class ApiEndpoints {
   String get feedbacks => 'feedbacks';
 
   // 📦 Avatar
-  String avatar(String path) => 'https://vcard.vaccinehomebd.com/storage/app/public/$path';
+  String avatar(String path) => 'https://demo.vaccinehomebd.com/storage/app/public/$path';
 }

@@ -6,7 +6,7 @@ final serviceLocator = GetIt.instance;
 
 Future<void> init() async {
   serviceLocator.registerLazySingleton<DioService>(
-    () => DioService(baseUrl: "https://vcard.vaccinehomebd.com/api/"),
+    () => DioService(baseUrl: ApiEndpoints().apiBaseUrl),
   );
 
   serviceLocator.registerLazySingleton<ApiEndpoints>(() => ApiEndpoints());

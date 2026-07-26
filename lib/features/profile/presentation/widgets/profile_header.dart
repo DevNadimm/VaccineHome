@@ -28,7 +28,7 @@ class ProfileHeader extends StatelessWidget {
               radius: 60,
               backgroundColor: AppColors.cardColorBold,
               backgroundImage: avatar.isNotEmpty
-                  ? CachedNetworkImageProvider('https://vcard.vaccinehomebd.com/storage/app/public/$avatar',)
+                  ? CachedNetworkImageProvider('https://demo.vaccinehomebd.com/storage/app/public/$avatar',)
                   : null,
               child: avatar.isEmpty
                   ? const Icon(Icons.person_rounded, size: 60, color: AppColors.white)

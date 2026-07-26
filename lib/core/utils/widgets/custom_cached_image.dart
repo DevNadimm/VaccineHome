@@ -22,8 +22,9 @@ class CustomCachedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final correctedUrl = imageUrl.replaceAll('vcard.vaccinehomebd.com', 'demo.vaccinehomebd.com');
     return CachedNetworkImage(
-      imageUrl: imageUrl,
+      imageUrl: correctedUrl,
       fit: fit,
       width: width,
       height: height,

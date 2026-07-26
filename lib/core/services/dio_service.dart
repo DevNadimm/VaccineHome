@@ -11,7 +11,7 @@ class DioService {
   DioService({String? baseUrl})
       : _dio = Dio(
           BaseOptions(
-            baseUrl: baseUrl ?? "https://vcard.vaccinehomebd.com/api/",
+            baseUrl: baseUrl ?? "https://demo.vaccinehomebd.com/api/",
             connectTimeout: const Duration(seconds: 15),
             receiveTimeout: const Duration(seconds: 15),
             headers: {

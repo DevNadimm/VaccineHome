@@ -69,7 +69,11 @@ class VaccineProduct {
       from: json['from'] as String?,
       to: json['to'] as String?,
       status: json['status'] as String?,
-      images: json['images'] != null ? List<String>.from(json['images']) : null,
+      images: json['images'] != null
+          ? List<String>.from(json['images'])
+              .map((url) => url.replaceAll('vcard.vaccinehomebd.com', 'demo.vaccinehomebd.com'))
+              .toList()
+          : null,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
     );
